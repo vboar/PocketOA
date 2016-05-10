@@ -26,6 +26,7 @@
     <string name="section_all_customers">All Customers</string>
 
     <string name="title_activity_add_customer">Add New Customer</string>
+    <string name="action_submit">Submit</string>
 
 
 </resources>

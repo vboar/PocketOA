@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -168,6 +169,14 @@ public class CustomerListActivity extends AppCompatActivity
             }
             listView.setAdapter(new ArrayAdapter<String>(this.getContext(),
                     android.R.layout.simple_expandable_list_item_1, data));
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), CustomerActivity.class);
+                    startActivity(intent);
+                }
+            });
             return rootView;
         }
     }

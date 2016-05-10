@@ -28,5 +28,7 @@
     <string name="title_activity_add_customer">Add New Customer</string>
     <string name="action_submit">Submit</string>
 
+    <string name="title_activity_customer">Customer 1</string>
+
 
 </resources>

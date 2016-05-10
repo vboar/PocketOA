@@ -21,5 +21,10 @@
     <string name="username">username</string>
     <string name="password">password</string>
 
+    <string name="title_activity_customer_list">Customer</string>
+    <string name="section_my_customers">My Customers</string>
+    <string name="section_all_customers">All Customers</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
 
 </resources>

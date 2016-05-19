@@ -1,34 +1,37 @@
 <resources>
     <string name="app_name">PocketOA</string>
 
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
 
-    <string name="home">Home</string>
-    <string name="customer">Customer</string>
-    <string name="contact">Contact</string>
-    <string name="opportunity">Opportunity</string>
-    <string name="contract">Contract</string>
-    <string name="product">Product</string>
-    <string name="business">Business</string>
-    <string name="login">Login</string>
-    <string name="logout">Logout</string>
-    <string name="others">Others</string>
+    <string name="navigation_home">Home</string>
+    <string name="navigation_customer">Customer</string>
+    <string name="navigation_contact">Contact</string>
+    <string name="navigation_opportunity">Opportunity</string>
+    <string name="navigation_contract">Contract</string>
+    <string name="navigation_product">Product</string>
+    <string name="navigation_business">Business</string>
+    <string name="navigation_logout">Logout</string>
+    <string name="navigation_others">Others</string>
 
-    <string name="welcome">Welcome</string>
-    <string name="username">username</string>
-    <string name="password">password</string>
+    <string name="title_home">PocketOA</string>
+    <string name="title_customer">Customer</string>
+    <string name="title_contact">Contact</string>
+    <string name="title_opportunity">Opportunity</string>
+    <string name="title_contract">Contract</string>
+    <string name="title_product">Product</string>
+    <string name="title_business">Business</string>
+    <string name="title_logout">Logout</string>
+    <string name="title_others">Others</string>
 
-    <string name="title_activity_customer_list">Customer</string>
-    <string name="section_my_customers">My Customers</string>
-    <string name="section_all_customers">All Customers</string>
-
-    <string name="title_activity_add_customer">Add New Customer</string>
-    <string name="action_submit">Submit</string>
-
-    <string name="title_activity_customer">Customer 1</string>
+    <string name="tab_my_customers">My Customers</string>
+    <string name="tab_all_customers">All Customers</string>
 
 
 </resources>

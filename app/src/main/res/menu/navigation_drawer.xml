@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="none">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_white_24dp"
-            android:title="@string/home" />
+            android:title="@string/navigation_home" />
         <item
             android:id="@+id/nav_customer"
             android:icon="@drawable/ic_people_white_24dp"
-            android:title="@string/customer" />
+            android:title="@string/navigation_customer" />
         <item
             android:id="@+id/nav_contact"
             android:icon="@drawable/ic_phone_white_24dp"
-            android:title="@string/contact" />
+            android:title="@string/navigation_contact" />
         <item
             android:id="@+id/nav_opportunity"
             android:icon="@drawable/ic_attach_money_white_24dp"
-            android:title="@string/opportunity" />
+            android:title="@string/navigation_opportunity" />
         <item
             android:id="@+id/nav_contract"
             android:icon="@drawable/ic_card_travel_white_24dp"
-            android:title="@string/contract" />
+            android:title="@string/navigation_contract" />
         <item
             android:id="@+id/nav_product"
             android:icon="@drawable/ic_shopping_basket_white_24dp"
-            android:title="@string/product" />
+            android:title="@string/navigation_product" />
         <item
             android:id="@+id/nav_business"
             android:icon="@drawable/ic_settings_white_24dp"
-            android:title="@string/business" />
+            android:title="@string/navigation_business" />
     </group>
 
-    <item android:title="@string/others">
+    <item android:title="@string/navigation_others">
         <menu>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_reply_white_24dp"
-                android:title="@string/logout" />
+                android:title="@string/navigation_logout" />
         </menu>
     </item>
 

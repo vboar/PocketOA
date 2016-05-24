@@ -16,8 +16,13 @@ import android.view.MenuItem;
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.presenter.MainPresenter;
 import top.kass.pocketoa.presenter.impl.MainPresenterImpl;
+import top.kass.pocketoa.ui.fragment.BusinessFragment;
+import top.kass.pocketoa.ui.fragment.ContactFragment;
+import top.kass.pocketoa.ui.fragment.ContractFragment;
 import top.kass.pocketoa.ui.fragment.CustomerFragment;
 import top.kass.pocketoa.ui.fragment.MainFragment;
+import top.kass.pocketoa.ui.fragment.OpportunityFragment;
+import top.kass.pocketoa.ui.fragment.ProductFragment;
 import top.kass.pocketoa.view.MainView;
 
 public class MainActivity extends AppCompatActivity implements MainView {
@@ -105,31 +110,42 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switchToContact() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
+                new ContactFragment()).commit();
         mToolBar.setTitle(R.string.title_contact);
     }
 
     @Override
     public void switchToOpportunity() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
+                new OpportunityFragment()).commit();
         mToolBar.setTitle(R.string.title_opportunity);
     }
 
     @Override
     public void switchToContract() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
+                new ContractFragment()).commit();
         mToolBar.setTitle(R.string.title_contract);
     }
 
     @Override
     public void switchToProduct() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
+                new ProductFragment()).commit();
         mToolBar.setTitle(R.string.title_product);
     }
 
     @Override
     public void switchToBusiness() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
+                new BusinessFragment()).commit();
         mToolBar.setTitle(R.string.title_business);
     }
 
     @Override
     public void switchToLogout() {
+        // TODO logout bl
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();

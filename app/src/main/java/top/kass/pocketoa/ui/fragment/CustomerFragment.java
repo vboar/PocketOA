@@ -18,8 +18,8 @@ import top.kass.pocketoa.R;
 
 public class CustomerFragment extends Fragment {
 
-    private static final int CUSTOMER_MY = 0;
-    private static final int CUSTOMER_ALL = 1;
+    public static final int CUSTOMER_MY = 0;
+    public static final int CUSTOMER_ALL = 1;
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;

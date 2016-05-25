@@ -108,14 +108,7 @@ public class CustomerListFragment extends Fragment implements CustomerView,
             CustomerBean customer = mAdapter.getItem(position);
             Intent intent = new Intent(getActivity(), CustomerDetailActivity.class);
             intent.putExtra("customer", customer);
-
-            // TODO
-            View transitionView = view.findViewById(R.id.customerIcon);
-            ActivityOptionsCompat options =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-                            transitionView, "Hello World");
-
-            ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+            startActivity(intent);
         }
     };
 
@@ -137,13 +130,12 @@ public class CustomerListFragment extends Fragment implements CustomerView,
     public void addCustomers(List<CustomerBean> customerList) {
         mAdapter.isShowFooter(true);
         if(mData == null) {
-            mData = new ArrayList<CustomerBean>();
+            mData = new ArrayList<>();
         }
         mData.addAll(customerList);
         if(pageIndex == 0) {
             mAdapter.setmData(mData);
         } else {
-            //如果没有更多数据了,则隐藏footer布局
             if(customerList == null || customerList.size() == 0) {
                 mAdapter.isShowFooter(false);
             }
@@ -163,8 +155,9 @@ public class CustomerListFragment extends Fragment implements CustomerView,
             mAdapter.isShowFooter(false);
             mAdapter.notifyDataSetChanged();
         }
-        View view = getActivity() == null ? mRecyclerView.getRootView() : getActivity().findViewById(R.id.drawer_layout);
-        Snackbar.make(view, "Fail", Snackbar.LENGTH_SHORT).show();
+        View view = getActivity() == null ? mRecyclerView.getRootView() :
+                getActivity().findViewById(R.id.drawer_layout);
+        Snackbar.make(view, getString(R.string.fail_loading), Snackbar.LENGTH_SHORT).show();
     }
 
 }

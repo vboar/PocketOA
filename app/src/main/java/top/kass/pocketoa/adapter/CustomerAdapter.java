@@ -70,7 +70,9 @@ public class CustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if(customer == null) {
                 return;
             }
-            // TODO
+            ((ItemViewHolder) holder).mName.setText(customer.getName());
+            ((ItemViewHolder) holder).mType.setText(getCustomerType(customer.getType()));
+            ((ItemViewHolder) holder).mStatus.setText(getCustomerStatus(customer.getStatus()));
         }
     }
 
@@ -103,13 +105,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public TextView mType;
         public TextView mName;
-        public ImageView mIcon;
+        public TextView mStatus;
 
         public ItemViewHolder(View v) {
             super(v);
             mType = (TextView) v.findViewById(R.id.tvCustomerType);
             mName = (TextView) v.findViewById(R.id.tvCustomerName);
-            mIcon = (ImageView) v.findViewById(R.id.customerIcon);
+            mStatus = (TextView) v.findViewById(R.id.tvCustomerStatus);
             v.setOnClickListener(this);
         }
 
@@ -132,6 +134,26 @@ public class CustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
+    }
+
+    private String getCustomerType(int type) {
+        switch (type) {
+            case 1: return mContext.getString(R.string.customer_type_important);
+            case 2: return mContext.getString(R.string.customer_type_normal);
+            case 3: return mContext.getString(R.string.customer_type_low_value);
+        }
+        return "";
+    }
+
+    private String getCustomerStatus(int status) {
+        switch (status) {
+            case 1: return mContext.getString(R.string.customer_status_1);
+            case 2: return mContext.getString(R.string.customer_status_2);
+            case 3: return mContext.getString(R.string.customer_status_3);
+            case 4: return mContext.getString(R.string.customer_status_4);
+            case 5: return mContext.getString(R.string.customer_status_5);
+        }
+        return "";
     }
 
 

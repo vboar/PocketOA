@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,11 +29,15 @@ public class CustomerPresenterImpl implements CustomerPresenter {
         if(pageIndex == 0) {
             mCustomerView.showProgress();
         }
-        // TODO
         mCustomerView.hideProgress();
+        // TODO
         List<CustomerBean> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            list.add(new CustomerBean());
+            CustomerBean customerBean = new CustomerBean();
+            customerBean.setName("刘钦 " + (new Random().nextInt(10) + 1));
+            customerBean.setType(new Random().nextInt(3) + 1);
+            customerBean.setStatus(new Random().nextInt(5) + 1);
+            list.add(customerBean);
         }
         if (pageIndex > 5) {
             mCustomerView.addCustomers(new ArrayList<CustomerBean>());

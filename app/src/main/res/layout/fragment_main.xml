@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Something about Customer..."
+                    android:text="客户概况..."
                     android:id="@+id/textView1" />
 
             </android.support.v7.widget.CardView>
@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Something about Contact..."
+                    android:text="联系人概况..."
                     android:id="@+id/textView2" />
 
             </android.support.v7.widget.CardView>
@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Something about Opportunity..."
+                    android:text="商机概况..."
                     android:id="@+id/textView3" />
 
             </android.support.v7.widget.CardView>
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Something about Contract..."
+                    android:text="合同概况..."
                     android:id="@+id/textView4" />
 
             </android.support.v7.widget.CardView>
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Something about Product..."
+                    android:text="产品概况..."
                     android:id="@+id/textView5" />
 
             </android.support.v7.widget.CardView>
@@ -119,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Something about Business..."
+                    android:text="业务概况..."
                     android:id="@+id/textView6" />
 
             </android.support.v7.widget.CardView>

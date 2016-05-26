@@ -34,6 +34,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="刘钦"
                     android:singleLine="true"/>
 
                 <TextView
@@ -43,7 +44,8 @@
                     android:text="@string/customer_intro"/>
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="简介"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -57,6 +59,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:text="@string/customer_type_important"/>
                     <RadioButton
                         android:layout_width="wrap_content"
@@ -76,7 +79,8 @@
                     android:singleLine="true"/>
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="东莞"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -86,7 +90,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:text="腾讯"/>
 
                 <TextView
                     android:layout_width="match_parent"

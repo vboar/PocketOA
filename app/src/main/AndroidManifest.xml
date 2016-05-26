@@ -39,7 +39,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.CustomerDetailActivity"
-            android:label="@string/title_customer"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.CustomerEditActivity"
+            android:label="@string/title_customer_edit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 

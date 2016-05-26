@@ -1,8 +1,6 @@
 package top.kass.pocketoa.ui.activity;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -118,10 +116,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
         );
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void switchToHome() {
-        if (type == HOME) return;
         type = HOME;
         mNavigationView.setCheckedItem(R.id.nav_home);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new MainFragment()).commit();

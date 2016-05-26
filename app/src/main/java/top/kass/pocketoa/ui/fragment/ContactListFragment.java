@@ -103,10 +103,10 @@ public class ContactListFragment extends Fragment implements ContactView,
     private ContactAdapter.OnItemClickListener mOnItemClickListener = new ContactAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View view, int position) {
-//            ContactBean contact = mAdapter.getItem(position);
-//            Intent intent = new Intent(getActivity(), ContactDetailActivity.class);
-//            intent.putExtra("contact", contact);
-//            startActivity(intent);
+            ContactBean contact = mAdapter.getItem(position);
+            Intent intent = new Intent(getActivity(), ContactDetailActivity.class);
+            intent.putExtra("contact", contact);
+            startActivity(intent);
         }
     };
 

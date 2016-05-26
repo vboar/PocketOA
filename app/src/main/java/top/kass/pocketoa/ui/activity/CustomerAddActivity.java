@@ -32,7 +32,7 @@ public class CustomerAddActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.customer_add, menu);
+        getMenuInflater().inflate(R.menu.common_add_edit, menu);
         return true;
     }
 

@@ -75,7 +75,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public boolean onCreateOptionsMenu(Menu menu) {
         switch (type) {
             case CUSTOMER:
-                getMenuInflater().inflate(R.menu.customer, menu);
+            case CONTACT:
+            case OPPORTUNITY:
+            case CONTRACT:
+                getMenuInflater().inflate(R.menu.common, menu);
                 break;
         }
         return true;
@@ -84,10 +87,26 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (type == CUSTOMER && id == R.id.action_add) {
-            Intent intent = new Intent(getApplicationContext(), CustomerAddActivity.class);
-            startActivity(intent);
-            return true;
+        if (id == R.id.action_add) {
+            Intent intent;
+            switch (type) {
+                case CUSTOMER:
+                    intent = new Intent(getApplicationContext(), CustomerAddActivity.class);
+                    startActivity(intent);
+                    break;
+                case CONTACT:
+                    intent = new Intent(getApplicationContext(), ContactAddActivity.class);
+                    startActivity(intent);
+                    break;
+                case OPPORTUNITY:
+                    intent = new Intent(getApplicationContext(), OpportunityAddActivity.class);
+                    startActivity(intent);
+                    break;
+                case CONTRACT:
+                    intent = new Intent(getApplicationContext(), ContractAddActivity.class);
+                    startActivity(intent);
+                    break;
+            }
         }
         return super.onOptionsItemSelected(item);
     }

@@ -32,6 +32,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private NavigationView mNavigationView;
     private MainPresenter mMainPresenter;
 
+    private static final int HOME = 0;
+    private static final int CUSTOMER = 1;
+    private static final int CONTACT = 2;
+    private static final int OPPORTUNITY = 3;
+    private static final int CONTRACT = 4;
+    private static final int PRODUCT = 5;
+    private static final int BUSSINESS = 0;
+    private int type = HOME;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -66,7 +75,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        switch (type) {
+            case HOME:
+                getMenuInflater().inflate(R.menu.main, menu);
+                break;
+            case CUSTOMER:
+                getMenuInflater().inflate(R.menu.customer, menu);
+                break;
+        }
         return true;
     }
 
@@ -75,8 +91,17 @@ public class MainActivity extends AppCompatActivity implements MainView {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_add) {
+            Intent intent = new Intent(getApplicationContext(), CustomerAddActivity.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -96,51 +121,72 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void switchToHome() {
+        if (type == HOME) return;
+        type = HOME;
         mNavigationView.setCheckedItem(R.id.nav_home);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new MainFragment()).commit();
         mToolBar.setTitle(R.string.title_home);
+        invalidateOptionsMenu();
     }
 
     @Override
     public void switchToCustomer() {
+        if (type == CUSTOMER) return;
+        type = CUSTOMER;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new CustomerFragment()).commit();
         mToolBar.setTitle(R.string.title_customer);
+        invalidateOptionsMenu();
     }
 
     @Override
     public void switchToContact() {
+        if (type == CONTACT) return;
+        type = CONTACT;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new ContactFragment()).commit();
         mToolBar.setTitle(R.string.title_contact);
+        invalidateOptionsMenu();
     }
 
     @Override
     public void switchToOpportunity() {
+        if (type == OPPORTUNITY) return;
+        type = OPPORTUNITY;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new OpportunityFragment()).commit();
         mToolBar.setTitle(R.string.title_opportunity);
+        invalidateOptionsMenu();
     }
 
     @Override
     public void switchToContract() {
+        if (type == CONTRACT) return;
+        type = CONTRACT;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new ContractFragment()).commit();
         mToolBar.setTitle(R.string.title_contract);
+        invalidateOptionsMenu();
     }
 
     @Override
     public void switchToProduct() {
+        if (type == PRODUCT) return;
+        type = PRODUCT;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new ProductFragment()).commit();
         mToolBar.setTitle(R.string.title_product);
+        invalidateOptionsMenu();
     }
 
     @Override
     public void switchToBusiness() {
+        if (type == BUSSINESS) return;
+        type = BUSSINESS;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new BusinessFragment()).commit();
         mToolBar.setTitle(R.string.title_business);
+        invalidateOptionsMenu();
     }
 
     @Override

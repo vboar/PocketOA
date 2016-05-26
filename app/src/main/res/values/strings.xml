@@ -11,6 +11,7 @@
 
     <string name="action_settings">设置</string>
     <string name="action_submit">提交</string>
+    <string name="action_add">添加</string>
 
     <string name="navigation_home">首页</string>
     <string name="navigation_customer">客户</string>

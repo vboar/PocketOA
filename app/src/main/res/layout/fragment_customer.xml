@@ -22,16 +22,4 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:src="@drawable/ic_add_white_24dp"
-        fab:fab_colorNormal="@color/fab_normal"
-        fab:fab_colorPressed="@color/fab_pressed"
-        fab:fab_colorRipple="@color/fab_ripple"/>
-
 </android.support.design.widget.CoordinatorLayout>

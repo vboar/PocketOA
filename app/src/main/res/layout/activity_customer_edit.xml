@@ -34,7 +34,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="刘钦"
+                    android:text="南京大学"
                     android:singleLine="true"/>
 
                 <TextView

@@ -74,9 +74,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         switch (type) {
-            case HOME:
-                getMenuInflater().inflate(R.menu.main, menu);
-                break;
             case CUSTOMER:
                 getMenuInflater().inflate(R.menu.customer, menu);
                 break;
@@ -87,9 +84,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_add) {
+        if (type == CUSTOMER && id == R.id.action_add) {
             Intent intent = new Intent(getApplicationContext(), CustomerAddActivity.class);
             startActivity(intent);
             return true;

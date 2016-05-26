@@ -27,7 +27,7 @@ public class CustomerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_customer, null);
+        final View view = inflater.inflate(R.layout.fragment_common, null);
 
         mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);

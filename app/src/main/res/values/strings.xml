@@ -59,6 +59,9 @@
     <string name="customer_zipcode">邮编</string>
     <string name="customer_remark">备注</string>
 
+    <string name="tab_my_contacts">我的联系人</string>
+    <string name="tab_all_contacts">所有联系人</string>
+
     <string name="fail_loading">加载失败</string>
 
 </resources>

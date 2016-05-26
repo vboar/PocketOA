@@ -42,7 +42,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="刘钦" />
+                            android:text="南京大学" />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

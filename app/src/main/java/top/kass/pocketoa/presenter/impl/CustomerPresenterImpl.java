@@ -34,7 +34,7 @@ public class CustomerPresenterImpl implements CustomerPresenter {
         List<CustomerBean> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             CustomerBean customerBean = new CustomerBean();
-            customerBean.setName("刘钦 " + (new Random().nextInt(10) + 1));
+            customerBean.setName("南京大学");
             customerBean.setType(new Random().nextInt(3) + 1);
             customerBean.setStatus(new Random().nextInt(5) + 1);
             list.add(customerBean);

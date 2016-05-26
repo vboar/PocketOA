@@ -18,7 +18,6 @@ import top.kass.pocketoa.R;
 
 public class ContactFragment extends Fragment {
 
-
     public static final int CONTACT_MY = 0;
     public static final int CONTACT_ALL = 1;
 

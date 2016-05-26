@@ -36,6 +36,11 @@
     <string name="title_customer_edit">编辑客户</string>
     <string name="title_contact_add">添加新联系人</string>
     <string name="title_contact_edit">编辑联系人</string>
+    <string name="title_opportunity_add">添加商机</string>
+    <string name="title_opportunity_edit">编辑商机</string>
+    <string name="title__goal_setting">员工目标设置</string>
+    <string name="title_attention_setting">提醒设置</string>
+    <string name="title_table_show">报表展现</string>
 
     <string name="tab_my_customers">我的客户</string>
     <string name="tab_all_customers">所有客户</string>
@@ -64,6 +69,25 @@
 
     <string name="tab_my_contacts">我的联系人</string>
     <string name="tab_all_contacts">所有联系人</string>
+
+    <string name="tab_my_opportunities">我的商机</string>
+    <string name="tab_all_opportunities">所有商机</string>
+
+    <string name="opportunity_type_important">重要商机</string>
+    <string name="opportunity_type_normal">普通商机</string>
+
+    <string name="opportunity_status_1">初步洽谈</string>
+    <string name="opportunity_status_2">需求确定</string>
+    <string name="opportunity_status_3">方案报价</string>
+    <string name="opportunity_status_4">谈判合同</string>
+    <string name="opportunity_status_5">赢单</string>
+    <string name="opportunity_status_6">输单</string>
+
+
+
+    <string name="business_goal_setting">员工目标设置</string>
+    <string name="business_attention_setting">提醒设置</string>
+    <string name="business_table_show">报表展现</string>
 
     <string name="fail_loading">加载失败</string>
 

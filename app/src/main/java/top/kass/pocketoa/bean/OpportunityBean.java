@@ -10,6 +10,8 @@ public class OpportunityBean implements Serializable {
 
     private String customer;
 
+    private int type;
+
     private int status;
 
     private double amount;
@@ -28,6 +30,14 @@ public class OpportunityBean implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getCustomer() {

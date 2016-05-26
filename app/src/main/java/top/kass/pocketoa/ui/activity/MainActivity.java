@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private static final int OPPORTUNITY = 3;
     private static final int CONTRACT = 4;
     private static final int PRODUCT = 5;
-    private static final int BUSSINESS = 0;
+    private static final int BUSINESS = 6;
     private int type = HOME;
 
     @Override
@@ -109,11 +110,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -191,8 +187,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switchToBusiness() {
-        if (type == BUSSINESS) return;
-        type = BUSSINESS;
+        if (type == BUSINESS) return;
+        type = BUSINESS;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new BusinessFragment()).commit();
         mToolBar.setTitle(R.string.title_business);

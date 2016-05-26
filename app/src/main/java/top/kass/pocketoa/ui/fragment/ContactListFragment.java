@@ -34,7 +34,7 @@ public class ContactListFragment extends Fragment implements ContactView,
     private List<ContactBean> mData;
     private ContactPresenter mContactPresenter;
 
-    private int mType = CustomerFragment.CUSTOMER_MY;
+    private int mType = ContactFragment.CONTACT_MY;
     private int pageIndex = 0;
 
     public static ContactListFragment newInstance(int type) {
@@ -95,7 +95,7 @@ public class ContactListFragment extends Fragment implements ContactView,
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
                     && mAdapter.isShowFooter()) {
-                mContactPresenter.loadContact(mType, pageIndex);
+                mContactPresenter.loadContacts(mType, pageIndex);
             }
         }
     };
@@ -116,7 +116,7 @@ public class ContactListFragment extends Fragment implements ContactView,
         if(mData != null) {
             mData.clear();
         }
-        mContactPresenter.loadContact(mType, pageIndex);
+        mContactPresenter.loadContacts(mType, pageIndex);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class ContactPresenterImpl implements ContactPresenter {
     }
 
     @Override
-    public void loadContact(final int type, final int pageIndex) {
+    public void loadContacts(final int type, final int pageIndex) {
         if(pageIndex == 0) {
             mContactView.showProgress();
         }

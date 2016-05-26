@@ -10,6 +10,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">设置</string>
+    <string name="action_submit">提交</string>
 
     <string name="navigation_home">首页</string>
     <string name="navigation_customer">客户</string>
@@ -28,6 +29,7 @@
     <string name="title_contract">合同</string>
     <string name="title_product">产品</string>
     <string name="title_business">业务</string>
+    <string name="title_customer_add">添加新客户</string>
 
     <string name="tab_my_customers">我的客户</string>
     <string name="tab_all_customers">所有客户</string>
@@ -41,6 +43,18 @@
     <string name="customer_status_3">报价</string>
     <string name="customer_status_4">成交</string>
     <string name="customer_status_5">暂时搁置</string>
+
+    <string name="customer_name">名称</string>
+    <string name="customer_intro">简介</string>
+    <string name="customer_type">类型</string>
+    <string name="customer_region">地区</string>
+    <string name="customer_source">来源</string>
+    <string name="customer_tel">电话</string>
+    <string name="customer_email">邮箱</string>
+    <string name="customer_website">网址</string>
+    <string name="customer_address">地址</string>
+    <string name="customer_zipcode">邮编</string>
+    <string name="customer_remark">备注</string>
 
     <string name="fail_loading">加载失败</string>
 

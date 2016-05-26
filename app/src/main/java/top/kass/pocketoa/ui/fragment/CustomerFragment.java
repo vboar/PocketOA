@@ -1,5 +1,6 @@
 package top.kass.pocketoa.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -11,10 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.clans.fab.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import top.kass.pocketoa.R;
+import top.kass.pocketoa.ui.activity.CustomerAddActivity;
 
 public class CustomerFragment extends Fragment {
 
@@ -23,6 +27,7 @@ public class CustomerFragment extends Fragment {
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private FloatingActionButton mFab;
 
     @Nullable
     @Override
@@ -36,6 +41,14 @@ public class CustomerFragment extends Fragment {
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.tab_my_customers));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.tab_all_customers));
         mTabLayout.setupWithViewPager(mViewPager);
+        mFab = (FloatingActionButton) view.findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CustomerAddActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

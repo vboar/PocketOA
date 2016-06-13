@@ -69,8 +69,8 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if(product == null) {
                 return;
             }
-            ((ItemViewHolder) holder).mName.setText(product.getName());
-            ((ItemViewHolder) holder).mSN.setText("编号： " + product.getSn());
+            ((ItemViewHolder) holder).mName.setText(product.getProductName());
+            ((ItemViewHolder) holder).mSN.setText("编号： " + product.getProductSn());
         }
     }
 

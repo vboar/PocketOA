@@ -38,6 +38,8 @@
     <string name="title_contact_edit">编辑联系人</string>
     <string name="title_opportunity_add">添加商机</string>
     <string name="title_opportunity_edit">编辑商机</string>
+    <string name="title_product_add">添加产品</string>
+    <string name="title_product_edit">编辑产品</string>
     <string name="title__goal_setting">员工目标设置</string>
     <string name="title_attention_setting">提醒设置</string>
     <string name="title_table_show">报表展现</string>
@@ -83,12 +85,12 @@
     <string name="opportunity_status_5">赢单</string>
     <string name="opportunity_status_6">输单</string>
 
-
-
     <string name="business_goal_setting">员工目标设置</string>
     <string name="business_attention_setting">提醒设置</string>
     <string name="business_table_show">报表展现</string>
 
     <string name="fail_loading">加载失败</string>
+
+    <string name="nothing">无</string>
 
 </resources>

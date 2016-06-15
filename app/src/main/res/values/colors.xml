@@ -13,4 +13,8 @@
     <color name="fab_normal">#E53935</color>
     <color name="fab_pressed">#E75043</color>
     <color name="fab_ripple">#99FFFFFF</color>
+
+    <color name="item_default">#FFFFFF</color>
+    <color name="item_pressed">#F1F1F1</color>
+    <color name="icon_border">#AFAFB1</color>
 </resources>

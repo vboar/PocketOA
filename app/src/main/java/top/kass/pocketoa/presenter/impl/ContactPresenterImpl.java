@@ -31,8 +31,8 @@ public class ContactPresenterImpl implements ContactPresenter {
         List<ContactBean> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             ContactBean contactBean = new ContactBean();
-            contactBean.setName("刘钦");
-            contactBean.setCustomer("南京大学");
+            contactBean.setContactsName("刘钦");
+            contactBean.setCustomerId(1);
             list.add(contactBean);
         }
         if (pageIndex > 5) {

@@ -3,12 +3,16 @@ package top.kass.pocketoa.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.ContactBean;
 import top.kass.pocketoa.bean.ProductBean;
@@ -64,13 +68,23 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof ItemViewHolder) {
-
             ProductBean product = mData.get(position);
             if(product == null) {
                 return;
             }
             ((ItemViewHolder) holder).mName.setText(product.getProductName());
-            ((ItemViewHolder) holder).mSN.setText("编号： " + product.getProductSn());
+            if (product.getProductSn().equals("")) {
+                ((ItemViewHolder) holder).mSN.setText(R.string.nothing);
+            } else {
+                ((ItemViewHolder) holder).mSN.setText(product.getProductSn());
+            }
+            if (product.getPicture().equals("")) {
+                ((ItemViewHolder) holder).mImageView.setImageResource(R.drawable.icon_default);
+            } else {
+                Glide.with(mContext).load(product.getPicture()).crossFade()
+                        .error(R.drawable.icon_default)
+                        .into(((ItemViewHolder) holder).mImageView);
+            }
         }
     }
 
@@ -103,18 +117,19 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         public TextView mName;
         public TextView mSN;
+        public CircleImageView mImageView;
 
         public ItemViewHolder(View v) {
             super(v);
             mName = (TextView) v.findViewById(R.id.tvProductName);
             mSN = (TextView) v.findViewById(R.id.tvProductSN);
+            mImageView = (CircleImageView) v.findViewById(R.id.imageView);
             v.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if(mOnItemClickListener != null) {
-                // TODO
                 mOnItemClickListener.onItemClick(view, this.getPosition());
             }
         }

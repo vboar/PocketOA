@@ -1,6 +1,7 @@
 package top.kass.pocketoa.ui.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +26,7 @@ import top.kass.pocketoa.bean.ProductBean;
 import top.kass.pocketoa.presenter.ProductPresenter;
 import top.kass.pocketoa.presenter.impl.ProductPresenterImpl;
 import top.kass.pocketoa.ui.activity.ProductDetailActivity;
+import top.kass.pocketoa.util.UIUtil;
 import top.kass.pocketoa.view.ProductView;
 
 public class ProductFragment extends Fragment implements ProductView,
@@ -123,6 +128,9 @@ public class ProductFragment extends Fragment implements ProductView,
         }
         mData.addAll(productList);
         if(pageIndex == 0) {
+            if (mData.size() < 10) {
+                mAdapter.isShowFooter(false);
+            }
             mAdapter.setmData(mData);
         } else {
             if(productList == null || productList.size() == 0) {
@@ -146,10 +154,7 @@ public class ProductFragment extends Fragment implements ProductView,
         }
         View view = getActivity() == null ? mRecyclerView.getRootView() :
                 getActivity().findViewById(R.id.drawer_layout);
-        Snackbar.make(view, getString(R.string.fail_loading), Snackbar.LENGTH_SHORT).show();
+        UIUtil.showSnackBar(view, getString(R.string.fail_loading), Snackbar.LENGTH_SHORT);
     }
-
-
-
 
 }

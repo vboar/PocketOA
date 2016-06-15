@@ -69,8 +69,8 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if(contact == null) {
                 return;
             }
-            ((ItemViewHolder) holder).mName.setText(contact.getName());
-            ((ItemViewHolder) holder).mCustomer.setText("来自客户[" + contact.getCustomer() + "]");
+            ((ItemViewHolder) holder).mName.setText(contact.getContactsName());
+            ((ItemViewHolder) holder).mCustomer.setText("来自客户[" + contact.getCustomerId() + "]");
         }
     }
 

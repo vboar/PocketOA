@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
             case CONTACT:
             case OPPORTUNITY:
             case CONTRACT:
+            case PRODUCT:
                 getMenuInflater().inflate(R.menu.common, menu);
                 break;
         }

@@ -68,11 +68,11 @@ public class OpportunityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             if(opportunity == null) {
                 return;
             }
-            ((ItemViewHolder) holder).mName.setText(opportunity.getTitle());
-            ((ItemViewHolder) holder).mType.setText(getOpportunityType(opportunity.getType()));
-            ((ItemViewHolder) holder).mStatus.setText(getOpportunityStatus(opportunity.getStatus()));
-            ((ItemViewHolder) holder).mAmount.setText(Double.toString(opportunity.getAmount()));
-            ((ItemViewHolder) holder).mCustomer.setText(opportunity.getCustomer());
+            ((ItemViewHolder) holder).mName.setText(opportunity.getOpportunityTitle());
+            ((ItemViewHolder) holder).mType.setText(getOpportunityType(opportunity.getBusinessType()));
+            ((ItemViewHolder) holder).mStatus.setText(getOpportunityStatus(opportunity.getOpportunityStatus()));
+            ((ItemViewHolder) holder).mAmount.setText(Double.toString(opportunity.getEstimatedAmount()));
+            ((ItemViewHolder) holder).mCustomer.setText(opportunity.getCustomerId().toString());
         }
     }
 

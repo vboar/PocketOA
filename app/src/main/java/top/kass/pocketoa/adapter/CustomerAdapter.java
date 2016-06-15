@@ -70,9 +70,9 @@ public class CustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if(customer == null) {
                 return;
             }
-            ((ItemViewHolder) holder).mName.setText(customer.getName());
-            ((ItemViewHolder) holder).mType.setText(getCustomerType(customer.getType()));
-            ((ItemViewHolder) holder).mStatus.setText(getCustomerStatus(customer.getStatus()));
+            ((ItemViewHolder) holder).mName.setText(customer.getCustomerName());
+            ((ItemViewHolder) holder).mType.setText(getCustomerType(customer.getCustomerType()));
+            ((ItemViewHolder) holder).mStatus.setText(getCustomerStatus(customer.getCustomerStatus()));
         }
     }
 

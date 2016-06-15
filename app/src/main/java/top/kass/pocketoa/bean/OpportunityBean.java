@@ -4,63 +4,146 @@ import java.io.Serializable;
 
 public class OpportunityBean implements Serializable {
 
-    private int id;
+    private Integer opportunityId;
 
-    private String title;
+    private String opportunityTitle;
 
-    private String customer;
+    private Integer customerId;
 
-    private int type;
+    private Double estimatedAmount;
 
-    private int status;
+    private Integer successRate;
 
-    private double amount;
+    private String expectedDate;
 
-    public int getId() {
-        return id;
+    private Integer opportunityStatus;
+
+    private String channel;
+
+    private Integer businessType;
+
+    private String acquisitionDate;
+
+    private String opportunitiesSource;
+
+    private Integer staffId;
+
+    private String opportunityRemarks;
+
+    private CustomerBean customer;
+
+    public OpportunityBean() {}
+
+    public Integer getOpportunityId() {
+        return opportunityId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOpportunityId(Integer opportunityId) {
+        this.opportunityId = opportunityId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getOpportunityTitle() {
+        return opportunityTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setOpportunityTitle(String opportunityTitle) {
+        this.opportunityTitle = opportunityTitle;
     }
 
-    public int getType() {
-        return type;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
-    public String getCustomer() {
+    public Double getEstimatedAmount() {
+        return estimatedAmount;
+    }
+
+    public void setEstimatedAmount(Double estimatedAmount) {
+        this.estimatedAmount = estimatedAmount;
+    }
+
+    public Integer getSuccessRate() {
+        return successRate;
+    }
+
+    public void setSuccessRate(Integer successRate) {
+        this.successRate = successRate;
+    }
+
+    public String getExpectedDate() {
+        return expectedDate;
+    }
+
+    public void setExpectedDate(String expectedDate) {
+        this.expectedDate = expectedDate;
+    }
+
+    public Integer getOpportunityStatus() {
+        return opportunityStatus;
+    }
+
+    public void setOpportunityStatus(Integer opportunityStatus) {
+        this.opportunityStatus = opportunityStatus;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
+
+    public Integer getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(Integer businessType) {
+        this.businessType = businessType;
+    }
+
+    public String getAcquisitionDate() {
+        return acquisitionDate;
+    }
+
+    public void setAcquisitionDate(String acquisitionDate) {
+        this.acquisitionDate = acquisitionDate;
+    }
+
+    public String getOpportunitiesSource() {
+        return opportunitiesSource;
+    }
+
+    public void setOpportunitiesSource(String opportunitiesSource) {
+        this.opportunitiesSource = opportunitiesSource;
+    }
+
+    public Integer getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
+    }
+
+    public String getOpportunityRemarks() {
+        return opportunityRemarks;
+    }
+
+    public void setOpportunityRemarks(String opportunityRemarks) {
+        this.opportunityRemarks = opportunityRemarks;
+    }
+
+    public CustomerBean getCustomer() {
         return customer;
     }
 
-    public void setCustomer(String customer) {
+    public void setCustomer(CustomerBean customer) {
         this.customer = customer;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
 }

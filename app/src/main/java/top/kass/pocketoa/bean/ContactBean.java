@@ -36,6 +36,8 @@ public class ContactBean implements Serializable {
 
     private String contactsRemarks;
 
+    private CustomerBean customer;
+
     public ContactBean() {}
 
     public Integer getContactsId() {
@@ -164,6 +166,14 @@ public class ContactBean implements Serializable {
 
     public void setContactsRemarks(String contactsRemarks) {
         this.contactsRemarks = contactsRemarks;
+    }
+
+    public CustomerBean getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerBean customer) {
+        this.customer = customer;
     }
 
 }

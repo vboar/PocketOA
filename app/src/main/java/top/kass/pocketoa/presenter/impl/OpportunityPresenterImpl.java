@@ -25,11 +25,11 @@ public class OpportunityPresenterImpl implements OpportunityPresenter {
         List<OpportunityBean> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             OpportunityBean opportunityBean = new OpportunityBean();
-            opportunityBean.setTitle("军火");
-            opportunityBean.setType(1);
-            opportunityBean.setCustomer("南京大学");
-            opportunityBean.setStatus(1);
-            opportunityBean.setAmount(12550);
+            opportunityBean.setOpportunityTitle("军火");
+            opportunityBean.setBusinessType(1);
+            opportunityBean.setCustomerId(1);
+            opportunityBean.setOpportunityStatus(1);
+            opportunityBean.setEstimatedAmount(12550.0);
             list.add(opportunityBean);
         }
         if (pageIndex > 5) {

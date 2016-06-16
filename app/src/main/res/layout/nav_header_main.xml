@@ -11,27 +11,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/userIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/ic_face_white_48dp" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"/>
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Justin Wong"
         android:textColor="@color/white_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/userEmail"
+        android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="vboar@live.com"
         android:textColor="@color/white_text" />
 
 </LinearLayout>

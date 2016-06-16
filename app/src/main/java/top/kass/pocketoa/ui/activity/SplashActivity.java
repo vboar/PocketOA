@@ -33,7 +33,7 @@ public class SplashActivity extends Activity {
                 finish();
             }
         };
-        timer.schedule(task, 1000*2);
+        timer.schedule(task, 1500);
     }
 
     @Override

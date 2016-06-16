@@ -1,18 +1,14 @@
 package top.kass.pocketoa.presenter.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import top.kass.pocketoa.bean.ContactBean;
 import top.kass.pocketoa.bean.ProductBean;
 import top.kass.pocketoa.model.ProductModel;
 import top.kass.pocketoa.model.impl.ProductModelImpl;
-import top.kass.pocketoa.presenter.ContactPresenter;
 import top.kass.pocketoa.presenter.ProductPresenter;
-import top.kass.pocketoa.view.ContactView;
 import top.kass.pocketoa.view.ProductView;
 
-public class ProductPresenterImpl implements ProductPresenter, ProductModelImpl.OnLoadProductsListener {
+public class ProductPresenterImpl implements ProductPresenter, ProductModel.OnLoadProductsListener {
 
     private ProductView mProductView;
     private ProductModel mProductModel;
@@ -29,7 +25,6 @@ public class ProductPresenterImpl implements ProductPresenter, ProductModelImpl.
         }
         mProductModel.loadProducts(pageIndex, this);
     }
-
 
     @Override
     public void onSuccess(List<ProductBean> list) {

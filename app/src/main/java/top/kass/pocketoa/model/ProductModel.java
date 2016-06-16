@@ -1,9 +1,17 @@
 package top.kass.pocketoa.model;
 
-import top.kass.pocketoa.model.impl.ProductModelImpl;
+import java.util.List;
+
+import top.kass.pocketoa.bean.ProductBean;
 
 public interface ProductModel {
 
-    void loadProducts(int page, ProductModelImpl.OnLoadProductsListener listener);
+    void loadProducts(int page, OnLoadProductsListener listener);
+
+    interface OnLoadProductsListener {
+        void onSuccess(List<ProductBean> list);
+        void onFailure(String msg, Exception e);
+    }
+
 
 }

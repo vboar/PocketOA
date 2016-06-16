@@ -51,11 +51,6 @@ public class ProductModelImpl implements ProductModel {
                 });
     }
 
-    public interface OnLoadProductsListener {
-        void onSuccess(List<ProductBean> list);
-        void onFailure(String msg, Exception e);
-    }
-
     private ProductBean jsonToProductBean(JSONObject object) throws JSONException {
         ProductBean productBean = new ProductBean();
         productBean.setProductId(ToolsUtil.sti(object.getString("productid")));

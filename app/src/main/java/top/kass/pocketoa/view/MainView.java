@@ -1,5 +1,7 @@
 package top.kass.pocketoa.view;
 
+import top.kass.pocketoa.bean.StaffBean;
+
 public interface MainView {
 
     void switchToHome();
@@ -10,5 +12,7 @@ public interface MainView {
     void switchToProduct();
     void switchToBusiness();
     void switchToLogout();
+    void reloadStaffInfo(StaffBean staffBean);
+    void navigateToUserEdit();
 
 }

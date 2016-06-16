@@ -1,45 +1,43 @@
 package top.kass.pocketoa.presenter.impl;
 
-import android.util.Log;
-
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.presenter.MainPresenter;
 import top.kass.pocketoa.view.MainView;
 
 public class MainPresenterImpl implements MainPresenter {
 
-    private MainView mainView;
+    private MainView mMainView;
 
     public MainPresenterImpl(MainView mainView) {
-        this.mainView = mainView;
+        this.mMainView = mainView;
     }
 
     @Override
     public void switchNavigation(int id) {
         switch (id) {
             case R.id.nav_home:
-                mainView.switchToHome();
+                mMainView.switchToHome();
                 break;
             case R.id.nav_customer:
-                mainView.switchToCustomer();
+                mMainView.switchToCustomer();
                 break;
             case R.id.nav_contact:
-                mainView.switchToContact();
+                mMainView.switchToContact();
                 break;
             case R.id.nav_opportunity:
-                mainView.switchToOpportunity();
+                mMainView.switchToOpportunity();
                 break;
             case R.id.nav_contract:
-                mainView.switchToContract();
+                mMainView.switchToContract();
                 break;
             case R.id.nav_product:
-                mainView.switchToProduct();
+                mMainView.switchToProduct();
                 break;
             case R.id.nav_business:
-                mainView.switchToBusiness();
+                mMainView.switchToBusiness();
                 break;
             case R.id.nav_logout:
-                mainView.switchToLogout();
+                mMainView.switchToLogout();
                 break;
         }
     }

@@ -48,6 +48,14 @@
     <string name="title_table_show">报表展现</string>
 
     <string name="username">用户名</string>
+    <string name="name">姓名</string>
+    <string name="mobile">手机号</string>
+    <string name="tel">电话号码</string>
+    <string name="gender">性别</string>
+    <string name="email">邮箱</string>
+    <string name="avatar">头像</string>
+    <string name="gender_male">男</string>
+    <string name="gender_female">女</string>
 
     <string name="tab_my_customers">我的客户</string>
     <string name="tab_all_customers">所有客户</string>

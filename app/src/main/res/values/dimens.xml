@@ -7,4 +7,6 @@
     <dimen name="nav_header_height">160dp</dimen>
 
     <dimen name="card_margin">10dp</dimen>
+
+    <dimen name="item_margin_top">10dp</dimen>
 </resources>

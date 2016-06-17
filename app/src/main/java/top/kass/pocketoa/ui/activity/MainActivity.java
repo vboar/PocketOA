@@ -258,7 +258,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void navigateToUserEdit() {
         Intent intent = new Intent(MainActivity.this, UserEditActivity.class);
         intent.putExtra("staffBean", mStaffBean);
-        startActivity(intent);
+        startActivityForResult(intent, 99);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 99 && resultCode == 99) {
+            reloadStaffInfo((StaffBean) data.getSerializableExtra("staffBean"));
+        }
+    }
 }

@@ -50,6 +50,44 @@ public class StaffModelImpl implements StaffModel {
                 });
     }
 
+    @Override
+    public void save(StaffBean staffBean, final OnSaveListener listener) {
+        String url = UrlUtil.URL_PREFIX + "staff_modify_json";
+        OkHttpUtils
+                .post()
+                .url(url)
+                .addParams("staffid", staffBean.getStaffId().toString())
+                .addParams("userid", staffBean.getUserId())
+                .addParams("mobile", staffBean.getMobile())
+                .addParams("tel", staffBean.getTel())
+                .addParams("email", staffBean.getEmail())
+                .addParams("gender", staffBean.getGender())
+                .addParams("avatar", staffBean.getAvatar())
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onSaveFailure();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getInt("resultcode") == 0) {
+                                listener.onSaveSuccess();
+                            } else {
+                                listener.onSaveFailure();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+    }
+
     private StaffBean jsonToStaffBean(JSONObject object) throws JSONException {
         StaffBean staffBean = new StaffBean();
         staffBean.setStaffId(ToolsUtil.sti(object.getString("staffid")));

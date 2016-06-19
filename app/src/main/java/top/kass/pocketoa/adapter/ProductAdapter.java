@@ -73,11 +73,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 return;
             }
             ((ItemViewHolder) holder).mName.setText(product.getProductName());
-            if (product.getProductSn().equals("")) {
-                ((ItemViewHolder) holder).mSN.setText(R.string.nothing);
-            } else {
-                ((ItemViewHolder) holder).mSN.setText(product.getProductSn());
-            }
+            ((ItemViewHolder) holder).mSN.setText(product.getProductSn());
             if (product.getPicture().equals("")) {
                 ((ItemViewHolder) holder).mImageView.setImageResource(R.drawable.icon_default);
             } else {

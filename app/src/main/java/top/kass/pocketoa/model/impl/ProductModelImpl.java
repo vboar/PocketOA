@@ -6,6 +6,8 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +91,7 @@ public class ProductModelImpl implements ProductModel {
                 .addParams("unitcost", productBean.getUnitCost().toString())
                 .addParams("introduction", productBean.getIntroduction())
                 .addParams("productremarks", productBean.getProductRemarks())
+                .addParams("picture", productBean.getPicture())
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -127,6 +130,7 @@ public class ProductModelImpl implements ProductModel {
                 .addParams("unitcost", productBean.getUnitCost().toString())
                 .addParams("introduction", productBean.getIntroduction())
                 .addParams("productremarks", productBean.getProductRemarks())
+                .addParams("picture", productBean.getPicture())
                 .build()
                 .execute(new StringCallback() {
                     @Override

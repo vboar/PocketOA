@@ -23,6 +23,7 @@ import top.kass.pocketoa.presenter.ProductEditPresenter;
 import top.kass.pocketoa.presenter.impl.ProductAddPresenterImpl;
 import top.kass.pocketoa.presenter.impl.ProductEditPresenterImpl;
 import top.kass.pocketoa.util.UIUtil;
+import top.kass.pocketoa.util.UrlUtil;
 import top.kass.pocketoa.view.ProductAddView;
 import top.kass.pocketoa.view.ProductEditView;
 
@@ -40,7 +41,7 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
     private EditText mEtCost;
     private EditText mEtIntroduction;
     private EditText mEtRemark;
-    private CircleImageView ivPicture;
+    private EditText mEtPicture;
 
     private ProgressDialog mProgressDialog;
     private ProductEditPresenter mProductEditPresenter;
@@ -73,20 +74,22 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
         mEtCost = (EditText) findViewById(R.id.etCost);
         mEtIntroduction = (EditText) findViewById(R.id.etIntroduction);
         mEtRemark = (EditText) findViewById(R.id.etRemark);
-        ivPicture = (CircleImageView) findViewById(R.id.ivPicture);
+        mEtPicture = (EditText) findViewById(R.id.etPicture);
         mEtName.setText(mProductBean.getProductName());
         mEtSn.setText(mProductBean.getProductSn());
-        mEtPrice.setText(mProductBean.getStandardPrice().toString());
+        if (mProductBean.getStandardPrice() != null) {
+            mEtPrice.setText(mProductBean.getStandardPrice().toString());
+        }
         mEtUnit.setText(mProductBean.getSalesUnit());
-        mEtCost.setText(mProductBean.getUnitCost().toString());
+        if (mProductBean.getUnitCost() != null) {
+            mEtCost.setText(mProductBean.getUnitCost().toString());
+        }
         mEtIntroduction.setText(mProductBean.getIntroduction());
         mEtRemark.setText(mProductBean.getProductRemarks());
         if (mProductBean.getPicture().equals("")) {
-            ivPicture.setImageResource(R.drawable.icon_default);
+            mEtPicture.setText(UrlUtil.COMMON_PIC_URL);
         } else {
-            Glide.with(this).load(mProductBean.getPicture()).crossFade()
-                    .error(R.drawable.icon_default)
-                    .into(ivPicture);
+            mEtPicture.setText(mProductBean.getPicture());
         }
 
     }
@@ -116,6 +119,7 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
                 mProductBean.setSalesUnit(mEtUnit.getText().toString());
                 mProductBean.setIntroduction(mEtIntroduction.getText().toString());
                 mProductBean.setProductRemarks(mEtRemark.getText().toString());
+                mProductBean.setPicture(mEtPicture.getText().toString());
                 mProductEditPresenter.editProduct(mProductBean);
                 break;
         }

@@ -18,6 +18,7 @@ import top.kass.pocketoa.bean.ProductBean;
 import top.kass.pocketoa.presenter.ProductAddPresenter;
 import top.kass.pocketoa.presenter.impl.ProductAddPresenterImpl;
 import top.kass.pocketoa.util.UIUtil;
+import top.kass.pocketoa.util.UrlUtil;
 import top.kass.pocketoa.view.ProductAddView;
 
 public class ProductAddActivity extends AppCompatActivity implements ProductAddView {
@@ -33,6 +34,7 @@ public class ProductAddActivity extends AppCompatActivity implements ProductAddV
     private EditText mEtCost;
     private EditText mEtIntroduction;
     private EditText mEtRemark;
+    private EditText mEtPicture;
 
     private ProgressDialog mProgressDialog;
     private ProductAddPresenter mProductAddPresenter;
@@ -63,6 +65,8 @@ public class ProductAddActivity extends AppCompatActivity implements ProductAddV
         mEtCost = (EditText) findViewById(R.id.etCost);
         mEtIntroduction = (EditText) findViewById(R.id.etIntroduction);
         mEtRemark = (EditText) findViewById(R.id.etRemark);
+        mEtPicture = (EditText) findViewById(R.id.etPicture);
+        mEtPicture.setText(UrlUtil.COMMON_PIC_URL);
     }
 
     @Override
@@ -91,6 +95,7 @@ public class ProductAddActivity extends AppCompatActivity implements ProductAddV
                 productBean.setSalesUnit(mEtUnit.getText().toString());
                 productBean.setIntroduction(mEtIntroduction.getText().toString());
                 productBean.setProductRemarks(mEtRemark.getText().toString());
+                productBean.setPicture(mEtPicture.getText().toString());
                 mProductAddPresenter.addProduct(productBean);
                 break;
         }

@@ -95,11 +95,19 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         TextView tvSn = (TextView) findViewById(R.id.tvSn);
         tvSn.setText(mProductBean.getProductSn());
         TextView tvPrice = (TextView) findViewById(R.id.tvPrice);
-        tvPrice.setText(mProductBean.getStandardPrice().toString());
+        if (mProductBean.getStandardPrice() == null) {
+            tvPrice.setText("");
+        } else {
+            tvPrice.setText(mProductBean.getStandardPrice().toString());
+        }
         TextView tvUnit = (TextView) findViewById(R.id.tvUnit);
         tvUnit.setText(mProductBean.getSalesUnit());
         TextView tvCost = (TextView) findViewById(R.id.tvCost);
-        tvCost.setText(mProductBean.getUnitCost().toString());
+        if (mProductBean.getUnitCost() == null) {
+            tvCost.setText("");
+        } else {
+            tvCost.setText(mProductBean.getUnitCost().toString());
+        }
         TextView tvIntroduction = (TextView) findViewById(R.id.tvIntroduction);
         tvIntroduction.setText(mProductBean.getIntroduction());
         TextView tvRemark = (TextView) findViewById(R.id.tvRemark);

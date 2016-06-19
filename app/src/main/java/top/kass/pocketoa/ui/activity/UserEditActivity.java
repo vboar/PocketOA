@@ -21,6 +21,7 @@ import top.kass.pocketoa.bean.StaffBean;
 import top.kass.pocketoa.presenter.UserEditPresenter;
 import top.kass.pocketoa.presenter.impl.UserEditPresenterImpl;
 import top.kass.pocketoa.util.UIUtil;
+import top.kass.pocketoa.util.UrlUtil;
 import top.kass.pocketoa.view.UserEditView;
 
 public class UserEditActivity extends AppCompatActivity implements UserEditView {
@@ -35,6 +36,7 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
     private EditText mEtMobile;
     private EditText mEtTel;
     private EditText mEtEmail;
+    private EditText mEtAvatar;
     private RadioGroup mRgGender;
     private RadioButton mRbMale;
     private RadioButton mRbFemale;
@@ -62,6 +64,7 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
         mEtMobile = (EditText) findViewById(R.id.etMobile);
         mEtTel = (EditText) findViewById(R.id.etTel);
         mEtEmail = (EditText) findViewById(R.id.etEmail);
+        mEtAvatar = (EditText) findViewById(R.id.etAvatar);
         mRgGender = (RadioGroup) findViewById(R.id.rgGender);
         mRbMale = (RadioButton) findViewById(R.id.rbMale);
         mRbFemale = (RadioButton) findViewById(R.id.rbFemale);
@@ -83,6 +86,7 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
                 mStaffBean.setMobile(mEtMobile.getText().toString());
                 mStaffBean.setTel(mEtTel.getText().toString());
                 mStaffBean.setEmail(mEtEmail.getText().toString());
+                mStaffBean.setAvatar(mEtAvatar.getText().toString());
                 if (mRbMale.isChecked()) {
                     mStaffBean.setGender("男");
                 } else {
@@ -102,6 +106,11 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
         mEtMobile.setText(mStaffBean.getMobile());
         mEtTel.setText(mStaffBean.getTel());
         mEtEmail.setText(mStaffBean.getEmail());
+        if (mStaffBean.getAvatar().equals("")) {
+            mEtAvatar.setText(UrlUtil.COMMON_PIC_URL);
+        } else {
+            mEtAvatar.setText(mStaffBean.getAvatar());
+        }
         if (staffBean.getGender().equals("女")) {
             mRbFemale.setChecked(true);
         } else {

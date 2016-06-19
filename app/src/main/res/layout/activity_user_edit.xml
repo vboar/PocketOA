@@ -114,11 +114,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
                     android:text="@string/avatar"/>
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_marginTop="5dp"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/icon_default"/>
+                <EditText
+                    android:id="@+id/etAvatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 

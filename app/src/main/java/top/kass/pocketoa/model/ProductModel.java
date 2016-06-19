@@ -8,11 +8,13 @@ public interface ProductModel {
 
     void loadProducts(int page, OnLoadProductsListener listener);
 
+    void loadProduct(int productId, OnLoadProductListner listener);
+
     void addProduct(ProductBean productBean, OnSingleProductListener listener);
 
     void saveProduct(ProductBean productBean, OnSingleProductListener listener);
 
-    void deleteProduct(ProductBean productBean, OnSingleProductListener listener);
+    void deleteProduct(int productId, OnSingleProductListener listener);
 
     interface OnLoadProductsListener {
         void onSuccess(List<ProductBean> list);
@@ -22,6 +24,11 @@ public interface ProductModel {
     interface OnSingleProductListener {
         void onSuccess();
         void onFailure(String msg);
+    }
+
+    interface OnLoadProductListner {
+        void onLoadSuccess(ProductBean productBean);
+        void onLoadFailure(String msg);
     }
 
 

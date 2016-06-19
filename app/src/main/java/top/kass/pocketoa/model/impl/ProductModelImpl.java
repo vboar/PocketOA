@@ -51,6 +51,32 @@ public class ProductModelImpl implements ProductModel {
     }
 
     @Override
+    public void loadProduct(int productId, final OnLoadProductListner listener) {
+        String url = UrlUtil.URL_PREFIX + "product_query_json";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .addParams("productid", Integer.toString(productId))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onLoadFailure("加载失败");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            listener.onLoadSuccess(jsonToProductBean(jsonObject.getJSONObject("0")));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    @Override
     public void addProduct(ProductBean productBean, final OnSingleProductListener listener) {
         String url = UrlUtil.URL_PREFIX + "product_create_json";
         OkHttpUtils
@@ -126,12 +152,12 @@ public class ProductModelImpl implements ProductModel {
     }
 
     @Override
-    public void deleteProduct(ProductBean productBean, final OnSingleProductListener listener) {
+    public void deleteProduct(int productId, final OnSingleProductListener listener) {
         String url = UrlUtil.URL_PREFIX + "product_delete_json";
         OkHttpUtils
                 .get()
                 .url(url)
-                .addParams("productid", productBean.getProductId().toString())
+                .addParams("productid", Integer.toString(productId))
                 .build()
                 .execute(new StringCallback() {
                     @Override

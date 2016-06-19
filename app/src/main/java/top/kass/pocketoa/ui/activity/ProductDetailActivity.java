@@ -30,6 +30,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     private ProductBean mProductBean;
     private ProgressDialog mProgressDialog;
     private ProductDetailPresenter mProductDetailPresenter;
+    private boolean isEdited = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,11 +44,17 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                navigateToMain(1);
             }
         });
 
-        loadProduct((ProductBean) getIntent().getSerializableExtra("product"));
+        ProductBean productBean = (ProductBean) getIntent().getSerializableExtra("product");
+        mProductDetailPresenter.loadProduct(productBean.getProductId());
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigateToMain(1);
     }
 
     @Override
@@ -64,7 +71,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mProductDetailPresenter.deleteProduct(mProductBean);
+                                mProductDetailPresenter.deleteProduct(mProductBean.getProductId());
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -73,12 +80,14 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                         }).show();
                 break;
             case R.id.action_edit:
+                navigateToEdit();
                 break;
         }
         return false;
     }
 
-    private void loadProduct(ProductBean productBean) {
+    @Override
+    public void loadProduct(ProductBean productBean) {
         mProductBean = productBean;
 
         TextView tvName = (TextView) findViewById(R.id.tvName);
@@ -96,25 +105,40 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         TextView tvRemark = (TextView) findViewById(R.id.tvRemark);
         tvRemark.setText(mProductBean.getProductRemarks());
         CircleImageView ivPicture = (CircleImageView) findViewById(R.id.ivPicture);
-        if (productBean.getPicture().equals("")) {
+        if (mProductBean.getPicture().equals("")) {
             ivPicture.setImageResource(R.drawable.icon_default);
         } else {
-            Glide.with(this).load(productBean.getPicture()).crossFade()
+            Glide.with(this).load(mProductBean.getPicture()).crossFade()
                     .error(R.drawable.icon_default)
                     .into(ivPicture);
         }
     }
 
     @Override
-    public void navigateToMain() {
+    public void navigateToEdit() {
+        Intent intent = new Intent(this, ProductEditActivity.class);
+        intent.putExtra("product", mProductBean);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void navigateToMain(int type) {
         Intent intent = new Intent();
-        setResult(2, intent);
+        if (type == 1) {
+            if (isEdited) {
+                setResult(1, intent);
+            } else {
+                setResult(2, intent);
+            }
+        } else if (type == 2) {
+            setResult(1, intent);
+        }
         finish();
     }
 
     @Override
-    public void showProgress() {
-        mProgressDialog = ProgressDialog.show(this, "", "正在删除...", false, false);
+    public void showProgress(String msg) {
+        mProgressDialog = ProgressDialog.show(this, "", msg, false, false);
     }
 
     @Override
@@ -128,4 +152,13 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         View view = findViewById(R.id.product_detail_layout);
         UIUtil.showSnackBar(view, msg, Snackbar.LENGTH_SHORT);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == 1) {
+            isEdited = true;
+            mProductDetailPresenter.loadProduct(mProductBean.getProductId());
+        }
+    }
+
 }

@@ -110,6 +110,7 @@
                     android:layout_marginTop="@dimen/item_margin_top"
                     android:text="@string/product_picture"/>
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivPicture"
                     android:layout_marginTop="5dp"
                     android:layout_width="64dp"
                     android:layout_height="64dp"

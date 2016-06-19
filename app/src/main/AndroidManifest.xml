@@ -87,6 +87,11 @@
             android:label="@string/title_product_detail"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ProductEditActivity"
+            android:label="@string/title_product_edit"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
 
         <activity

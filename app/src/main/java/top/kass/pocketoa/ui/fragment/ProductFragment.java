@@ -160,10 +160,8 @@ public class ProductFragment extends Fragment implements ProductView,
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == 2) {
+        if (requestCode == 1 && resultCode == 1) {
             onRefresh();
-            Log.i("123", "456");
         }
     }
 }

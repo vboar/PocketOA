@@ -28,21 +28,36 @@
     <string name="navigation_others">其他</string>
 
     <string name="title_home">口袋OA</string>
+
     <string name="title_customer">客户</string>
     <string name="title_contact">联系人</string>
     <string name="title_opportunity">商机</string>
     <string name="title_contract">合同</string>
     <string name="title_product">产品</string>
     <string name="title_business">业务</string>
+
     <string name="title_user_edit">编辑资料</string>
+
     <string name="title_customer_add">添加新客户</string>
+    <string name="title_customer_detail">客户详情</string>
     <string name="title_customer_edit">编辑客户</string>
+
     <string name="title_contact_add">添加新联系人</string>
+    <string name="title_contact_detail">联系人详情</string>
     <string name="title_contact_edit">编辑联系人</string>
-    <string name="title_opportunity_add">添加商机</string>
+
+    <string name="title_opportunity_add">添加新商机</string>
+    <string name="title_opportunity_detail">商机详情</string>
     <string name="title_opportunity_edit">编辑商机</string>
-    <string name="title_product_add">添加产品</string>
+
+    <string name="title_contract_add">添加新合同</string>
+    <string name="title_contract_detail">合同详情</string>
+    <string name="title_contract_edit">编辑合同</string>
+
+    <string name="title_product_add">添加新产品</string>
+    <string name="title_product_detail">产品详情</string>
     <string name="title_product_edit">编辑产品</string>
+
     <string name="title__goal_setting">员工目标设置</string>
     <string name="title_attention_setting">提醒设置</string>
     <string name="title_table_show">报表展现</string>
@@ -97,6 +112,17 @@
     <string name="opportunity_status_4">谈判合同</string>
     <string name="opportunity_status_5">赢单</string>
     <string name="opportunity_status_6">输单</string>
+    
+    <string name="product_name">名称</string>
+    <string name="product_sn">编号</string>
+    <string name="product_price">标准单价</string>
+    <string name="product_unit">销售单位</string>
+    <string name="product_cost">单位成本</string>
+    <string name="product_introduction">介绍</string>
+    <string name="product_picture">图片</string>
+    <string name="product_remark">备注</string>
+
+
 
     <string name="business_goal_setting">员工目标设置</string>
     <string name="business_attention_setting">提醒设置</string>

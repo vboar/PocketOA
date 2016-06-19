@@ -1,6 +1,7 @@
 package top.kass.pocketoa.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -128,19 +129,23 @@ public class MainActivity extends AppCompatActivity implements MainView {
             switch (type) {
                 case CUSTOMER:
                     intent = new Intent(getApplicationContext(), CustomerAddActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 1);
                     break;
                 case CONTACT:
                     intent = new Intent(getApplicationContext(), ContactAddActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 2);
                     break;
                 case OPPORTUNITY:
                     intent = new Intent(getApplicationContext(), OpportunityAddActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 3);
                     break;
                 case CONTRACT:
                     intent = new Intent(getApplicationContext(), ContractAddActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 4);
+                    break;
+                case PRODUCT:
+                    intent = new Intent(getApplicationContext(), ProductAddActivity.class);
+                    startActivityForResult(intent, 5);
                     break;
             }
         }
@@ -172,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switchToCustomer() {
-        if (type == CUSTOMER) return;
         type = CUSTOMER;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new CustomerFragment()).commit();
@@ -182,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switchToContact() {
-        if (type == CONTACT) return;
         type = CONTACT;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new ContactFragment()).commit();
@@ -192,7 +195,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switchToOpportunity() {
-        if (type == OPPORTUNITY) return;
         type = OPPORTUNITY;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new OpportunityFragment()).commit();
@@ -202,7 +204,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switchToContract() {
-        if (type == CONTRACT) return;
         type = CONTRACT;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new ContractFragment()).commit();
@@ -212,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switchToProduct() {
-        if (type == PRODUCT) return;
         type = PRODUCT;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new ProductFragment()).commit();
@@ -222,7 +222,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void switchToBusiness() {
-        if (type == BUSINESS) return;
         type = BUSINESS;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
                 new BusinessFragment()).commit();
@@ -252,6 +251,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
         }
         tvName.setText(staffBean.getName());
         tvEmail.setText(staffBean.getEmail());
+
+        SharedPreferences sharedPreferences = getSharedPreferences("oa", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("staffId", mStaffBean.getStaffId());
+        editor.apply();
     }
 
     @Override
@@ -266,6 +270,17 @@ public class MainActivity extends AppCompatActivity implements MainView {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 99 && resultCode == 99) {
             reloadStaffInfo((StaffBean) data.getSerializableExtra("staffBean"));
+        } else if (requestCode == 1 && resultCode == 1) {
+            switchToCustomer();
+        } else if (requestCode == 2 && resultCode == 2) {
+            switchToContact();
+        } else if (requestCode == 3 && resultCode == 3) {
+            switchToOpportunity();
+        } else if (requestCode == 4 && resultCode == 4) {
+            switchToContract();
+        } else if (requestCode == 5 && resultCode == 5) {
+            switchToProduct();
         }
     }
+
 }

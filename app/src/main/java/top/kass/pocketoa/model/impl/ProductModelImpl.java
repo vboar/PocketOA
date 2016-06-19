@@ -1,6 +1,5 @@
 package top.kass.pocketoa.model.impl;
 
-import android.util.Log;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -50,6 +49,113 @@ public class ProductModelImpl implements ProductModel {
                     }
                 });
     }
+
+    @Override
+    public void addProduct(ProductBean productBean, final OnSingleProductListener listener) {
+        String url = UrlUtil.URL_PREFIX + "product_create_json";
+        OkHttpUtils
+                .post()
+                .url(url)
+                .addParams("productname", productBean.getProductName())
+                .addParams("productsn", productBean.getProductSn())
+                .addParams("standardprice", productBean.getStandardPrice().toString())
+                .addParams("salesunit", productBean.getSalesUnit())
+                .addParams("unitcost", productBean.getUnitCost().toString())
+                .addParams("introduction", productBean.getIntroduction())
+                .addParams("productremarks", productBean.getProductRemarks())
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onFailure("添加失败");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getInt("resultcode") == 0) {
+                                listener.onSuccess();
+                            } else {
+                                listener.onFailure("添加失败");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+    }
+
+    @Override
+    public void saveProduct(ProductBean productBean, final OnSingleProductListener listener) {
+        String url = UrlUtil.URL_PREFIX + "product_modify_json";
+        OkHttpUtils
+                .post()
+                .url(url)
+                .addParams("productid", productBean.getProductId().toString())
+                .addParams("productname", productBean.getProductName())
+                .addParams("productsn", productBean.getProductSn())
+                .addParams("standardprice", productBean.getStandardPrice().toString())
+                .addParams("salesunit", productBean.getSalesUnit())
+                .addParams("unitcost", productBean.getUnitCost().toString())
+                .addParams("introduction", productBean.getIntroduction())
+                .addParams("productremarks", productBean.getProductRemarks())
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onFailure("编辑失败");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getInt("resultcode") == 0) {
+                                listener.onSuccess();
+                            } else {
+                                listener.onFailure("编辑失败");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+    }
+
+    @Override
+    public void deleteProduct(ProductBean productBean, final OnSingleProductListener listener) {
+        String url = UrlUtil.URL_PREFIX + "product_delete_json";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .addParams("productid", productBean.getProductId().toString())
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onFailure("删除失败");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getInt("resultcode") == 0) {
+                                listener.onSuccess();
+                            } else {
+                                listener.onFailure("删除失败");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+    }
+
 
     private ProductBean jsonToProductBean(JSONObject object) throws JSONException {
         ProductBean productBean = new ProductBean();

@@ -13,6 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".ui.activity.SplashActivity"
             android:screenOrientation="portrait"
@@ -22,25 +23,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.activity.LoginActivity"
             android:label="@string/login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.MainActivity"
-            android:label="@string/title_home"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.activity.RegisterActivity"
             android:label="@string/register"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:label="@string/title_home"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.activity.UserEditActivity"
             android:label="@string/title_user_edit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.activity.CustomerAddActivity"
             android:label="@string/title_customer_add"
@@ -48,6 +53,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.CustomerDetailActivity"
+            android:label="@string/title_customer_edit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -55,6 +61,7 @@
             android:label="@string/title_customer_edit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.activity.ContactAddActivity"
             android:label="@string/title_contact_add"
@@ -62,6 +69,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.ContactDetailActivity"
+            android:label="@string/title_contact_edit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -69,10 +77,18 @@
             android:label="@string/title_contact_edit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.activity.ProductDetailActivity"
+
+        <activity android:name=".ui.activity.ProductAddActivity"
+            android:label="@string/title_product_add"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ProductDetailActivity"
+            android:label="@string/title_product_detail"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
         <activity
             android:name=".ui.activity.OpportunityAddActivity"
             android:label="@string/title_opportunity_add"
@@ -80,6 +96,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.OpportunityDetailActivity"
+            android:label="@string/title_opportunity_edit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -87,6 +104,7 @@
             android:label="@string/title_opportunity_edit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.activity.BusinessGoalSettingActivity"
             android:label="@string/title__goal_setting"
@@ -103,13 +121,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
-
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="573c18f4e0f55ac414002eb0" />
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="Test" />
+
     </application>
 
 </manifest>

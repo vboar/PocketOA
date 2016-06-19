@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +103,7 @@ public class ProductFragment extends Fragment implements ProductView,
             ProductBean product = mAdapter.getItem(position);
             Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
             intent.putExtra("product", product);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
         }
     };
 
@@ -157,4 +158,12 @@ public class ProductFragment extends Fragment implements ProductView,
         UIUtil.showSnackBar(view, getString(R.string.fail_loading), Snackbar.LENGTH_SHORT);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 2) {
+            onRefresh();
+            Log.i("123", "456");
+        }
+    }
 }

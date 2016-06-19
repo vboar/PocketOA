@@ -9,4 +9,5 @@
     <dimen name="card_margin">10dp</dimen>
 
     <dimen name="item_margin_top">10dp</dimen>
+    <dimen name="derail_item_margin_top">16dp</dimen>
 </resources>

@@ -1,46 +1,41 @@
 package top.kass.pocketoa.presenter.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import top.kass.pocketoa.bean.ContactBean;
-import top.kass.pocketoa.bean.CustomerBean;
-import top.kass.pocketoa.model.CustomerModel;
-import top.kass.pocketoa.model.impl.CustomerModelImpl;
+import top.kass.pocketoa.model.ContactModel;
+import top.kass.pocketoa.model.impl.ContactModelImpl;
 import top.kass.pocketoa.presenter.ContactPresenter;
-import top.kass.pocketoa.presenter.CustomerPresenter;
 import top.kass.pocketoa.view.ContactView;
-import top.kass.pocketoa.view.CustomerView;
 
-public class ContactPresenterImpl implements ContactPresenter {
+public class ContactPresenterImpl implements ContactPresenter, ContactModel.OnLoadContactsListener {
 
     private ContactView mContactView;
+    private ContactModel mContactModel;
 
     public ContactPresenterImpl(ContactView contactView) {
         this.mContactView = contactView;
+        this.mContactModel = new ContactModelImpl();
     }
 
     @Override
-    public void loadContacts(final int type, final int pageIndex) {
+    public void loadContacts(final int type, final int staffId, final int pageIndex) {
         if(pageIndex == 0) {
             mContactView.showProgress();
         }
-        mContactView.hideProgress();
-        // TODO
-        List<ContactBean> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ContactBean contactBean = new ContactBean();
-            contactBean.setContactsName("刘钦");
-            contactBean.setCustomerId(1);
-            list.add(contactBean);
-        }
-        if (pageIndex > 5) {
-            mContactView.addContacts(new ArrayList<ContactBean>());
-        } else {
-            mContactView.addContacts(list);
-        }
+        mContactModel.loadContacts(type, staffId, pageIndex, this);
     }
 
 
+    @Override
+    public void onSuccess(List<ContactBean> list) {
+        mContactView.hideProgress();
+        mContactView.addContacts(list);
+    }
+
+    @Override
+    public void onFailure(String msg) {
+        mContactView.hideProgress();
+        mContactView.showLoadFailMsg();
+    }
 }

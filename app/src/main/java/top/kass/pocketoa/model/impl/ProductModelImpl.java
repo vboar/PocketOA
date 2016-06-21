@@ -25,13 +25,12 @@ public class ProductModelImpl implements ProductModel {
         OkHttpUtils
                 .post()
                 .url(url)
-                .addParams("currentpage", Integer.toString(page))
-                .addParams("search", Integer.toString(page))
+                .addParams("currentpage", Integer.toString(page+1))
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        listener.onFailure("Load products into failure.", e);
+                        listener.onFailure("加载失败", e);
                     }
 
                     @Override
@@ -185,7 +184,6 @@ public class ProductModelImpl implements ProductModel {
                     }
                 });
     }
-
 
     private ProductBean jsonToProductBean(JSONObject object) throws JSONException {
         ProductBean productBean = new ProductBean();

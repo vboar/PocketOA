@@ -7,11 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.ContactBean;
 import top.kass.pocketoa.bean.CustomerBean;
+import top.kass.pocketoa.util.UrlUtil;
 
 public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -64,13 +68,15 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof ItemViewHolder) {
-
             ContactBean contact = mData.get(position);
             if(contact == null) {
                 return;
             }
             ((ItemViewHolder) holder).mName.setText(contact.getContactsName());
-            ((ItemViewHolder) holder).mCustomer.setText("来自客户[" + contact.getCustomerId() + "]");
+            ((ItemViewHolder) holder).mCustomer.setText("来自客户 [" + contact.getCustomer().getCustomerName() + "]");
+            Glide.with(mContext).load(UrlUtil.COMMON_PIC_URL).crossFade()
+                    .error(R.drawable.icon_default)
+                    .into(((ItemViewHolder) holder).mImageView);
         }
     }
 
@@ -103,18 +109,19 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         public TextView mName;
         public TextView mCustomer;
+        private CircleImageView mImageView;
 
         public ItemViewHolder(View v) {
             super(v);
             mName = (TextView) v.findViewById(R.id.tvContactName);
             mCustomer = (TextView) v.findViewById(R.id.tvContactCustomer);
+            mImageView = (CircleImageView) v.findViewById(R.id.imageView);
             v.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if(mOnItemClickListener != null) {
-                // TODO
                 mOnItemClickListener.onItemClick(view, this.getPosition());
             }
         }

@@ -53,7 +53,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.CustomerDetailActivity"
-            android:label="@string/title_customer_edit"
+            android:label="@string/title_customer_detail"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -69,7 +69,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.ContactDetailActivity"
-            android:label="@string/title_contact_edit"
+            android:label="@string/title_contact_detail"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -101,7 +101,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.OpportunityDetailActivity"
-            android:label="@string/title_opportunity_edit"
+            android:label="@string/title_opportunity_detail"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

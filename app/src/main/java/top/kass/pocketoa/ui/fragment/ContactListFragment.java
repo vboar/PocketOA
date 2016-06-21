@@ -1,6 +1,8 @@
 package top.kass.pocketoa.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -36,6 +38,7 @@ public class ContactListFragment extends Fragment implements ContactView,
 
     private int mType = ContactFragment.CONTACT_MY;
     private int pageIndex = 0;
+    private int staffId;
 
     public static ContactListFragment newInstance(int type) {
         Bundle args = new Bundle();
@@ -50,6 +53,10 @@ public class ContactListFragment extends Fragment implements ContactView,
         super.onCreate(savedInstanceState);
         mContactPresenter = new ContactPresenterImpl(this);
         mType = getArguments().getInt("type");
+
+        SharedPreferences sharedPreferences = getActivity().
+                getSharedPreferences("oa", Context.MODE_PRIVATE);
+        staffId = sharedPreferences.getInt("staffId", 0);
     }
 
     @Nullable
@@ -95,7 +102,7 @@ public class ContactListFragment extends Fragment implements ContactView,
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
                     && mAdapter.isShowFooter()) {
-                mContactPresenter.loadContacts(mType, pageIndex);
+                mContactPresenter.loadContacts(mType, staffId, pageIndex);
             }
         }
     };
@@ -116,7 +123,7 @@ public class ContactListFragment extends Fragment implements ContactView,
         if(mData != null) {
             mData.clear();
         }
-        mContactPresenter.loadContacts(mType, pageIndex);
+        mContactPresenter.loadContacts(mType, staffId, pageIndex);
     }
 
     @Override
@@ -132,6 +139,9 @@ public class ContactListFragment extends Fragment implements ContactView,
         }
         mData.addAll(contactList);
         if(pageIndex == 0) {
+            if (mData.size() < 10) {
+                mAdapter.isShowFooter(false);
+            }
             mAdapter.setmData(mData);
         } else {
             if(contactList == null || contactList.size() == 0) {

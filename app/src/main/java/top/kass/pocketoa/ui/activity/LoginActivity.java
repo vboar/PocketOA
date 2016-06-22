@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void showProgress() {
         mProgressDialog = ProgressDialog.show(this, getString(R.string.login),
-                getString(R.string.login_loading), false, false);
+                getString(R.string.login_loading), false, true);
     }
 
     @Override

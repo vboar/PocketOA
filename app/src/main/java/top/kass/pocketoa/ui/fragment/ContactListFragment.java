@@ -113,7 +113,7 @@ public class ContactListFragment extends Fragment implements ContactView,
             ContactBean contact = mAdapter.getItem(position);
             Intent intent = new Intent(getActivity(), ContactDetailActivity.class);
             intent.putExtra("contact", contact);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
         }
     };
 

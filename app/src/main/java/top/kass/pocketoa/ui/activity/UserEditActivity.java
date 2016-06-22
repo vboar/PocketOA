@@ -128,7 +128,7 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
 
     @Override
     public void showProgress(String msg) {
-        mProgressDialog = ProgressDialog.show(this, "", msg, false, false);
+        mProgressDialog = ProgressDialog.show(this, "", msg, false, true);
     }
 
     @Override

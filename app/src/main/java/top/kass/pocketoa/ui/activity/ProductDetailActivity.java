@@ -48,8 +48,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             }
         });
 
-        ProductBean productBean = (ProductBean) getIntent().getSerializableExtra("product");
-        mProductDetailPresenter.loadProduct(productBean.getProductId());
+        int productId = getIntent().getIntExtra("productId", 0);
+        mProductDetailPresenter.loadProduct(productId);
     }
 
     @Override
@@ -146,7 +146,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     @Override
     public void showProgress(String msg) {
-        mProgressDialog = ProgressDialog.show(this, "", msg, false, false);
+        mProgressDialog = ProgressDialog.show(this, "", msg, false, true);
     }
 
     @Override

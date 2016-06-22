@@ -97,7 +97,7 @@ public class ProductFragment extends Fragment implements ProductView,
         public void onItemClick(View view, int position) {
             ProductBean product = mAdapter.getItem(position);
             Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
-            intent.putExtra("product", product);
+            intent.putExtra("productId", product.getProductId());
             startActivityForResult(intent, 1);
         }
     };

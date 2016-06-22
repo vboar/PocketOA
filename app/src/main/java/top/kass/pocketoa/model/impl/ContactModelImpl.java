@@ -48,7 +48,7 @@ public class ContactModelImpl implements ContactModel {
                                 }
                                 listener.onSuccess(list);
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                listener.onFailure("加载失败");
                             }
                         }
                     });
@@ -76,7 +76,7 @@ public class ContactModelImpl implements ContactModel {
                                 }
                                 listener.onSuccess(list);
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                listener.onFailure("加载失败");
                             }
                         }
                     });
@@ -84,23 +84,119 @@ public class ContactModelImpl implements ContactModel {
     }
 
     @Override
-    public void loadContact(int contactId, OnLoadProductListner listener) {
+    public void loadContact(int contactId, final OnLoadContactListner listener) {
+        String url = UrlUtil.URL_PREFIX + "contact_query_json";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .addParams("contactid", Integer.toString(contactId))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onLoadFailure("加载失败");
+                    }
 
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            listener.onLoadSuccess(jsonToSimpleContactBean(jsonObject.getJSONObject("0")));
+                        } catch (JSONException e) {
+                            listener.onLoadFailure("加载失败");
+                        }
+                    }
+                });
     }
 
     @Override
-    public void addContact(ContactBean contactBean, OnSingleProductListener listener) {
+    public void addContact(ContactBean contactBean, final OnSingleContactListener listener) {
+        String url = UrlUtil.URL_PREFIX + "contact_create_json";
+        OkHttpUtils
+                .post()
+                .url(url)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onFailure("添加失败");
+                    }
 
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getInt("resultcode") == 0) {
+                                listener.onSuccess();
+                            } else {
+                                listener.onFailure("添加失败");
+                            }
+                        } catch (JSONException e) {
+                            listener.onFailure("添加失败");
+                        }
+
+                    }
+                });
     }
 
     @Override
-    public void saveContact(ContactBean contactBean, OnSingleProductListener listener) {
+    public void saveContact(ContactBean contactBean, final OnSingleContactListener listener) {
+        String url = UrlUtil.URL_PREFIX + "contact_modify_json";
+        OkHttpUtils
+                .post()
+                .url(url)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onFailure("编辑失败");
+                    }
 
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getInt("resultcode") == 0) {
+                                listener.onSuccess();
+                            } else {
+                                listener.onFailure("编辑失败");
+                            }
+                        } catch (JSONException e) {
+                            listener.onFailure("编辑失败");
+                        }
+                    }
+                });
     }
 
     @Override
-    public void deleteContact(int contactId, OnSingleProductListener listener) {
+    public void deleteContact(int contactId, final OnSingleContactListener listener) {
+        String url = UrlUtil.URL_PREFIX + "contact_delete_json";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .addParams("contactsId", Integer.toString(contactId))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onFailure("删除失败");
+                    }
 
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getInt("resultcode") == 0) {
+                                listener.onSuccess();
+                            } else {
+                                listener.onFailure("删除失败");
+                            }
+                        } catch (JSONException e) {
+                            listener.onFailure("删除失败");
+                        }
+
+                    }
+                });
     }
 
     private ContactBean jsonToContactBean(JSONObject object) throws JSONException {
@@ -140,6 +236,27 @@ public class ContactModelImpl implements ContactModel {
         customerBean.setCreateDate(ToolsUtil.sts(object.getString("createdate")));
         customerBean.setCustomerRemarks(ToolsUtil.sts(object.getString("customerremarks")));
         contactBean.setCustomer(customerBean);
+        return contactBean;
+    }
+
+    private ContactBean jsonToSimpleContactBean(JSONObject object) throws JSONException {
+        ContactBean contactBean = new ContactBean();
+        contactBean.setContactsId(ToolsUtil.sti(object.getString("contactsid")));
+        contactBean.setCustomerId(ToolsUtil.sti(object.getString("customerid")));
+        contactBean.setContactsName(ToolsUtil.sts(object.getString("contactsname")));
+        contactBean.setContactsAge(ToolsUtil.sti(object.getString("contactsage")));
+        contactBean.setContactsGender(ToolsUtil.sts(object.getString("contactsgender")));
+        contactBean.setContactsMobile(ToolsUtil.sts(object.getString("contactsmobile")));
+        contactBean.setContactsTelephone(ToolsUtil.sts(object.getString("contactstelephone")));
+        contactBean.setContactsEmail(ToolsUtil.sts(object.getString("contactsemail")));
+        contactBean.setContactsAddress(ToolsUtil.sts(object.getString("contactsaddress")));
+        contactBean.setContactsZipcode(ToolsUtil.sts(object.getString("contactszipcode")));
+        contactBean.setContactsQq(ToolsUtil.sts(object.getString("contactsqq")));
+        contactBean.setContactsWechat(ToolsUtil.sts(object.getString("contactswechat")));
+        contactBean.setContactsWangwang(ToolsUtil.sts(object.getString("contactswangwang")));
+        contactBean.setContactsDeptName(ToolsUtil.sts(object.getString("contactsdeptname")));
+        contactBean.setContactsPosition(ToolsUtil.sti(object.getString("contactsposition")));
+        contactBean.setContactsRemarks(ToolsUtil.sts(object.getString("contactsremarks")));
         return contactBean;
     }
 

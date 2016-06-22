@@ -45,7 +45,7 @@ public class ProductModelImpl implements ProductModel {
                             }
                             listener.onSuccess(list);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            listener.onFailure("加载失败", e);
                         }
                     }
                 });
@@ -71,7 +71,7 @@ public class ProductModelImpl implements ProductModel {
                             JSONObject jsonObject = new JSONObject(response);
                             listener.onLoadSuccess(jsonToProductBean(jsonObject.getJSONObject("0")));
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            listener.onLoadFailure("加载失败");
                         }
                     }
                 });
@@ -108,7 +108,7 @@ public class ProductModelImpl implements ProductModel {
                                 listener.onFailure("添加失败");
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            listener.onFailure("添加失败");
                         }
 
                     }
@@ -147,7 +147,7 @@ public class ProductModelImpl implements ProductModel {
                                 listener.onFailure("编辑失败");
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            listener.onFailure("编辑失败");
                         }
 
                     }
@@ -178,7 +178,7 @@ public class ProductModelImpl implements ProductModel {
                                 listener.onFailure("删除失败");
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            listener.onFailure("删除失败");
                         }
 
                     }

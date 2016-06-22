@@ -135,7 +135,7 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
 
     @Override
     public void showProgress() {
-        mProgressDialog = ProgressDialog.show(this, "", "正在编辑...", false, false);
+        mProgressDialog = ProgressDialog.show(this, "", "正在编辑...", false, true);
     }
 
     @Override

@@ -115,6 +115,19 @@ public class ContactModelImpl implements ContactModel {
         OkHttpUtils
                 .post()
                 .url(url)
+                .addParams("contactsname", contactBean.getContactsName())
+                .addParams("customerid", contactBean.getCustomerId().toString())
+                .addParams("contactsage", contactBean.getContactsAge().toString())
+                .addParams("contactsgender", contactBean.getContactsGender())
+                .addParams("contactsmobile", contactBean.getContactsMobile())
+                .addParams("contactstelephone", contactBean.getContactsTelephone())
+                .addParams("contactsemail", contactBean.getContactsEmail())
+                .addParams("contactsaddress", contactBean.getContactsAddress())
+                .addParams("contactszipcode", contactBean.getContactsZipcode())
+                .addParams("contactsqq", contactBean.getContactsQq())
+                .addParams("contactswechat", contactBean.getContactsWechat())
+                .addParams("contactswangwang", contactBean.getContactsWangwang())
+                .addParams("contactsremarks", contactBean.getContactsRemarks())
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -145,6 +158,20 @@ public class ContactModelImpl implements ContactModel {
         OkHttpUtils
                 .post()
                 .url(url)
+                .addParams("contactsid", contactBean.getContactsId().toString())
+                .addParams("contactsname", contactBean.getContactsName())
+                .addParams("customerid", contactBean.getCustomerId().toString())
+                .addParams("contactsage", contactBean.getContactsAge().toString())
+                .addParams("contactsgender", contactBean.getContactsGender())
+                .addParams("contactsmobile", contactBean.getContactsMobile())
+                .addParams("contactstelephone", contactBean.getContactsTelephone())
+                .addParams("contactsemail", contactBean.getContactsEmail())
+                .addParams("contactsaddress", contactBean.getContactsAddress())
+                .addParams("contactszipcode", contactBean.getContactsZipcode())
+                .addParams("contactsqq", contactBean.getContactsQq())
+                .addParams("contactswechat", contactBean.getContactsWechat())
+                .addParams("contactswangwang", contactBean.getContactsWangwang())
+                .addParams("contactsremarks", contactBean.getContactsRemarks())
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -156,11 +183,7 @@ public class ContactModelImpl implements ContactModel {
                     public void onResponse(String response, int id) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject.getInt("resultcode") == 0) {
-                                listener.onSuccess();
-                            } else {
-                                listener.onFailure("编辑失败");
-                            }
+                            listener.onSuccess();
                         } catch (JSONException e) {
                             listener.onFailure("编辑失败");
                         }
@@ -185,12 +208,9 @@ public class ContactModelImpl implements ContactModel {
                     @Override
                     public void onResponse(String response, int id) {
                         try {
+                            Log.i("aaa", response);
                             JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject.getInt("resultcode") == 0) {
-                                listener.onSuccess();
-                            } else {
-                                listener.onFailure("删除失败");
-                            }
+                            listener.onSuccess();
                         } catch (JSONException e) {
                             listener.onFailure("删除失败");
                         }

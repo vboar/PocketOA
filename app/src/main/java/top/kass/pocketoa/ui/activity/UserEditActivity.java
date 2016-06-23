@@ -3,23 +3,31 @@ package top.kass.pocketoa.ui.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.bumptech.glide.Glide;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.StaffBean;
 import top.kass.pocketoa.presenter.UserEditPresenter;
 import top.kass.pocketoa.presenter.impl.UserEditPresenterImpl;
+import top.kass.pocketoa.util.ImageUriUtil;
+import top.kass.pocketoa.util.ToolsUtil;
 import top.kass.pocketoa.util.UIUtil;
 import top.kass.pocketoa.util.UrlUtil;
 import top.kass.pocketoa.view.UserEditView;
@@ -36,10 +44,10 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
     private EditText mEtMobile;
     private EditText mEtTel;
     private EditText mEtEmail;
-    private EditText mEtAvatar;
-    private RadioGroup mRgGender;
     private RadioButton mRbMale;
     private RadioButton mRbFemale;
+    private CircleImageView mIvPicture;
+    private Button mBtnSelectPic;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,10 +72,20 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
         mEtMobile = (EditText) findViewById(R.id.etMobile);
         mEtTel = (EditText) findViewById(R.id.etTel);
         mEtEmail = (EditText) findViewById(R.id.etEmail);
-        mEtAvatar = (EditText) findViewById(R.id.etAvatar);
-        mRgGender = (RadioGroup) findViewById(R.id.rgGender);
         mRbMale = (RadioButton) findViewById(R.id.rbMale);
         mRbFemale = (RadioButton) findViewById(R.id.rbFemale);
+
+        mIvPicture = (CircleImageView) findViewById(R.id.ivPicture);
+        mBtnSelectPic = (Button) findViewById(R.id.btnSelectPic);
+        mBtnSelectPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
+            }
+        });
 
     }
 
@@ -86,7 +104,6 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
                 mStaffBean.setMobile(mEtMobile.getText().toString());
                 mStaffBean.setTel(mEtTel.getText().toString());
                 mStaffBean.setEmail(mEtEmail.getText().toString());
-                mStaffBean.setAvatar(mEtAvatar.getText().toString());
                 if (mRbMale.isChecked()) {
                     mStaffBean.setGender("男");
                 } else {
@@ -106,15 +123,17 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
         mEtMobile.setText(mStaffBean.getMobile());
         mEtTel.setText(mStaffBean.getTel());
         mEtEmail.setText(mStaffBean.getEmail());
-        if (mStaffBean.getAvatar().equals("")) {
-            mEtAvatar.setText(UrlUtil.COMMON_PIC_URL);
-        } else {
-            mEtAvatar.setText(mStaffBean.getAvatar());
-        }
         if (staffBean.getGender().equals("女")) {
             mRbFemale.setChecked(true);
         } else {
             mRbMale.setChecked(true);
+        }
+        if (!mStaffBean.getAvatar().equals("")) {
+            Glide.with(this).load(staffBean.getAvatar()).crossFade()
+                    .error(R.drawable.icon_default)
+                    .into(mIvPicture);
+        } else {
+            mIvPicture.setImageResource(R.drawable.icon_default);
         }
     }
 
@@ -141,6 +160,22 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
     public void showFailMsg(String msg) {
         View view = findViewById(R.id.user_edit_layout);
         UIUtil.showSnackBar(view, msg, Snackbar.LENGTH_SHORT);
+    }
+
+    @Override
+    public void showImage(String url) {
+        mStaffBean.setAvatar(url);
+        Glide.with(this).load(mStaffBean.getAvatar()).crossFade()
+                .error(R.drawable.icon_default)
+                .into(mIvPicture);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            mUserEditPresenter.uploadImage(ImageUriUtil.getImageAbsolutePath(this, uri));
+        }
     }
 
 }

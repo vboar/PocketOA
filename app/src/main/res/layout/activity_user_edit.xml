@@ -91,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
                     android:text="@string/gender"/>
+
                 <RadioGroup
                     android:id="@+id/rgGender"
                     android:layout_width="match_parent"
@@ -114,10 +115,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
                     android:text="@string/avatar"/>
-                <EditText
-                    android:id="@+id/etAvatar"
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/item_margin_top"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivPicture"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp" />
+                    <Button
+                        android:id="@+id/btnSelectPic"
+                        android:layout_marginLeft="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/select_picture"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

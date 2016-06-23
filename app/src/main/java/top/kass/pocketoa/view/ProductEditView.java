@@ -6,5 +6,6 @@ public interface ProductEditView {
     void showProgress();
     void hideProgress();
     void showFailMsg(String msg);
+    void showImage(String url);
 
 }

@@ -74,11 +74,7 @@ public class StaffModelImpl implements StaffModel {
                     public void onResponse(String response, int id) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject.getInt("resultcode") == 0) {
-                                listener.onSaveSuccess();
-                            } else {
-                                listener.onSaveFailure();
-                            }
+                            listener.onSaveSuccess();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

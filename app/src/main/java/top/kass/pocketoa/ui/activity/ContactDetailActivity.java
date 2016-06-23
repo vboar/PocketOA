@@ -70,7 +70,7 @@ public class ContactDetailActivity extends AppCompatActivity implements ContactD
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                new AlertDialog.Builder(this).setTitle("确定要删除该商品吗？")
+                new AlertDialog.Builder(this).setTitle("确定要删除该联系人吗？")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

@@ -9,5 +9,6 @@ public interface UserEditView {
     void showProgress(String msg);
     void hideProgress();
     void showFailMsg(String msg);
+    void showImage(String url);
 
 }

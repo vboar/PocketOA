@@ -3,6 +3,7 @@ package top.kass.pocketoa.ui.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +24,7 @@ import top.kass.pocketoa.presenter.ProductAddPresenter;
 import top.kass.pocketoa.presenter.ProductEditPresenter;
 import top.kass.pocketoa.presenter.impl.ProductAddPresenterImpl;
 import top.kass.pocketoa.presenter.impl.ProductEditPresenterImpl;
+import top.kass.pocketoa.util.ImageUriUtil;
 import top.kass.pocketoa.util.UIUtil;
 import top.kass.pocketoa.util.UrlUtil;
 import top.kass.pocketoa.view.ProductAddView;
@@ -31,7 +34,6 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
 
     private Toolbar mToolBar;
 
-    private int staffId;
     private ProductBean mProductBean;
 
     private EditText mEtName;
@@ -41,7 +43,8 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
     private EditText mEtCost;
     private EditText mEtIntroduction;
     private EditText mEtRemark;
-    private EditText mEtPicture;
+    private CircleImageView mIvPicture;
+    private Button mBtnSelectPic;
 
     private ProgressDialog mProgressDialog;
     private ProductEditPresenter mProductEditPresenter;
@@ -62,9 +65,6 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
             }
         });
 
-        SharedPreferences sharedPreferences = getSharedPreferences("oa", MODE_PRIVATE);
-        staffId = sharedPreferences.getInt("staffId", 0);
-
         mProductBean = (ProductBean) getIntent().getSerializableExtra("product");
 
         mEtName = (EditText) findViewById(R.id.etName);
@@ -74,7 +74,8 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
         mEtCost = (EditText) findViewById(R.id.etCost);
         mEtIntroduction = (EditText) findViewById(R.id.etIntroduction);
         mEtRemark = (EditText) findViewById(R.id.etRemark);
-        mEtPicture = (EditText) findViewById(R.id.etPicture);
+        mIvPicture = (CircleImageView) findViewById(R.id.ivPicture);
+
         mEtName.setText(mProductBean.getProductName());
         mEtSn.setText(mProductBean.getProductSn());
         if (mProductBean.getStandardPrice() != null) {
@@ -87,11 +88,23 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
         mEtIntroduction.setText(mProductBean.getIntroduction());
         mEtRemark.setText(mProductBean.getProductRemarks());
         if (mProductBean.getPicture().equals("")) {
-            mEtPicture.setText(UrlUtil.COMMON_PIC_URL);
+            mIvPicture.setImageResource(R.drawable.icon_default);
         } else {
-            mEtPicture.setText(mProductBean.getPicture());
+            Glide.with(this).load(mProductBean.getPicture()).crossFade()
+                    .error(R.drawable.icon_default)
+                    .into(mIvPicture);
         }
 
+        mBtnSelectPic = (Button) findViewById(R.id.btnSelectPic);
+        mBtnSelectPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
+            }
+        });
     }
 
     @Override
@@ -119,7 +132,6 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
                 mProductBean.setSalesUnit(mEtUnit.getText().toString());
                 mProductBean.setIntroduction(mEtIntroduction.getText().toString());
                 mProductBean.setProductRemarks(mEtRemark.getText().toString());
-                mProductBean.setPicture(mEtPicture.getText().toString());
                 mProductEditPresenter.editProduct(mProductBean);
                 break;
         }
@@ -148,6 +160,22 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
     public void showFailMsg(String msg) {
         View view = findViewById(R.id.product_add_layout);
         UIUtil.showSnackBar(view, msg, Snackbar.LENGTH_SHORT);
+    }
+
+    @Override
+    public void showImage(String url) {
+        mProductBean.setPicture(UrlUtil.COMMON_PIC_URL);
+        Glide.with(this).load(url).crossFade()
+                .error(R.drawable.icon_default)
+                .into(mIvPicture);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            mProductEditPresenter.uploadImage(ImageUriUtil.getImageAbsolutePath(this, uri));
+        }
     }
 
 }

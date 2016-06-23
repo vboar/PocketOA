@@ -1,11 +1,9 @@
 package top.kass.pocketoa.view;
 
-public interface ProductAddView {
+public interface ContactAddView {
 
     void navigateToMain();
     void showProgress();
     void hideProgress();
     void showFailMsg(String msg);
-    void showImage(String url);
-
 }

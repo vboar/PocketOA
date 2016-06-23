@@ -3,6 +3,7 @@ package top.kass.pocketoa.ui.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -11,12 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
+import com.bumptech.glide.Glide;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.ProductBean;
 import top.kass.pocketoa.presenter.ProductAddPresenter;
 import top.kass.pocketoa.presenter.impl.ProductAddPresenterImpl;
+import top.kass.pocketoa.util.ImageUriUtil;
 import top.kass.pocketoa.util.UIUtil;
 import top.kass.pocketoa.util.UrlUtil;
 import top.kass.pocketoa.view.ProductAddView;
@@ -25,8 +32,6 @@ public class ProductAddActivity extends AppCompatActivity implements ProductAddV
 
     private Toolbar mToolBar;
 
-    private int staffId;
-
     private EditText mEtName;
     private EditText mEtSn;
     private EditText mEtPrice;
@@ -34,10 +39,13 @@ public class ProductAddActivity extends AppCompatActivity implements ProductAddV
     private EditText mEtCost;
     private EditText mEtIntroduction;
     private EditText mEtRemark;
-    private EditText mEtPicture;
+    private CircleImageView mIvPicture;
+    private Button mBtnSelectPic;
 
     private ProgressDialog mProgressDialog;
     private ProductAddPresenter mProductAddPresenter;
+
+    private ProductBean mProductBean;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,9 +63,6 @@ public class ProductAddActivity extends AppCompatActivity implements ProductAddV
             }
         });
 
-        SharedPreferences sharedPreferences = getSharedPreferences("oa", MODE_PRIVATE);
-        staffId = sharedPreferences.getInt("staffId", 0);
-
         mEtName = (EditText) findViewById(R.id.etName);
         mEtSn = (EditText) findViewById(R.id.etSn);
         mEtPrice = (EditText) findViewById(R.id.etPrice);
@@ -65,8 +70,20 @@ public class ProductAddActivity extends AppCompatActivity implements ProductAddV
         mEtCost = (EditText) findViewById(R.id.etCost);
         mEtIntroduction = (EditText) findViewById(R.id.etIntroduction);
         mEtRemark = (EditText) findViewById(R.id.etRemark);
-        mEtPicture = (EditText) findViewById(R.id.etPicture);
-        mEtPicture.setText(UrlUtil.COMMON_PIC_URL);
+        mIvPicture = (CircleImageView) findViewById(R.id.ivPicture);
+        mIvPicture.setImageResource(R.drawable.icon_default);
+        mBtnSelectPic = (Button) findViewById(R.id.btnSelectPic);
+        mBtnSelectPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
+            }
+        });
+        mProductBean = new ProductBean();
+        mProductBean.setPicture("");
     }
 
     @Override
@@ -79,24 +96,22 @@ public class ProductAddActivity extends AppCompatActivity implements ProductAddV
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_submit:
-                ProductBean productBean = new ProductBean();
-                productBean.setProductName(mEtName.getText().toString());
-                productBean.setProductSn(mEtSn.getText().toString());
+                mProductBean.setProductName(mEtName.getText().toString());
+                mProductBean.setProductSn(mEtSn.getText().toString());
                 if (!mEtPrice.getText().toString().equals("")) {
-                    productBean.setStandardPrice(Double.valueOf(mEtPrice.getText().toString()));
+                    mProductBean.setStandardPrice(Double.valueOf(mEtPrice.getText().toString()));
                 } else {
-                    productBean.setStandardPrice(0.0);
+                    mProductBean.setStandardPrice(0.0);
                 }
                 if (!mEtCost.getText().toString().equals("")) {
-                    productBean.setUnitCost(Double.valueOf(mEtCost.getText().toString()));
+                    mProductBean.setUnitCost(Double.valueOf(mEtCost.getText().toString()));
                 } else {
-                    productBean.setUnitCost(0.0);
+                    mProductBean.setUnitCost(0.0);
                 }
-                productBean.setSalesUnit(mEtUnit.getText().toString());
-                productBean.setIntroduction(mEtIntroduction.getText().toString());
-                productBean.setProductRemarks(mEtRemark.getText().toString());
-                productBean.setPicture(mEtPicture.getText().toString());
-                mProductAddPresenter.addProduct(productBean);
+                mProductBean.setSalesUnit(mEtUnit.getText().toString());
+                mProductBean.setIntroduction(mEtIntroduction.getText().toString());
+                mProductBean.setProductRemarks(mEtRemark.getText().toString());
+                mProductAddPresenter.addProduct(mProductBean);
                 break;
         }
         return false;
@@ -111,7 +126,7 @@ public class ProductAddActivity extends AppCompatActivity implements ProductAddV
 
     @Override
     public void showProgress() {
-        mProgressDialog = ProgressDialog.show(this, "", "正在添加...", false, false);
+        mProgressDialog = ProgressDialog.show(this, "", "正在添加...", false, true);
     }
 
     @Override
@@ -124,5 +139,21 @@ public class ProductAddActivity extends AppCompatActivity implements ProductAddV
     public void showFailMsg(String msg) {
         View view = findViewById(R.id.product_add_layout);
         UIUtil.showSnackBar(view, msg, Snackbar.LENGTH_SHORT);
+    }
+
+    @Override
+    public void showImage(String url) {
+        mProductBean.setPicture(UrlUtil.COMMON_PIC_URL);
+        Glide.with(this).load(url).crossFade()
+                .error(R.drawable.icon_default)
+                .into(mIvPicture);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            mProductAddPresenter.uploadImage(ImageUriUtil.getImageAbsolutePath(this, uri));
+        }
     }
 }

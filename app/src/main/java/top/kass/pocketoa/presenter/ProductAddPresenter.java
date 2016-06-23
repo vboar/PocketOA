@@ -5,5 +5,6 @@ import top.kass.pocketoa.bean.ProductBean;
 public interface ProductAddPresenter {
 
     void addProduct(ProductBean productBean);
+    void uploadImage(String path);
 
 }

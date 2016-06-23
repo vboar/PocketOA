@@ -8,4 +8,6 @@ public interface UserEditPresenter {
 
     void editStaff(StaffBean staffBean);
 
+    void uploadImage(String path);
+
 }

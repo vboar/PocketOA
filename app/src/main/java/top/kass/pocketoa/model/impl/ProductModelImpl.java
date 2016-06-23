@@ -1,5 +1,7 @@
 package top.kass.pocketoa.model.impl;
 
+import android.util.Log;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -80,6 +82,7 @@ public class ProductModelImpl implements ProductModel {
     @Override
     public void addProduct(ProductBean productBean, final OnSingleProductListener listener) {
         String url = UrlUtil.URL_PREFIX + "product_create_json";
+        Log.i("aaa", productBean.getPicture());
         OkHttpUtils
                 .post()
                 .url(url)
@@ -141,11 +144,7 @@ public class ProductModelImpl implements ProductModel {
                     public void onResponse(String response, int id) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject.getInt("resultcode") == 0) {
-                                listener.onSuccess();
-                            } else {
-                                listener.onFailure("编辑失败");
-                            }
+                            listener.onSuccess();
                         } catch (JSONException e) {
                             listener.onFailure("编辑失败");
                         }

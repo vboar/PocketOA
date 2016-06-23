@@ -2,7 +2,6 @@ package top.kass.pocketoa.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,14 +19,11 @@ import com.bumptech.glide.Glide;
 import de.hdodenhof.circleimageview.CircleImageView;
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.ProductBean;
-import top.kass.pocketoa.presenter.ProductAddPresenter;
 import top.kass.pocketoa.presenter.ProductEditPresenter;
-import top.kass.pocketoa.presenter.impl.ProductAddPresenterImpl;
 import top.kass.pocketoa.presenter.impl.ProductEditPresenterImpl;
 import top.kass.pocketoa.util.ImageUriUtil;
 import top.kass.pocketoa.util.UIUtil;
 import top.kass.pocketoa.util.UrlUtil;
-import top.kass.pocketoa.view.ProductAddView;
 import top.kass.pocketoa.view.ProductEditView;
 
 public class ProductEditActivity extends AppCompatActivity implements ProductEditView {

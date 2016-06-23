@@ -34,6 +34,7 @@ public class CustomerAddActivity extends AppCompatActivity implements CustomerAd
     private EditText mEtName;
     private EditText mEtProfile;
     private EditText mEtSource;
+    private EditText mEtSize;
     private EditText mEtTel;
     private EditText mEtEmail;
     private EditText mEtWebsite;
@@ -65,6 +66,7 @@ public class CustomerAddActivity extends AppCompatActivity implements CustomerAd
         mEtProfile = (EditText) findViewById(R.id.etProfile);
         mEtName = (EditText) findViewById(R.id.etName);
         mEtSource = (EditText) findViewById(R.id.etSource);
+        mEtSize = (EditText) findViewById(R.id.etSize);
         mEtTel = (EditText) findViewById(R.id.etTel);
         mEtEmail = (EditText) findViewById(R.id.etEmail);
         mEtWebsite = (EditText) findViewById(R.id.etWebsite);
@@ -103,7 +105,7 @@ public class CustomerAddActivity extends AppCompatActivity implements CustomerAd
         mCustomerBean.setCustomerStatus(1);
 
         SharedPreferences sharedPreferences = getSharedPreferences("oa", MODE_PRIVATE);
-        int staffId =  sharedPreferences.getInt("staffid", 0);
+        int staffId =  sharedPreferences.getInt("staffId", 0);
         mCustomerBean.setStaffId(staffId);
     }
 
@@ -120,6 +122,11 @@ public class CustomerAddActivity extends AppCompatActivity implements CustomerAd
                 mCustomerBean.setCustomerName(mEtName.getText().toString());
                 mCustomerBean.setProfile(mEtProfile.getText().toString());
                 mCustomerBean.setCustomerSource(mEtSource.getText().toString());
+                if (mEtSize.getText().toString().equals("")) {
+                    mCustomerBean.setSize(0);
+                } else {
+                    mCustomerBean.setSize(Integer.parseInt(mEtSize.getText().toString()));
+                }
                 mCustomerBean.setTelephone(mEtTel.getText().toString());
                 mCustomerBean.setEmail(mEtEmail.getText().toString());
                 mCustomerBean.setWebsite(mEtWebsite.getText().toString());

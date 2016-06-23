@@ -46,7 +46,6 @@ public class ContactDetailPresenterImpl implements ContactDetailPresenter,
 
     @Override
     public void onLoadSuccess(ContactBean contactBean) {
-        Log.i("aaa", contactBean.getContactsName());
         mContactDetailView.hideProgress();
         mContactDetailView.loadContact(contactBean);
     }

@@ -168,4 +168,11 @@ public class ContactListFragment extends Fragment implements ContactView,
         Snackbar.make(view, getString(R.string.fail_loading), Snackbar.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == 1) {
+            onRefresh();
+        }
+    }
+
 }

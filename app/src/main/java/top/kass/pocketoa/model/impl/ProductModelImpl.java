@@ -82,7 +82,6 @@ public class ProductModelImpl implements ProductModel {
     @Override
     public void addProduct(ProductBean productBean, final OnSingleProductListener listener) {
         String url = UrlUtil.URL_PREFIX + "product_create_json";
-        Log.i("aaa", productBean.getPicture());
         OkHttpUtils
                 .post()
                 .url(url)

@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
-                    android:text="@string/customer_intro"/>
+                    android:text="@string/customer_profile"/>
                 <EditText
                     android:id="@+id/etProfile"
                     android:layout_width="match_parent"
@@ -79,6 +79,18 @@
                     android:id="@+id/etSource"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_item_margin_top"
+                    android:text="@string/customer_size"/>
+                <EditText
+                    android:id="@+id/etSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
                     android:singleLine="true"/>
 
                 <TextView

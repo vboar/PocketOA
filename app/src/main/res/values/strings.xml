@@ -86,11 +86,12 @@
     <string name="customer_status_5">暂时搁置</string>
 
     <string name="customer_name">名称</string>
-    <string name="customer_intro">简介</string>
+    <string name="customer_profile">简介</string>
     <string name="customer_type">类型</string>
     <string name="customer_status">状态</string>
     <string name="customer_region">地区</string>
     <string name="customer_source">来源</string>
+    <string name="customer_size">公司规模</string>
     <string name="customer_tel">电话</string>
     <string name="customer_email">邮箱</string>
     <string name="customer_website">网址</string>

@@ -2,6 +2,8 @@ package top.kass.pocketoa.bean;
 
 import java.io.Serializable;
 
+import top.kass.pocketoa.R;
+
 public class CustomerBean implements Serializable {
 
     private Integer customerId;
@@ -184,6 +186,28 @@ public class CustomerBean implements Serializable {
 
     public void setStaff(StaffBean staff) {
         this.staff = staff;
+    }
+
+    public static String getTypeString(Integer type) {
+        if (type == null) return "";
+        switch (type) {
+            case 1: return "重要客户";
+            case 2: return "一般客户";
+            case 3: return "低价值客户";
+        }
+        return "";
+    }
+
+    public static String getStatusString(Integer status) {
+        if (status == null) return "";
+        switch (status) {
+            case 1: return "初访";
+            case 2: return "意向";
+            case 3: return "报价";
+            case 4: return "成交";
+            case 5: return "暂时搁置";
+        }
+        return "";
     }
 
 }

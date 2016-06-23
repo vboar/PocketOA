@@ -14,7 +14,7 @@ import top.kass.pocketoa.model.impl.CustomerModelImpl;
 import top.kass.pocketoa.presenter.CustomerPresenter;
 import top.kass.pocketoa.view.CustomerView;
 
-public class CustomerPresenterImpl implements CustomerPresenter {
+public class CustomerPresenterImpl implements CustomerPresenter, CustomerModel.OnLoadCustomersListener {
 
     private CustomerView mCustomerView;
     private CustomerModel mCustomerModel;
@@ -25,26 +25,23 @@ public class CustomerPresenterImpl implements CustomerPresenter {
     }
 
     @Override
-    public void loadCustomers(final int type, final int pageIndex) {
+    public void loadCustomers(final int type, final int staffId, final int pageIndex) {
         if(pageIndex == 0) {
             mCustomerView.showProgress();
         }
-        mCustomerView.hideProgress();
-        // TODO
-        List<CustomerBean> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            CustomerBean customerBean = new CustomerBean();
-            customerBean.setCustomerName("南京大学");
-            customerBean.setCustomerType(new Random().nextInt(3) + 1);
-            customerBean.setCustomerStatus(new Random().nextInt(5) + 1);
-            list.add(customerBean);
-        }
-        if (pageIndex > 5) {
-            mCustomerView.addCustomers(new ArrayList<CustomerBean>());
-        } else {
-            mCustomerView.addCustomers(list);
-        }
+        mCustomerModel.loadCustomers(type, staffId, pageIndex, this);
     }
 
 
+    @Override
+    public void onSuccess(List<CustomerBean> list) {
+        mCustomerView.hideProgress();
+        mCustomerView.addCustomers(list);
+    }
+
+    @Override
+    public void onFailure(String msg) {
+        mCustomerView.hideProgress();
+        mCustomerView.showLoadFailMsg();
+    }
 }

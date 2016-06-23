@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customer_add_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -32,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/customer_name"/>
                 <EditText
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"/>
@@ -39,51 +41,42 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/item_margin_top"
                     android:text="@string/customer_intro"/>
                 <EditText
+                    android:id="@+id/etProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/item_margin_top"
                     android:text="@string/customer_type"/>
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/customer_type_important"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/customer_type_normal"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/customer_type_low_value"/>
-                </RadioGroup>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/customer_region"
-                    android:singleLine="true"/>
-                <EditText
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spType"
+                    android:layout_marginTop="6dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/item_margin_top"
+                    android:text="@string/customer_status"/>
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spStatus"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_item_margin_top"
                     android:text="@string/customer_source"/>
                 <EditText
+                    android:id="@+id/etSource"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"/>
@@ -91,20 +84,22 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/customer_tel"
-                    android:singleLine="true"/>
+                    android:layout_marginTop="@dimen/detail_item_margin_top"
+                    android:text="@string/customer_tel"/>
                 <EditText
+                    android:id="@+id/etTel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="phone"/>
+                    android:inputType="phone"
+                    android:singleLine="true"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/detail_item_margin_top"
                     android:text="@string/customer_email"/>
                 <EditText
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -113,9 +108,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/detail_item_margin_top"
                     android:text="@string/customer_website"/>
                 <EditText
+                    android:id="@+id/etWebsite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"/>
@@ -123,9 +119,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/detail_item_margin_top"
+                    android:text="@string/customer_address"/>
+                <EditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_item_margin_top"
                     android:text="@string/customer_zipcode"/>
                 <EditText
+                    android:id="@+id/etZipcode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
@@ -134,9 +142,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/detail_item_margin_top"
                     android:text="@string/customer_remark"/>
                 <EditText
+                    android:id="@+id/etRemark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

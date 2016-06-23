@@ -208,9 +208,12 @@ public class ContactModelImpl implements ContactModel {
                     @Override
                     public void onResponse(String response, int id) {
                         try {
-                            Log.i("aaa", response);
                             JSONObject jsonObject = new JSONObject(response);
-                            listener.onSuccess();
+                            if (jsonObject.getInt("resultcode") == 0) {
+                                listener.onSuccess();
+                            } else {
+                                listener.onFailure("删除失败");
+                            }
                         } catch (JSONException e) {
                             listener.onFailure("删除失败");
                         }

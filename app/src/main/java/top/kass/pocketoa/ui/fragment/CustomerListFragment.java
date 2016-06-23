@@ -1,6 +1,8 @@
 package top.kass.pocketoa.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -36,6 +38,7 @@ public class CustomerListFragment extends Fragment implements CustomerView,
 
     private int mType = CustomerFragment.CUSTOMER_MY;
     private int pageIndex = 0;
+    private int staffId;
 
     public static CustomerListFragment newInstance(int type) {
         Bundle args = new Bundle();
@@ -50,6 +53,10 @@ public class CustomerListFragment extends Fragment implements CustomerView,
         super.onCreate(savedInstanceState);
         mCustomerPresenter = new CustomerPresenterImpl(this);
         mType = getArguments().getInt("type");
+
+        SharedPreferences sharedPreferences = getActivity().
+                getSharedPreferences("oa", Context.MODE_PRIVATE);
+        staffId = sharedPreferences.getInt("staffId", 0);
     }
 
     @Nullable
@@ -95,7 +102,7 @@ public class CustomerListFragment extends Fragment implements CustomerView,
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
                     && mAdapter.isShowFooter()) {
-                mCustomerPresenter.loadCustomers(mType, pageIndex);
+                mCustomerPresenter.loadCustomers(mType, staffId, pageIndex);
             }
         }
     };
@@ -106,7 +113,7 @@ public class CustomerListFragment extends Fragment implements CustomerView,
             CustomerBean customer = mAdapter.getItem(position);
             Intent intent = new Intent(getActivity(), CustomerDetailActivity.class);
             intent.putExtra("customer", customer);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
         }
     };
 
@@ -116,7 +123,7 @@ public class CustomerListFragment extends Fragment implements CustomerView,
         if(mData != null) {
             mData.clear();
         }
-        mCustomerPresenter.loadCustomers(mType, pageIndex);
+        mCustomerPresenter.loadCustomers(mType, staffId, pageIndex);
     }
 
     @Override
@@ -132,6 +139,9 @@ public class CustomerListFragment extends Fragment implements CustomerView,
         }
         mData.addAll(customerList);
         if(pageIndex == 0) {
+            if (mData.size() < 10) {
+                mAdapter.isShowFooter(false);
+            }
             mAdapter.setmData(mData);
         } else {
             if(customerList == null || customerList.size() == 0) {

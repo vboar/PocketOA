@@ -9,10 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.CustomerBean;
+import top.kass.pocketoa.util.UrlUtil;
 
 public class CustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -71,8 +75,11 @@ public class CustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 return;
             }
             ((ItemViewHolder) holder).mName.setText(customer.getCustomerName());
-            ((ItemViewHolder) holder).mType.setText(getCustomerType(customer.getCustomerType()));
-            ((ItemViewHolder) holder).mStatus.setText(getCustomerStatus(customer.getCustomerStatus()));
+            ((ItemViewHolder) holder).mType.setText(CustomerBean.getTypeString(customer.getCustomerType()));
+            ((ItemViewHolder) holder).mStatus.setText(CustomerBean.getStatusString(customer.getCustomerStatus()));
+            Glide.with(mContext).load(UrlUtil.COMMON_PIC_URL).crossFade()
+                    .error(R.drawable.icon_default)
+                    .into(((ItemViewHolder) holder).mIvPic);
         }
     }
 
@@ -106,19 +113,20 @@ public class CustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public TextView mType;
         public TextView mName;
         public TextView mStatus;
+        public CircleImageView mIvPic;
 
         public ItemViewHolder(View v) {
             super(v);
             mType = (TextView) v.findViewById(R.id.tvCustomerType);
             mName = (TextView) v.findViewById(R.id.tvCustomerName);
             mStatus = (TextView) v.findViewById(R.id.tvCustomerStatus);
+            mIvPic = (CircleImageView) v.findViewById(R.id.ivPicture);
             v.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if(mOnItemClickListener != null) {
-                // TODO
                 mOnItemClickListener.onItemClick(view, this.getPosition());
             }
         }
@@ -134,26 +142,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
-    }
-
-    private String getCustomerType(int type) {
-        switch (type) {
-            case 1: return mContext.getString(R.string.customer_type_important);
-            case 2: return mContext.getString(R.string.customer_type_normal);
-            case 3: return mContext.getString(R.string.customer_type_low_value);
-        }
-        return "";
-    }
-
-    private String getCustomerStatus(int status) {
-        switch (status) {
-            case 1: return mContext.getString(R.string.customer_status_1);
-            case 2: return mContext.getString(R.string.customer_status_2);
-            case 3: return mContext.getString(R.string.customer_status_3);
-            case 4: return mContext.getString(R.string.customer_status_4);
-            case 5: return mContext.getString(R.string.customer_status_5);
-        }
-        return "";
     }
 
 

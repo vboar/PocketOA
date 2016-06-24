@@ -3,13 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:background="@drawable/item_selector">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:orientation="vertical">
@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearance"
+                android:textColor="@color/secondary_text"
                 android:id="@+id/tvType" />
 
             <TextView
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearance"
+                android:textColor="@color/secondary_text"
                 android:id="@+id/tvStatus" />
 
         </LinearLayout>
@@ -51,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearance"
+                android:textColor="@color/secondary_text"
                 android:id="@+id/tvAmount" />
 
             <TextView
@@ -58,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearance"
+                android:textColor="@color/secondary_text"
                 android:id="@+id/tvCustomer" />
 
         </LinearLayout>

@@ -1,6 +1,8 @@
 package top.kass.pocketoa.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -36,6 +38,7 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
 
     private int mType = OpportunityFragment.OPPORTUNITY_MY;
     private int pageIndex = 0;
+    private int staffId;
 
     public static OpportunityListFragment newInstance(int type) {
         Bundle args = new Bundle();
@@ -50,6 +53,10 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
         super.onCreate(savedInstanceState);
         mOpportunityPresenter = new OpportunityPresenterImpl(this);
         mType = getArguments().getInt("type");
+
+        SharedPreferences sharedPreferences = getActivity().
+                getSharedPreferences("oa", Context.MODE_PRIVATE);
+        staffId = sharedPreferences.getInt("staffId", 0);
     }
 
     @Nullable
@@ -95,7 +102,7 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
                     && mAdapter.isShowFooter()) {
-                mOpportunityPresenter.loadOpportunities(mType, pageIndex);
+                mOpportunityPresenter.loadOpportunities(mType, staffId, pageIndex);
             }
         }
     };
@@ -106,7 +113,7 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
             OpportunityBean opportunity = mAdapter.getItem(position);
             Intent intent = new Intent(getActivity(), OpportunityDetailActivity.class);
             intent.putExtra("opportunity", opportunity);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
         }
     };
 
@@ -116,7 +123,7 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
         if(mData != null) {
             mData.clear();
         }
-        mOpportunityPresenter.loadOpportunities(mType, pageIndex);
+        mOpportunityPresenter.loadOpportunities(mType, staffId, pageIndex);
     }
 
     @Override
@@ -132,6 +139,9 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
         }
         mData.addAll(opportunityList);
         if(pageIndex == 0) {
+            if (mData.size() < 10) {
+                mAdapter.isShowFooter(false);
+            }
             mAdapter.setmData(mData);
         } else {
             if(opportunityList == null || opportunityList.size() == 0) {
@@ -156,6 +166,13 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
         View view = getActivity() == null ? mRecyclerView.getRootView() :
                 getActivity().findViewById(R.id.drawer_layout);
         Snackbar.make(view, getString(R.string.fail_loading), Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == 1) {
+            onRefresh();
+        }
     }
 
 }

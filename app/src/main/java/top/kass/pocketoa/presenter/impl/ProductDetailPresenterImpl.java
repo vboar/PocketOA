@@ -7,8 +7,8 @@ import top.kass.pocketoa.presenter.ProductDetailPresenter;
 import top.kass.pocketoa.view.ProductDetailView;
 
 public class ProductDetailPresenterImpl implements ProductDetailPresenter,
-        ProductModel.OnSingleProductListener,
-        ProductModel.OnLoadProductListner {
+    ProductModel.OnSingleProductListener,
+    ProductModel.OnLoadProductListner {
 
     private ProductDetailView mProductDetailView;
     private ProductModel mProductModel;

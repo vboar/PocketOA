@@ -1,7 +1,5 @@
 package top.kass.pocketoa.presenter.impl;
 
-import android.util.Log;
-
 import top.kass.pocketoa.bean.ContactBean;
 import top.kass.pocketoa.model.ContactModel;
 import top.kass.pocketoa.model.impl.ContactModelImpl;
@@ -9,8 +7,8 @@ import top.kass.pocketoa.presenter.ContactDetailPresenter;
 import top.kass.pocketoa.view.ContactDetailView;
 
 public class ContactDetailPresenterImpl implements ContactDetailPresenter,
-        ContactModel.OnSingleContactListener,
-        ContactModel.OnLoadContactListner {
+    ContactModel.OnSingleContactListener,
+    ContactModel.OnLoadContactListner {
 
     private ContactDetailView mContactDetailView;
     private ContactModel mContactModel;

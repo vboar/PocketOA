@@ -69,10 +69,12 @@ public class OpportunityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 return;
             }
             ((ItemViewHolder) holder).mName.setText(opportunity.getOpportunityTitle());
-            ((ItemViewHolder) holder).mType.setText(getOpportunityType(opportunity.getBusinessType()));
-            ((ItemViewHolder) holder).mStatus.setText(getOpportunityStatus(opportunity.getOpportunityStatus()));
-            ((ItemViewHolder) holder).mAmount.setText(Double.toString(opportunity.getEstimatedAmount()));
-            ((ItemViewHolder) holder).mCustomer.setText(opportunity.getCustomerId().toString());
+            ((ItemViewHolder) holder).mType.setText(OpportunityBean.getTypeString(opportunity.getBusinessType()));
+            ((ItemViewHolder) holder).mStatus.setText(OpportunityBean.getStatusString(opportunity.getOpportunityStatus()));
+            if (opportunity.getEstimatedAmount() != null) {
+                ((ItemViewHolder) holder).mAmount.setText(opportunity.getEstimatedAmount().toString() + "元");
+            }
+            ((ItemViewHolder) holder).mCustomer.setText(opportunity.getCustomer().getCustomerName());
         }
     }
 
@@ -122,7 +124,6 @@ public class OpportunityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         @Override
         public void onClick(View view) {
             if(mOnItemClickListener != null) {
-                // TODO
                 mOnItemClickListener.onItemClick(view, this.getPosition());
             }
         }
@@ -138,26 +139,6 @@ public class OpportunityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
-    }
-
-    private String getOpportunityType(int type) {
-        switch (type) {
-            case 1: return mContext.getString(R.string.opportunity_type_important);
-            case 2: return mContext.getString(R.string.opportunity_type_normal);
-        }
-        return "";
-    }
-
-    private String getOpportunityStatus(int status) {
-        switch (status) {
-            case 1: return mContext.getString(R.string.opportunity_status_1);
-            case 2: return mContext.getString(R.string.opportunity_status_2);
-            case 3: return mContext.getString(R.string.opportunity_status_3);
-            case 4: return mContext.getString(R.string.opportunity_status_4);
-            case 5: return mContext.getString(R.string.opportunity_status_5);
-            case 6: return mContext.getString(R.string.opportunity_status_6);
-        }
-        return "";
     }
 
 }

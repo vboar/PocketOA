@@ -146,4 +146,26 @@ public class OpportunityBean implements Serializable {
         this.customer = customer;
     }
 
+    public static String getTypeString(Integer type) {
+        if (type == null) return "";
+        switch (type) {
+            case 1: return "重要商机";
+            case 2: return "普通商机";
+        }
+        return "";
+    }
+
+    public static String getStatusString(Integer status) {
+        if (status == null) return "";
+        switch (status) {
+            case 1: return "初步洽谈";
+            case 2: return "需求确定";
+            case 3: return "方案报价";
+            case 4: return "谈判合同";
+            case 5: return "赢单";
+            case 6: return "输单";
+        }
+        return "";
+    }
+
 }

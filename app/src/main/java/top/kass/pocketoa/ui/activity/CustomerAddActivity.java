@@ -162,4 +162,5 @@ public class CustomerAddActivity extends AppCompatActivity implements CustomerAd
         View view = findViewById(R.id.customer_add_layout);
         UIUtil.showSnackBar(view, msg, Snackbar.LENGTH_SHORT);
     }
+
 }

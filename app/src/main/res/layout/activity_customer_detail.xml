@@ -241,22 +241,22 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="跟进记录"/>
+                    android:text="@string/title_followup"/>
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="联系人"/>
+                    android:text="@string/title_contact"/>
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="商机"/>
+                    android:text="@string/title_opportunity"/>
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="合同"/>
+                    android:text="@string/title_contract"/>
             </LinearLayout>
 
         </RelativeLayout>

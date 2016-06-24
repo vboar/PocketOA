@@ -7,8 +7,8 @@ import top.kass.pocketoa.presenter.CustomerDetailPresenter;
 import top.kass.pocketoa.view.CustomerDetailView;
 
 public class CustomerDetailPresenterImpl implements CustomerDetailPresenter,
-        CustomerModel.OnLoadCustomerListener,
-        CustomerModel.OnSingleCustomerListener {
+    CustomerModel.OnLoadCustomerListener,
+    CustomerModel.OnSingleCustomerListener {
 
     private CustomerDetailView mCustomerDetailView;
     private CustomerModel mCustomerModel;

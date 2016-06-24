@@ -8,6 +8,8 @@ public interface StaffModel {
 
     void save(StaffBean staffBean, OnSaveListener listener);
 
+    void add(StaffBean staffBean, OnAddListener listener);
+
     interface OnLoginFinishedListener {
         void onSuccess(StaffBean staffBean);
         void onFailure(String msg);
@@ -16,6 +18,11 @@ public interface StaffModel {
     interface OnSaveListener {
         void onSaveSuccess();
         void onSaveFailure();
+    }
+
+    interface OnAddListener {
+        void onSuccess();
+        void onFailure(String msg);
     }
 
 }

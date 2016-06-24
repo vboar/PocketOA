@@ -58,6 +58,7 @@ public class StaffModelImpl implements StaffModel {
                 .url(url)
                 .addParams("staffid", staffBean.getStaffId().toString())
                 .addParams("userid", staffBean.getUserId())
+                .addParams("name", staffBean.getName())
                 .addParams("mobile", staffBean.getMobile())
                 .addParams("tel", staffBean.getTel())
                 .addParams("email", staffBean.getEmail())
@@ -81,7 +82,38 @@ public class StaffModelImpl implements StaffModel {
 
                     }
                 });
+    }
 
+    @Override
+    public void add(StaffBean staffBean, final OnAddListener listener) {
+        String url = UrlUtil.URL_PREFIX + "staff_create_json";
+        OkHttpUtils
+                .post()
+                .url(url)
+                .addParams("userid", staffBean.getUserId())
+                .addParams("name", staffBean.getName())
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onFailure("注册失败");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getInt("resultcode") == 0) {
+                                listener.onSuccess();
+                            } else {
+                                listener.onFailure("注册失败");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
     }
 
     private StaffBean jsonToStaffBean(JSONObject object) throws JSONException {
@@ -106,6 +138,5 @@ public class StaffModelImpl implements StaffModel {
         staffBean.setStaffRemarks(ToolsUtil.sts(object.getString("staffremarks")));
         return staffBean;
     }
-
 
 }

@@ -15,8 +15,8 @@ public class ProductFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_product, null);
-        getChildFragmentManager().beginTransaction().
-                add(ProductListFragment.newInstance(), "product").commit();
+        getFragmentManager().beginTransaction().
+                replace(R.id.frame_content, ProductListFragment.newInstance()).commit();
         return view;
     }
 

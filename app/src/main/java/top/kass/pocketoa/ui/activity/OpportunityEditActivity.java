@@ -69,7 +69,7 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
         mEtRemark = (EditText) findViewById(R.id.etRemark);
 
         mEtTitle.setText(mOpportunityBean.getOpportunityTitle());
-        mEtCustomer.setText(mOpportunityBean.getCustomerId());
+        mEtCustomer.setText(mOpportunityBean.getCustomerId().toString());
         if (mOpportunityBean.getEstimatedAmount() != null) {
             mEtAmount.setText(mOpportunityBean.getEstimatedAmount().toString());
         }
@@ -78,10 +78,10 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
         if (mOpportunityBean.getAcquisitionDate().equals("")) {
             mEtADate.setText(ToolsUtil.getCurrentDate());
         } else {
-            mEtADate.setText(mOpportunityBean.getAcquisitionDate());
+            mEtADate.setText(mOpportunityBean.getAcquisitionDate().substring(0, 10));
         }
         if (mOpportunityBean.getExpectedDate().equals("")) {
-            mEtEDate.setText(ToolsUtil.getCurrentDate());
+            mEtEDate.setText(ToolsUtil.getCurrentDate().substring(0, 10));
         } else {
             mEtEDate.setText(mOpportunityBean.getExpectedDate());
         }
@@ -99,6 +99,8 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
         });
         if (mOpportunityBean.getBusinessType() != null) {
             mSpType.setSelectedIndex(mOpportunityBean.getBusinessType()-1);
+        } else {
+            mOpportunityBean.setBusinessType(1);
         }
 
         mSpStatus = (MaterialSpinner) findViewById(R.id.spStatus);
@@ -117,6 +119,8 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
         });
         if (mOpportunityBean.getOpportunityStatus() != null) {
             mSpStatus.setSelectedIndex(mOpportunityBean.getOpportunityStatus()-1);
+        } else {
+            mOpportunityBean.setOpportunityStatus(1);
         }
 
     }

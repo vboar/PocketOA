@@ -1,7 +1,10 @@
 package top.kass.pocketoa.model.impl;
 
+import android.util.Log;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.utils.Exceptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,6 +100,7 @@ public class OpportunityModelImpl implements OpportunityModel {
 
                     @Override
                     public void onResponse(String response, int id) {
+
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             listener.onLoadSuccess(jsonToOpportunityBean(jsonObject.getJSONObject("0")));
@@ -230,11 +234,14 @@ public class OpportunityModelImpl implements OpportunityModel {
         opportunityBean.setOpportunitiesSource(ToolsUtil.sts(object.getString("opportunitiessource")));
         opportunityBean.setStaffId(ToolsUtil.sti(object.getString("staffid")));
         opportunityBean.setOpportunityRemarks(ToolsUtil.sts(object.getString("opportunityremarks")));
-        CustomerBean customerBean = new CustomerBean();
-        customerBean.setCustomerId(ToolsUtil.sti(object.getString("customerid")));
-        customerBean.setCustomerName(ToolsUtil.sts(object.getString("customername")));
-        opportunityBean.setCustomer(customerBean);
-        // TODO
+        try {
+            CustomerBean customerBean = new CustomerBean();
+            customerBean.setCustomerId(ToolsUtil.sti(object.getString("customerid")));
+            customerBean.setCustomerName(ToolsUtil.sts(object.getString("customername")));
+            opportunityBean.setCustomer(customerBean);
+        } catch (Exception e) {
+
+        }
         return opportunityBean;
     }
 

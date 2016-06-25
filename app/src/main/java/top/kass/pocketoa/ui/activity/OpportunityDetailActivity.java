@@ -27,6 +27,7 @@ public class OpportunityDetailActivity extends AppCompatActivity implements Oppo
     private boolean canEdited = false;
     private boolean isEdited = false;
     private OpportunityBean mOpportunityBean;
+    private String customerName;
     private OpportunityDetailPresenter mOpportunityDetailPresenter;
     private ProgressDialog mProgressDialog;
 
@@ -47,6 +48,7 @@ public class OpportunityDetailActivity extends AppCompatActivity implements Oppo
         });
 
         OpportunityBean opportunityBean = (OpportunityBean) getIntent().getSerializableExtra("opportunity");
+        customerName = opportunityBean.getCustomer().getCustomerName();
 
         int staffId = getSharedPreferences("oa", MODE_PRIVATE).getInt("staffId", 0);
         if (staffId == opportunityBean.getStaffId()) {
@@ -108,7 +110,7 @@ public class OpportunityDetailActivity extends AppCompatActivity implements Oppo
         TextView tvEDate = (TextView) findViewById(R.id.tvEDate);
         TextView tvRemark = (TextView) findViewById(R.id.tvRemark);
         tvTitle.setText(mOpportunityBean.getOpportunityTitle());
-        tvCustomer.setText(mOpportunityBean.getCustomer().getCustomerName());
+        tvCustomer.setText(customerName);
         if (mOpportunityBean.getEstimatedAmount() != null) {
             tvAmount.setText(mOpportunityBean.getEstimatedAmount().toString());
         }
@@ -116,8 +118,12 @@ public class OpportunityDetailActivity extends AppCompatActivity implements Oppo
         tvStatus.setText(OpportunityBean.getStatusString(mOpportunityBean.getOpportunityStatus()));
         tvSource.setText(mOpportunityBean.getOpportunitiesSource());
         tvChannel.setText(mOpportunityBean.getChannel());
-        tvADate.setText(mOpportunityBean.getAcquisitionDate());
-        tvEDate.setText(mOpportunityBean.getExpectedDate());
+        if (!mOpportunityBean.getAcquisitionDate().equals("")) {
+            tvADate.setText(mOpportunityBean.getAcquisitionDate().substring(0, 10));
+        }
+        if(!mOpportunityBean.getExpectedDate().equals("")) {
+            tvEDate.setText(mOpportunityBean.getExpectedDate().substring(0, 10));
+        }
         tvRemark.setText(mOpportunityBean.getOpportunityRemarks());
     }
 
@@ -158,6 +164,14 @@ public class OpportunityDetailActivity extends AppCompatActivity implements Oppo
     public void showFailMsg(String msg) {
         View view = findViewById(R.id.opportunity_detail_layout);
         UIUtil.showSnackBar(view, msg, Snackbar.LENGTH_SHORT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == 1) {
+            isEdited = true;
+            mOpportunityDetailPresenter.loadOpportunity(mOpportunityBean.getOpportunityId());
+        }
     }
 
 }

@@ -74,7 +74,7 @@
                             android:id="@+id/tvCustomer"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"/>
+                            android:layout_weight="2"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -90,7 +90,7 @@
                             android:id="@+id/tvAmount"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"/>
+                            android:layout_weight="2"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -106,7 +106,7 @@
                             android:id="@+id/tvSource"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"/>
+                            android:layout_weight="2"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -122,7 +122,7 @@
                             android:id="@+id/tvChannel"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"/>
+                            android:layout_weight="2"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -138,7 +138,7 @@
                             android:id="@+id/tvADate"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"/>
+                            android:layout_weight="2"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -154,7 +154,7 @@
                             android:id="@+id/tvEDate"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"/>
+                            android:layout_weight="2"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -170,7 +170,7 @@
                             android:id="@+id/tvRemark"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"/>
+                            android:layout_weight="2"/>
                     </LinearLayout>
 
                 </LinearLayout>

@@ -97,6 +97,8 @@ public class CustomerEditActivity extends AppCompatActivity implements CustomerE
         });
         if (mCustomerBean.getCustomerType() != null) {
             mSpType.setSelectedIndex(mCustomerBean.getCustomerType()-1);
+        } else {
+            mCustomerBean.setCustomerType(1);
         }
 
         mSpStatus = (MaterialSpinner) findViewById(R.id.spStatus);
@@ -114,8 +116,9 @@ public class CustomerEditActivity extends AppCompatActivity implements CustomerE
         });
         if (mCustomerBean.getCustomerStatus() != null) {
             mSpStatus.setSelectedIndex(mCustomerBean.getCustomerStatus()-1);
+        } else {
+            mCustomerBean.setCustomerStatus(1);
         }
-
     }
 
     @Override

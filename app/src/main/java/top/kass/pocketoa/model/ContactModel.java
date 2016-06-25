@@ -3,7 +3,6 @@ package top.kass.pocketoa.model;
 import java.util.List;
 
 import top.kass.pocketoa.bean.ContactBean;
-import top.kass.pocketoa.bean.ContractBean;
 
 public interface ContactModel {
 
@@ -18,7 +17,7 @@ public interface ContactModel {
     void deleteContact(int contactId, OnSingleContactListener listener);
 
     interface OnLoadContactsListener {
-        void onSuccess(List<ContractBean> list);
+        void onSuccess(List<ContactBean> list);
         void onFailure(String msg);
     }
 
@@ -28,7 +27,7 @@ public interface ContactModel {
     }
 
     interface OnLoadContactListner {
-        void onLoadSuccess(ContractBean contractBean);
+        void onLoadSuccess(ContactBean contactBean);
         void onLoadFailure(String msg);
     }
 

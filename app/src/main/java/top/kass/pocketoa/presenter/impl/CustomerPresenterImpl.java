@@ -32,7 +32,6 @@ public class CustomerPresenterImpl implements CustomerPresenter, CustomerModel.O
         mCustomerModel.loadCustomers(type, staffId, pageIndex, this);
     }
 
-
     @Override
     public void onSuccess(List<CustomerBean> list) {
         mCustomerView.hideProgress();
@@ -44,4 +43,5 @@ public class CustomerPresenterImpl implements CustomerPresenter, CustomerModel.O
         mCustomerView.hideProgress();
         mCustomerView.showLoadFailMsg();
     }
+
 }

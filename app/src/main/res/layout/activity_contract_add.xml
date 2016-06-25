@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/opportunity_add_layout"
+    android:id="@+id/contract_add_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -32,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
-                    android:text="@string/opportunity_title"/>
+                    android:text="@string/contract_title"/>
                 <EditText
                     android:id="@+id/etTitle"
                     android:layout_width="match_parent"
@@ -43,18 +43,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
-                    android:text="@string/opportunity_customer"/>
+                    android:text="@string/contract_customer"/>
                 <EditText
                     android:id="@+id/etCustomer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="number"
                     android:singleLine="true"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
-                    android:text="@string/opportunity_estimatedamount"/>
+                    android:text="@string/contract_opportunity"/>
+                <EditText
+                    android:id="@+id/etOpportunity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_top"
+                    android:text="@string/contract_amount"/>
                 <EditText
                     android:id="@+id/etAmount"
                     android:layout_width="match_parent"
@@ -66,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
-                    android:text="@string/opportunity_type"/>
+                    android:text="@string/contract_type"/>
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spType"
                     android:layout_marginTop="6dp"
@@ -77,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
-                    android:text="@string/opportunity_status"/>
+                    android:text="@string/contract_status"/>
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spStatus"
                     android:layout_marginTop="6dp"
@@ -88,9 +101,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
-                    android:text="@string/opportunity_source"/>
+                    android:text="@string/contract_startdate"/>
                 <EditText
-                    android:id="@+id/etSource"
+                    android:id="@+id/etStartDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_top"
+                    android:text="@string/contract_enddate"/>
+                <EditText
+                    android:id="@+id/etEndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_top"
+                    android:text="@string/contract_number"/>
+                <EditText
+                    android:id="@+id/etNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"/>
@@ -99,9 +136,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
-                    android:text="@string/opportunity_channel"/>
+                    android:text="@string/contract_paymethod"/>
                 <EditText
-                    android:id="@+id/etChannel"
+                    android:id="@+id/etPayMethod"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"/>
@@ -110,23 +147,46 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
-                    android:text="@string/opportunity_acquisitiondate"/>
+                    android:text="@string/contract_clientcontractor"/>
                 <EditText
-                    android:id="@+id/etADate"
+                    android:id="@+id/etCC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="date"/>
+                    android:singleLine="true"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/item_margin_top"
-                    android:text="@string/opportunity_expecteddate"/>
+                    android:text="@string/contract_ourcontractor"/>
                 <EditText
-                    android:id="@+id/etEDate"
+                    android:id="@+id/etOC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="date"/>
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_top"
+                    android:text="@string/contract_signingdate"/>
+                <EditText
+                    android:id="@+id/etSigningDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_top"
+                    android:text="@string/contract_attachment"/>
+                <EditText
+                    android:id="@+id/etAttachment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"/>
 
                 <TextView
                     android:layout_width="match_parent"

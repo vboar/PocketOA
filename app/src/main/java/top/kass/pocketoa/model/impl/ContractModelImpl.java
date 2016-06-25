@@ -11,7 +11,10 @@ import java.util.List;
 
 import okhttp3.Call;
 import top.kass.pocketoa.bean.ContractBean;
+import top.kass.pocketoa.bean.CustomerBean;
+import top.kass.pocketoa.bean.OpportunityBean;
 import top.kass.pocketoa.model.ContractModel;
+import top.kass.pocketoa.util.ToolsUtil;
 import top.kass.pocketoa.util.UrlUtil;
 
 public class ContractModelImpl implements ContractModel {
@@ -111,6 +114,22 @@ public class ContractModelImpl implements ContractModel {
         OkHttpUtils
                 .post()
                 .url(url)
+                .addParams("contracttitle", contractBean.getContractTitle())
+                .addParams("opportunityid", Integer.toString(contractBean.getOpportunityId()))
+                .addParams("customerid", Integer.toString(contractBean.getCustomerId()))
+                .addParams("totalamount", Double.toString(contractBean.getTotalAmount()))
+                .addParams("startdate", contractBean.getStartDate())
+                .addParams("enddate", contractBean.getEndDate())
+                .addParams("contractstatus", Integer.toString(contractBean.getContractStatus()))
+                .addParams("contractnumber", contractBean.getContractNumber())
+                .addParams("contracttype", Integer.toString(contractBean.getContractType()))
+                .addParams("paymethod", contractBean.getPayMethod())
+                .addParams("clientcontractor", contractBean.getClientContractor())
+                .addParams("ourcontractor", contractBean.getOurContractor())
+                .addParams("staffid", Integer.toString(contractBean.getStaffId()))
+                .addParams("signingdate", contractBean.getSigningDate())
+                .addParams("attachment", contractBean.getAttachment())
+                .addParams("contractremarks", contractBean.getContractRemarks())
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -140,6 +159,23 @@ public class ContractModelImpl implements ContractModel {
         OkHttpUtils
                 .post()
                 .url(url)
+                .addParams("contractid", Integer.toString(contractBean.getContractId()))
+                .addParams("contracttitle", contractBean.getContractTitle())
+                .addParams("opportunityid", Integer.toString(contractBean.getOpportunityId()))
+                .addParams("customerid", Integer.toString(contractBean.getCustomerId()))
+                .addParams("totalamount", Double.toString(contractBean.getTotalAmount()))
+                .addParams("startdate", contractBean.getStartDate())
+                .addParams("enddate", contractBean.getEndDate())
+                .addParams("contractstatus", Integer.toString(contractBean.getContractStatus()))
+                .addParams("contractnumber", contractBean.getContractNumber())
+                .addParams("contracttype", Integer.toString(contractBean.getContractType()))
+                .addParams("paymethod", contractBean.getPayMethod())
+                .addParams("clientcontractor", contractBean.getClientContractor())
+                .addParams("ourcontractor", contractBean.getOurContractor())
+                .addParams("staffid", Integer.toString(contractBean.getStaffId()))
+                .addParams("signingdate", contractBean.getSigningDate())
+                .addParams("attachment", contractBean.getAttachment())
+                .addParams("contractremarks", contractBean.getContractRemarks())
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -190,9 +226,37 @@ public class ContractModelImpl implements ContractModel {
                 });
     }
 
-    private ContractBean jsonToContractBean(JSONObject object) {
+    private ContractBean jsonToContractBean(JSONObject object) throws JSONException {
         ContractBean contractBean = new ContractBean();
-        // TODO
+        contractBean.setContractId(ToolsUtil.sti(object.getString("contractid")));
+        contractBean.setContractTitle(ToolsUtil.sts(object.getString("contracttitle")));
+        contractBean.setOpportunityId(ToolsUtil.sti(object.getString("opportunityid")));
+        contractBean.setCustomerId(ToolsUtil.sti(object.getString("customerid")));
+        contractBean.setTotalAmount(ToolsUtil.std(object.getString("totalamount")));
+        contractBean.setStartDate(ToolsUtil.sts(object.getString("startdate")));
+        contractBean.setEndDate(ToolsUtil.sts(object.getString("enddate")));
+        contractBean.setContractStatus(ToolsUtil.sti(object.getString("contractstatus")));
+        contractBean.setContractNumber(ToolsUtil.sts(object.getString("contractnumber")));
+        contractBean.setContractType(ToolsUtil.sti(object.getString("contracttype")));
+        contractBean.setPayMethod(ToolsUtil.sts(object.getString("paymethod")));
+        contractBean.setClientContractor(ToolsUtil.sts(object.getString("clientcontractor")));
+        contractBean.setOurContractor(ToolsUtil.sts(object.getString("ourcontractor")));
+        contractBean.setStaffId(ToolsUtil.sti(object.getString("staffid")));
+        contractBean.setSigningDate(ToolsUtil.sts(object.getString("signingdate")));
+        contractBean.setAttachment(ToolsUtil.sts(object.getString("attachment")));
+        contractBean.setContractRemarks(ToolsUtil.sts(object.getString("contractremarks")));
+        try {
+            CustomerBean customerBean = new CustomerBean();
+            customerBean.setCustomerId(ToolsUtil.sti(object.getString("customerid")));
+            customerBean.setCustomerName(ToolsUtil.sts(object.getString("customername")));
+            contractBean.setCustomer(customerBean);
+            OpportunityBean opportunityBean = new OpportunityBean();
+            opportunityBean.setOpportunityId(ToolsUtil.sti(object.getString("opportunityid")));
+            opportunityBean.setOpportunityTitle(ToolsUtil.sts(object.getString("opportunitytitle")));
+            contractBean.setOpportunity(opportunityBean);
+        } catch (Exception e) {
+
+        }
         return contractBean;
     }
 

@@ -141,6 +141,34 @@
     <string name="opportunity_expecteddate">预计签单日期</string>
     <string name="opportunity_remark">备注</string>
 
+    <string name="tab_my_contracts">我的合同</string>
+    <string name="tab_all_contracts">所有合同</string>
+
+    <string name="contract_type_1">直销合同</string>
+    <string name="contract_type_2">分销合同</string>
+    <string name="contract_type_3">其他合同</string>
+
+    <string name="contract_status_1">未开始</string>
+    <string name="contract_status_2">执行中</string>
+    <string name="contract_status_3">成功结束</string>
+    <string name="contract_status_4">意外终止</string>
+
+    <string name="contract_title">标题</string>
+    <string name="contract_customer">客户</string>
+    <string name="contract_opportunity">商机</string>
+    <string name="contract_type">类型</string>
+    <string name="contract_status">状态</string>
+    <string name="contract_amount">总金额</string>
+    <string name="contract_startdate">开始日期</string>
+    <string name="contract_enddate">结束日期</string>
+    <string name="contract_number">编号</string>
+    <string name="contract_paymethod">付款方式</string>
+    <string name="contract_clientcontractor">客户方签约人</string>
+    <string name="contract_ourcontractor">我方签约人</string>
+    <string name="contract_signingdate">签约日期</string>
+    <string name="contract_attachment">合同附件</string>
+    <string name="contract_remark">备注</string>
+
     <string name="product_name">名称</string>
     <string name="product_sn">编号</string>
     <string name="product_price">标准单价</string>

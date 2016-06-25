@@ -40,7 +40,7 @@ public class ContractBean implements Serializable {
 
     private CustomerBean customer;
 
-    private OpportunityBean opportunityBean;
+    private OpportunityBean opportunity;
 
     public ContractBean() {}
 
@@ -188,12 +188,33 @@ public class ContractBean implements Serializable {
         this.customer = customer;
     }
 
-    public OpportunityBean getOpportunityBean() {
-        return opportunityBean;
+    public OpportunityBean getOpportunity() {
+        return opportunity;
     }
 
-    public void setOpportunityBean(OpportunityBean opportunityBean) {
-        this.opportunityBean = opportunityBean;
+    public void setOpportunity(OpportunityBean opportunityBean) {
+        this.opportunity = opportunityBean;
+    }
+
+    public static String getTypeString(Integer type) {
+        if (type == null) return "";
+        switch (type) {
+            case 1: return "直销合同";
+            case 2: return "分销合同";
+            case 3: return "其他合同";
+        }
+        return "";
+    }
+
+    public static String getStatusString(Integer status) {
+        if (status == null) return "";
+        switch (status) {
+            case 1: return "未开始";
+            case 2: return "执行中";
+            case 3: return "成功结束";
+            case 4: return "意外终止";
+        }
+        return "";
     }
 
 }

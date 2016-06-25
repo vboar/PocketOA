@@ -8,7 +8,7 @@ public interface ContactModel {
 
     void loadContacts(int type, int staffId, int page, OnLoadContactsListener listener);
 
-    void loadContact(int contactId, OnLoadContactListner listener);
+    void loadContact(int contactId, OnLoadContactListener listener);
 
     void addContact(ContactBean contactBean, OnSingleContactListener listener);
 
@@ -26,7 +26,7 @@ public interface ContactModel {
         void onFailure(String msg);
     }
 
-    interface OnLoadContactListner {
+    interface OnLoadContactListener {
         void onLoadSuccess(ContactBean contactBean);
         void onLoadFailure(String msg);
     }

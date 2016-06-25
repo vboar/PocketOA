@@ -94,7 +94,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
-
         <activity
             android:name=".ui.activity.OpportunityAddActivity"
             android:label="@string/title_opportunity_add"
@@ -108,6 +107,22 @@
         <activity
             android:name=".ui.activity.OpportunityEditActivity"
             android:label="@string/title_opportunity_edit"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.activity.ContractAddActivity"
+            android:label="@string/title_contract_add"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ContractDetailActivity"
+            android:label="@string/title_contract_detail"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ContractEditActivity"
+            android:label="@string/title_contract_edit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 

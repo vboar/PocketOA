@@ -1,7 +1,5 @@
 package top.kass.pocketoa.model.impl;
 
-import android.util.Log;
-
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -84,7 +82,7 @@ public class ContactModelImpl implements ContactModel {
     }
 
     @Override
-    public void loadContact(int contactId, final OnLoadContactListner listener) {
+    public void loadContact(int contactId, final OnLoadContactListener listener) {
         String url = UrlUtil.URL_PREFIX + "contact_query_json";
         OkHttpUtils
                 .get()

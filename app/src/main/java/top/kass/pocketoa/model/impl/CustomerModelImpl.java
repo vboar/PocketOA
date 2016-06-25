@@ -1,7 +1,5 @@
 package top.kass.pocketoa.model.impl;
 
-import android.util.Log;
-
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 

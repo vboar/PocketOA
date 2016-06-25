@@ -8,7 +8,7 @@ import top.kass.pocketoa.view.ContactDetailView;
 
 public class ContactDetailPresenterImpl implements ContactDetailPresenter,
     ContactModel.OnSingleContactListener,
-    ContactModel.OnLoadContactListner {
+        ContactModel.OnLoadContactListener {
 
     private ContactDetailView mContactDetailView;
     private ContactModel mContactModel;

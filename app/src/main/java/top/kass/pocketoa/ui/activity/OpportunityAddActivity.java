@@ -137,7 +137,7 @@ public class OpportunityAddActivity extends AppCompatActivity implements Opportu
     @Override
     public void navigateToMain() {
         Intent intent = new Intent();
-        setResult(1, intent);
+        setResult(3, intent);
         finish();
     }
 

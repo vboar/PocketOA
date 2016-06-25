@@ -8,26 +8,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
-
 import top.kass.pocketoa.R;
-import top.kass.pocketoa.bean.OpportunityBean;
+import top.kass.pocketoa.bean.ContractBean;
 
-public class OpportunityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ContractAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
 
-    private List<OpportunityBean> mData;
+    private List<ContractBean> mData;
     private boolean mShowFooter = true;
     private Context mContext;
 
     private OnItemClickListener mOnItemClickListener;
 
-    public OpportunityAdapter(Context context) {
+    public ContractAdapter(Context context) {
         this.mContext = context;
     }
 
-    public void setmData(List<OpportunityBean> data) {
+    public void setmData(List<ContractBean> data) {
         this.mData = data;
         this.notifyDataSetChanged();
     }
@@ -48,7 +47,7 @@ public class OpportunityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType == TYPE_ITEM) {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_opportunity, parent, false);
+                    .inflate(R.layout.item_contract, parent, false);
             ItemViewHolder vh = new ItemViewHolder(v);
             return vh;
         } else {
@@ -63,18 +62,17 @@ public class OpportunityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof ItemViewHolder) {
-
-            OpportunityBean opportunity = mData.get(position);
-            if(opportunity == null) {
+            ContractBean contract = mData.get(position);
+            if(contract == null) {
                 return;
             }
-            ((ItemViewHolder) holder).mName.setText(opportunity.getOpportunityTitle());
-            ((ItemViewHolder) holder).mType.setText(OpportunityBean.getTypeString(opportunity.getBusinessType()));
-            ((ItemViewHolder) holder).mStatus.setText(OpportunityBean.getStatusString(opportunity.getOpportunityStatus()));
-            if (opportunity.getEstimatedAmount() != null) {
-                ((ItemViewHolder) holder).mAmount.setText(opportunity.getEstimatedAmount().toString() + "元");
+            ((ItemViewHolder) holder).mTitle.setText(contract.getContractTitle());
+            ((ItemViewHolder) holder).mType.setText(ContractBean.getTypeString(contract.getContractType()));
+            ((ItemViewHolder) holder).mStatus.setText(ContractBean.getStatusString(contract.getContractStatus()));
+            if (contract.getTotalAmount() != null) {
+                ((ItemViewHolder) holder).mAmount.setText(contract.getTotalAmount().toString() + "元");
             }
-            ((ItemViewHolder) holder).mCustomer.setText("客户 [" + opportunity.getCustomer().getCustomerName() +"]");
+            ((ItemViewHolder) holder).mOpportunity.setText("商机 [" + contract.getOpportunity().getOpportunityTitle() + "]");
         }
     }
 
@@ -87,7 +85,7 @@ public class OpportunityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return mData.size() + begin;
     }
 
-    public OpportunityBean getItem(int position) {
+    public ContractBean getItem(int position) {
         return mData == null ? null : mData.get(position);
     }
 
@@ -105,19 +103,19 @@ public class OpportunityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView mName;
+        public TextView mTitle;
         public TextView mType;
         public TextView mStatus;
         public TextView mAmount;
-        public TextView mCustomer;
+        public TextView mOpportunity;
 
         public ItemViewHolder(View v) {
             super(v);
-            mName = (TextView) v.findViewById(R.id.tvName);
+            mTitle = (TextView) v.findViewById(R.id.tvTitle);
             mType = (TextView) v.findViewById(R.id.tvType);
             mStatus = (TextView) v.findViewById(R.id.tvStatus);
             mAmount = (TextView) v.findViewById(R.id.tvAmount);
-            mCustomer = (TextView) v.findViewById(R.id.tvCustomer);
+            mOpportunity = (TextView) v.findViewById(R.id.tvOpportunity);
             v.setOnClickListener(this);
         }
 

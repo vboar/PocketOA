@@ -14,7 +14,10 @@ import android.widget.EditText;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import java.util.List;
+
 import top.kass.pocketoa.R;
+import top.kass.pocketoa.bean.CustomerBean;
 import top.kass.pocketoa.bean.OpportunityBean;
 import top.kass.pocketoa.presenter.OpportunityEditPresenter;
 import top.kass.pocketoa.presenter.impl.OpportunityEditPresenterImpl;
@@ -30,7 +33,6 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
     private OpportunityBean mOpportunityBean;
 
     private EditText mEtTitle;
-    private EditText mEtCustomer;
     private EditText mEtAmount;
     private EditText mEtSource;
     private EditText mEtChannel;
@@ -39,6 +41,7 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
     private EditText mEtRemark;
     private MaterialSpinner mSpType;
     private MaterialSpinner mSpStatus;
+    private MaterialSpinner mSpCustomer;
 
 
     @Override
@@ -47,6 +50,9 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
         setContentView(R.layout.activity_opportunity_add);
 
         mOpportunityEditPresenter = new OpportunityEditPresenterImpl(this);
+
+        mSpCustomer = (MaterialSpinner) findViewById(R.id.spCustomer);
+        mOpportunityEditPresenter.loadCustomers();
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
@@ -60,7 +66,6 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
         mOpportunityBean = (OpportunityBean) getIntent().getSerializableExtra("opportunity");
 
         mEtTitle = (EditText) findViewById(R.id.etTitle);
-        mEtCustomer = (EditText) findViewById(R.id.etCustomer);
         mEtAmount = (EditText) findViewById(R.id.etAmount);
         mEtSource = (EditText) findViewById(R.id.etSource);
         mEtChannel = (EditText) findViewById(R.id.etChannel);
@@ -69,7 +74,6 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
         mEtRemark = (EditText) findViewById(R.id.etRemark);
 
         mEtTitle.setText(mOpportunityBean.getOpportunityTitle());
-        mEtCustomer.setText(mOpportunityBean.getCustomerId().toString());
         if (mOpportunityBean.getEstimatedAmount() != null) {
             mEtAmount.setText(mOpportunityBean.getEstimatedAmount().toString());
         }
@@ -136,7 +140,6 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
         switch (item.getItemId()) {
             case R.id.action_submit:
                 mOpportunityBean.setOpportunityTitle(mEtTitle.getText().toString());
-                mOpportunityBean.setCustomerId(Integer.parseInt(mEtCustomer.getText().toString()));
                 if (mEtAmount.getText().toString().equals("")) {
                     mOpportunityBean.setEstimatedAmount(0.0);
                 } else {
@@ -158,6 +161,29 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
         Intent intent = new Intent();
         setResult(1, intent);
         finish();
+    }
+
+    @Override
+    public void loadCustomers(List<CustomerBean> list) {
+        final int[] cids = new int[list.size()];
+        String[] cnames = new String[list.size()];
+        int position = 0;
+        for (int i = 0; i < list.size(); i++) {
+            cids[i] = list.get(i).getCustomerId();
+            cnames[i] = list.get(i).getCustomerName();
+
+            if (mOpportunityBean.getCustomerId() == cids[i]) {
+                position = i;
+            }
+        }
+        mSpCustomer.setItems(cnames);
+        mSpCustomer.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                mOpportunityBean.setCustomerId(cids[position]);
+            }
+        });
+        mSpCustomer.setSelectedIndex(position);
     }
 
     @Override

@@ -6,4 +6,6 @@ public interface OpportunityAddPresenter {
 
     void addOpportunity(OpportunityBean opportunityBean);
 
+    void loadCustomers();
+
 }

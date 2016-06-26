@@ -46,6 +46,7 @@ public class OpportunityActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_add) {
             Intent intent = new Intent(this, OpportunityAddActivity.class);
+            intent.putExtra("customerId", customerId);
             startActivityForResult(intent, 1);
         }
         return super.onOptionsItemSelected(item);

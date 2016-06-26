@@ -95,7 +95,7 @@ public class CustomerEditActivity extends AppCompatActivity implements CustomerE
                 mCustomerBean.setCustomerType(position+1);
             }
         });
-        if (mCustomerBean.getCustomerType() != null) {
+        if (mCustomerBean.getCustomerType() != null && mCustomerBean.getCustomerType() > 0) {
             mSpType.setSelectedIndex(mCustomerBean.getCustomerType()-1);
         } else {
             mCustomerBean.setCustomerType(1);
@@ -114,7 +114,7 @@ public class CustomerEditActivity extends AppCompatActivity implements CustomerE
                 mCustomerBean.setCustomerStatus(position+1);
             }
         });
-        if (mCustomerBean.getCustomerStatus() != null) {
+        if (mCustomerBean.getCustomerStatus() != null && mCustomerBean.getCustomerStatus() > 0) {
             mSpStatus.setSelectedIndex(mCustomerBean.getCustomerStatus()-1);
         } else {
             mCustomerBean.setCustomerStatus(1);

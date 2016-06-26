@@ -8,10 +8,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -50,15 +50,51 @@ public class CustomerDetailActivity extends AppCompatActivity implements Custome
             }
         });
 
-        CustomerBean customerBean = (CustomerBean) getIntent().getSerializableExtra("customer");
+        final CustomerBean customerBean = (CustomerBean) getIntent().getSerializableExtra("customer");
+
+        Button btnFollowup = (Button) findViewById(R.id.btnFollowup);
+        assert btnFollowup != null;
+        btnFollowup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomerDetailActivity.this, FollowUpActivity.class);
+                intent.putExtra("sourceId", customerBean.getCustomerId());
+                intent.putExtra("sourceType", 1);
+                startActivity(intent);
+            }
+        });
+        Button btnContact = (Button) findViewById(R.id.btnContact);
+        assert btnContact != null;
+        btnContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO
+            }
+        });
+        Button btnOpportunity = (Button) findViewById(R.id.btnOpportunity);
+        assert btnOpportunity != null;
+        btnOpportunity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO
+            }
+        });
+        Button btnContract = (Button) findViewById(R.id.btnContract);
+        assert btnContract != null;
+        btnContract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO
+            }
+        });
 
         int staffId = getSharedPreferences("oa", MODE_PRIVATE).getInt("staffId", 0);
-        if (staffId == customerBean.getStaffId()) {
-            canEdited = true;
-        } else {
-            View btnGroup = (View) findViewById(R.id.btnGroup);
-            btnGroup.setVisibility(View.GONE);
-        }
+//        if (staffId == customerBean.getStaffId()) {
+//            canEdited = true;
+//        } else {
+//            View btnGroup = (View) findViewById(R.id.btnGroup);
+//            btnGroup.setVisibility(View.GONE);
+//        }
         mCustomerDetailPresenter.loadCustomer(customerBean.getCustomerId());
 
     }
@@ -70,9 +106,10 @@ public class CustomerDetailActivity extends AppCompatActivity implements Custome
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (canEdited) {
-            getMenuInflater().inflate(R.menu.common_detail, menu);
-        }
+//        if (canEdited) {
+//            getMenuInflater().inflate(R.menu.common_detail, menu);
+//        }
+        getMenuInflater().inflate(R.menu.common_detail, menu);
         return true;
     }
 

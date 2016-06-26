@@ -188,16 +188,19 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true">
                 <Button
+                    android:id="@+id/btnFollowup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/title_followup"/>
                 <Button
+                    android:id="@+id/btnProduct"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/title_product"/>
                 <Button
+                    android:id="@+id/btnContract"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

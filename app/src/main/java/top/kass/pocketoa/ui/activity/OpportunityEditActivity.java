@@ -97,7 +97,7 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
                 mOpportunityBean.setBusinessType(position+1);
             }
         });
-        if (mOpportunityBean.getBusinessType() != null) {
+        if (mOpportunityBean.getBusinessType() != null && mOpportunityBean.getBusinessType() > 0) {
             mSpType.setSelectedIndex(mOpportunityBean.getBusinessType()-1);
         } else {
             mOpportunityBean.setBusinessType(1);
@@ -117,7 +117,7 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
                 mOpportunityBean.setOpportunityStatus(position+1);
             }
         });
-        if (mOpportunityBean.getOpportunityStatus() != null) {
+        if (mOpportunityBean.getOpportunityStatus() != null && mOpportunityBean.getOpportunityStatus() > 0) {
             mSpStatus.setSelectedIndex(mOpportunityBean.getOpportunityStatus()-1);
         } else {
             mOpportunityBean.setOpportunityStatus(1);

@@ -59,6 +59,10 @@
     <string name="title_product_detail">产品详情</string>
     <string name="title_product_edit">编辑产品</string>
 
+    <string name="title_followup_add">添加跟进记录</string>
+    <string name="title_followup_detail">跟进记录详情</string>
+    <string name="title_followup_edit">编辑跟进记录</string>
+
     <string name="title__goal_setting">员工目标设置</string>
     <string name="title_attention_setting">提醒设置</string>
     <string name="title_table_show">报表展现</string>
@@ -177,6 +181,9 @@
     <string name="product_introduction">介绍</string>
     <string name="product_picture">图片</string>
     <string name="product_remark">备注</string>
+
+    <string name="followup_content">内容</string>
+    <string name="followup_remark">备注</string>
 
     <string name="business_goal_setting">员工目标设置</string>
     <string name="business_attention_setting">提醒设置</string>

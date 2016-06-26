@@ -117,7 +117,7 @@ public class ContractEditActivity extends AppCompatActivity implements ContractE
                 mContractBean.setContractType(position+1);
             }
         });
-        if (mContractBean.getContractType() != null) {
+        if (mContractBean.getContractType() != null && mContractBean.getContractType() > 0) {
             mSpType.setSelectedIndex(mContractBean.getContractType()-1);
         } else {
             mSpType.setSelectedIndex(1);
@@ -135,7 +135,7 @@ public class ContractEditActivity extends AppCompatActivity implements ContractE
                 mContractBean.setContractStatus(position+1);
             }
         });
-        if (mContractBean.getContractStatus() != null) {
+        if (mContractBean.getContractStatus() != null && mContractBean.getContractStatus() > 0) {
             mSpStatus.setSelectedIndex(mContractBean.getContractStatus()-1);
         } else {
             mSpStatus.setSelectedIndex(1);

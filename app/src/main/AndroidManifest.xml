@@ -127,6 +127,27 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".ui.activity.FollowUpActivity"
+            android:label="@string/title_followup"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.FollowUpAddActivity"
+            android:label="@string/title_followup_add"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.FollowUpDetailActivity"
+            android:label="@string/title_followup_detail"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.FollowUpEditActivity"
+            android:label="@string/title_followup_edit"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".ui.activity.BusinessGoalSettingActivity"
             android:label="@string/title__goal_setting"
             android:screenOrientation="portrait"

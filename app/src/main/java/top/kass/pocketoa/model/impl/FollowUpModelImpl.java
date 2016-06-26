@@ -12,7 +12,9 @@ import java.util.List;
 import okhttp3.Call;
 import top.kass.pocketoa.bean.CustomerBean;
 import top.kass.pocketoa.bean.FollowUpBean;
+import top.kass.pocketoa.bean.StaffBean;
 import top.kass.pocketoa.model.FollowUpModel;
+import top.kass.pocketoa.util.ToolsUtil;
 import top.kass.pocketoa.util.UrlUtil;
 
 public class FollowUpModelImpl implements FollowUpModel {
@@ -83,6 +85,11 @@ public class FollowUpModelImpl implements FollowUpModel {
         OkHttpUtils
                 .post()
                 .url(url)
+                .addParams("sourceid", followUpBean.getSourceId().toString())
+                .addParams("sourcetype", followUpBean.getSourceType().toString())
+                .addParams("creatorid", followUpBean.getCreatorId().toString())
+                .addParams("content", followUpBean.getContent())
+                .addParams("followupremarks", followUpBean.getFollowUpRemarks())
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -112,6 +119,12 @@ public class FollowUpModelImpl implements FollowUpModel {
         OkHttpUtils
                 .post()
                 .url(url)
+                .addParams("followupid", followUpBean.getFollowUpId().toString())
+                .addParams("sourceid", followUpBean.getSourceId().toString())
+                .addParams("sourcetype", followUpBean.getSourceType().toString())
+                .addParams("creatorid", followUpBean.getCreatorId().toString())
+                .addParams("content", followUpBean.getContent())
+                .addParams("followupremarks", followUpBean.getFollowUpRemarks())
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -162,9 +175,24 @@ public class FollowUpModelImpl implements FollowUpModel {
                 });
     }
 
-    private FollowUpBean jsonToFollowUpBean(JSONObject object) {
+    private FollowUpBean jsonToFollowUpBean(JSONObject object) throws JSONException {
         FollowUpBean followUpBean = new FollowUpBean();
-        // TODO
+        followUpBean.setFollowUpId(ToolsUtil.sti(object.getString("followupid")));
+        followUpBean.setSourceId(ToolsUtil.sti(object.getString("sourceid")));
+        followUpBean.setSourceType(ToolsUtil.sti(object.getString("sourcetype")));
+        followUpBean.setFollowUpType(ToolsUtil.sti(object.getString("followuptype")));
+        followUpBean.setCreateTime(ToolsUtil.sts(object.getString("createtime")));
+        followUpBean.setCreatorId(ToolsUtil.sti(object.getString("creatorid")));
+        followUpBean.setContent(ToolsUtil.sts(object.getString("content")));
+        followUpBean.setFollowUpRemarks(ToolsUtil.sts(object.getString("followupremarks")));
+        try {
+            followUpBean.setCustomerId(ToolsUtil.sti(object.getString("customerid")));
+            StaffBean staffBean = new StaffBean();
+            staffBean.setStaffId(ToolsUtil.sti(object.getString("creatorid")));
+            staffBean.setName(ToolsUtil.sts(object.getString("name")));
+            followUpBean.setStaff(staffBean);
+        } catch (Exception e) {
+        }
         return followUpBean;
     }
 

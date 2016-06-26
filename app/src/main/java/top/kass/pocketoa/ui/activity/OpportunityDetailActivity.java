@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import top.kass.pocketoa.R;
@@ -47,16 +48,44 @@ public class OpportunityDetailActivity extends AppCompatActivity implements Oppo
             }
         });
 
-        OpportunityBean opportunityBean = (OpportunityBean) getIntent().getSerializableExtra("opportunity");
+        final OpportunityBean opportunityBean = (OpportunityBean) getIntent().getSerializableExtra("opportunity");
         customerName = opportunityBean.getCustomer().getCustomerName();
 
+        Button btnFollowup = (Button) findViewById(R.id.btnFollowup);
+        assert btnFollowup != null;
+        btnFollowup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OpportunityDetailActivity.this, FollowUpActivity.class);
+                intent.putExtra("sourceId", opportunityBean.getOpportunityId());
+                intent.putExtra("sourceType", 2);
+                startActivity(intent);
+            }
+        });
+        Button btnProduct = (Button) findViewById(R.id.btnProduct);
+        assert btnProduct != null;
+        btnProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO
+            }
+        });
+        Button btnContract = (Button) findViewById(R.id.btnContract);
+        assert btnContract != null;
+        btnContract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO
+            }
+        });
+
         int staffId = getSharedPreferences("oa", MODE_PRIVATE).getInt("staffId", 0);
-        if (staffId == opportunityBean.getStaffId()) {
-            canEdited = true;
-        } else {
-            View btnGroup = (View) findViewById(R.id.btnGroup);
-            btnGroup.setVisibility(View.GONE);
-        }
+//        if (staffId == opportunityBean.getStaffId()) {
+//            canEdited = true;
+//        } else {
+//            View btnGroup = (View) findViewById(R.id.btnGroup);
+//            btnGroup.setVisibility(View.GONE);
+//        }
         mOpportunityDetailPresenter.loadOpportunity(opportunityBean.getOpportunityId());
     }
 
@@ -67,9 +96,10 @@ public class OpportunityDetailActivity extends AppCompatActivity implements Oppo
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (canEdited) {
-            getMenuInflater().inflate(R.menu.common_detail, menu);
-        }
+//        if (canEdited) {
+//            getMenuInflater().inflate(R.menu.common_detail, menu);
+//        }
+        getMenuInflater().inflate(R.menu.common_detail, menu);
         return true;
     }
 

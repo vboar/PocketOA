@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import top.kass.pocketoa.R;
@@ -47,17 +48,29 @@ public class ContractDetailActivity extends AppCompatActivity implements Contrac
             }
         });
 
-        ContractBean contractBean = (ContractBean) getIntent().getSerializableExtra("contract");
+        final ContractBean contractBean = (ContractBean) getIntent().getSerializableExtra("contract");
         customerName = contractBean.getCustomer().getCustomerName();
         opportunityTitle = contractBean.getOpportunity().getOpportunityTitle();
 
+        Button btnFollowup = (Button) findViewById(R.id.btnFollowup);
+        assert btnFollowup != null;
+        btnFollowup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ContractDetailActivity.this, FollowUpActivity.class);
+                intent.putExtra("sourceId", contractBean.getContractId());
+                intent.putExtra("sourceType", 3);
+                startActivity(intent);
+            }
+        });
+
         int staffId = getSharedPreferences("oa", MODE_PRIVATE).getInt("staffId", 0);
-        if (staffId == contractBean.getStaffId()) {
-            canEdited = true;
-        } else {
-            View btnGroup = (View) findViewById(R.id.btnGroup);
-            btnGroup.setVisibility(View.GONE);
-        }
+//        if (staffId == contractBean.getStaffId()) {
+//            canEdited = true;
+//        } else {
+//            View btnGroup = (View) findViewById(R.id.btnGroup);
+//            btnGroup.setVisibility(View.GONE);
+//        }
         mContractDetailPresenter.loadContract(contractBean.getContractId());
     }
 
@@ -68,9 +81,10 @@ public class ContractDetailActivity extends AppCompatActivity implements Contrac
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (canEdited) {
-            getMenuInflater().inflate(R.menu.common_detail, menu);
-        }
+//        if (canEdited) {
+//            getMenuInflater().inflate(R.menu.common_detail, menu);
+//        }
+        getMenuInflater().inflate(R.menu.common_detail, menu);
         return true;
     }
 

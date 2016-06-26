@@ -169,7 +169,7 @@
 
         <activity
             android:name=".ui.activity.BusinessGoalSettingActivity"
-            android:label="@string/title__goal_setting"
+            android:label="@string/title_goal_setting"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.ui.activity.BusinessAttentionSettingActivity;
+import top.kass.pocketoa.ui.activity.BusinessGoalSettingActivity;
 import top.kass.pocketoa.ui.activity.BusinessTableShowActivity;
 
 public class BusinessFragment extends Fragment {
@@ -24,7 +25,7 @@ public class BusinessFragment extends Fragment {
         btnGoalSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), BusinessAttentionSettingActivity.class);
+                Intent intent = new Intent(getActivity(), BusinessGoalSettingActivity.class);
                 startActivity(intent);
             }
         });

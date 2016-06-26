@@ -13,8 +13,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.jaredrummler.materialspinner.MaterialSpinner;
+
+import java.util.List;
+
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.ContactBean;
+import top.kass.pocketoa.bean.CustomerBean;
 import top.kass.pocketoa.presenter.ContactAddPresenter;
 import top.kass.pocketoa.presenter.impl.ContactAddPresenterImpl;
 import top.kass.pocketoa.util.UIUtil;
@@ -29,7 +34,6 @@ public class ContactAddActivity extends AppCompatActivity implements ContactAddV
     private ContactAddPresenter mContactAddPresenter;
 
     private EditText mEtName;
-    private EditText mEtCustomer;
     private EditText mEtAge;
     private EditText mEtMobile;
     private EditText mEtTel;
@@ -42,6 +46,10 @@ public class ContactAddActivity extends AppCompatActivity implements ContactAddV
     private EditText mEtRemark;
     private RadioButton mRbMale;
     private RadioButton mRbFemale;
+    private MaterialSpinner mSpCustomer;
+
+    private ContactBean mContactBean = new ContactBean();
+    private int defaultCustomerId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +57,8 @@ public class ContactAddActivity extends AppCompatActivity implements ContactAddV
         setContentView(R.layout.activity_contact_add);
 
         mContactAddPresenter = new ContactAddPresenterImpl(this);
+
+        defaultCustomerId = getIntent().getIntExtra("customerId", 0);
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
@@ -60,7 +70,6 @@ public class ContactAddActivity extends AppCompatActivity implements ContactAddV
         });
 
         mEtName = (EditText) findViewById(R.id.etName);
-        mEtCustomer = (EditText) findViewById(R.id.etCustomer);
         mEtAge = (EditText) findViewById(R.id.etAge);
         mEtMobile = (EditText) findViewById(R.id.etMobile);
         mEtTel = (EditText) findViewById(R.id.etTel);
@@ -74,6 +83,8 @@ public class ContactAddActivity extends AppCompatActivity implements ContactAddV
         mRbMale = (RadioButton) findViewById(R.id.rbMale);
         mRbFemale = (RadioButton) findViewById(R.id.rbFemale);
 
+        mSpCustomer = (MaterialSpinner) findViewById(R.id.spCustomer);
+        mContactAddPresenter.loadCustomers();
     }
 
     @Override
@@ -86,33 +97,27 @@ public class ContactAddActivity extends AppCompatActivity implements ContactAddV
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_submit:
-                ContactBean contactBean = new ContactBean();
-                contactBean.setContactsName(mEtName.getText().toString());
-                if (mEtCustomer.getText().toString().equals("")) {
-                    contactBean.setCustomerId(0);
-                } else {
-                    contactBean.setCustomerId(Integer.parseInt(mEtCustomer.getText().toString()));
-                }
+                mContactBean.setContactsName(mEtName.getText().toString());
                 if (mEtAge.getText().toString().equals("")) {
-                    contactBean.setContactsAge(0);
+                    mContactBean.setContactsAge(0);
                 } else {
-                    contactBean.setContactsAge(Integer.parseInt(mEtAge.getText().toString()));
+                    mContactBean.setContactsAge(Integer.parseInt(mEtAge.getText().toString()));
                 }
                 if (mRbMale.isChecked()) {
-                    contactBean.setContactsGender("男");
+                    mContactBean.setContactsGender("男");
                 } else {
-                    contactBean.setContactsGender("女");
+                    mContactBean.setContactsGender("女");
                 }
-                contactBean.setContactsMobile(mEtMobile.getText().toString());
-                contactBean.setContactsTelephone(mEtTel.getText().toString());
-                contactBean.setContactsEmail(mEtEmail.getText().toString());
-                contactBean.setContactsAddress(mEtAddress.getText().toString());
-                contactBean.setContactsZipcode(mEtZipcode.getText().toString());
-                contactBean.setContactsQq(mEtQQ.getText().toString());
-                contactBean.setContactsWechat(mEtWechat.getText().toString());
-                contactBean.setContactsWangwang(mEtWangwang.getText().toString());
-                contactBean.setContactsRemarks(mEtRemark.getText().toString());
-                mContactAddPresenter.addContact(contactBean);
+                mContactBean.setContactsMobile(mEtMobile.getText().toString());
+                mContactBean.setContactsTelephone(mEtTel.getText().toString());
+                mContactBean.setContactsEmail(mEtEmail.getText().toString());
+                mContactBean.setContactsAddress(mEtAddress.getText().toString());
+                mContactBean.setContactsZipcode(mEtZipcode.getText().toString());
+                mContactBean.setContactsQq(mEtQQ.getText().toString());
+                mContactBean.setContactsWechat(mEtWechat.getText().toString());
+                mContactBean.setContactsWangwang(mEtWangwang.getText().toString());
+                mContactBean.setContactsRemarks(mEtRemark.getText().toString());
+                mContactAddPresenter.addContact(mContactBean);
                 break;
         }
         return false;
@@ -123,6 +128,29 @@ public class ContactAddActivity extends AppCompatActivity implements ContactAddV
         Intent intent = new Intent();
         setResult(2, intent);
         finish();
+    }
+
+    @Override
+    public void loadCustomers(List<CustomerBean> list) {
+        final int[] cids = new int[list.size()];
+        String[] cnames = new String[list.size()];
+        int position = 0;
+        for (int i = 0; i < list.size(); i++) {
+            cids[i] = list.get(i).getCustomerId();
+            cnames[i] = list.get(i).getCustomerName();
+
+            if (defaultCustomerId == cids[i]) {
+                position = i;
+            }
+        }
+        mSpCustomer.setItems(cnames);
+        mSpCustomer.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                mContactBean.setCustomerId(cids[position]);
+            }
+        });
+        mSpCustomer.setSelectedIndex(position);
     }
 
     @Override

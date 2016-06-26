@@ -7,4 +7,6 @@ public interface ContactEditPresenter {
 
     void editContact(ContactBean contactBean);
 
+    void loadCustomers();
+
 }

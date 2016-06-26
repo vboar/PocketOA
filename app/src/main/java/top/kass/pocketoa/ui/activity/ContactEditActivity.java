@@ -13,8 +13,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.jaredrummler.materialspinner.MaterialSpinner;
+
+import java.util.List;
+
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.ContactBean;
+import top.kass.pocketoa.bean.CustomerBean;
 import top.kass.pocketoa.presenter.ContactEditPresenter;
 import top.kass.pocketoa.presenter.impl.ContactEditPresenterImpl;
 import top.kass.pocketoa.util.UIUtil;
@@ -28,7 +33,6 @@ public class ContactEditActivity extends AppCompatActivity implements ContactEdi
     private ProgressDialog mProgressDialog;
 
     private EditText mEtName;
-    private EditText mEtCustomer;
     private EditText mEtAge;
     private EditText mEtMobile;
     private EditText mEtTel;
@@ -41,6 +45,7 @@ public class ContactEditActivity extends AppCompatActivity implements ContactEdi
     private EditText mEtRemark;
     private RadioButton mRbMale;
     private RadioButton mRbFemale;
+    private MaterialSpinner mSpCustomer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +64,6 @@ public class ContactEditActivity extends AppCompatActivity implements ContactEdi
         });
 
         mEtName = (EditText) findViewById(R.id.etName);
-        mEtCustomer = (EditText) findViewById(R.id.etCustomer);
         mEtAge = (EditText) findViewById(R.id.etAge);
         mEtMobile = (EditText) findViewById(R.id.etMobile);
         mEtTel = (EditText) findViewById(R.id.etTel);
@@ -72,11 +76,12 @@ public class ContactEditActivity extends AppCompatActivity implements ContactEdi
         mEtRemark = (EditText) findViewById(R.id.etRemark);
         mRbMale = (RadioButton) findViewById(R.id.rbMale);
         mRbFemale = (RadioButton) findViewById(R.id.rbFemale);
+        mSpCustomer = (MaterialSpinner) findViewById(R.id.spCustomer);
+        mContactEditPresenter.loadCustomers();
 
         mContactBean = (ContactBean) getIntent().getSerializableExtra("contact");
 
         mEtName.setText(mContactBean.getContactsName());
-        mEtCustomer.setText(mContactBean.getCustomerId().toString());
         if (mContactBean.getContactsAge() != null) {
             mEtAge.setText(mContactBean.getContactsAge().toString());
         }
@@ -109,11 +114,6 @@ public class ContactEditActivity extends AppCompatActivity implements ContactEdi
         switch (item.getItemId()) {
             case R.id.action_submit:
                 mContactBean.setContactsName(mEtName.getText().toString());
-                if (mEtCustomer.getText().toString().equals("")) {
-                    mContactBean.setCustomerId(0);
-                } else {
-                    mContactBean.setCustomerId(Integer.parseInt(mEtCustomer.getText().toString()));
-                }
                 if (mEtAge.getText().toString().equals("")) {
                     mContactBean.setContactsAge(0);
                 } else {
@@ -144,6 +144,29 @@ public class ContactEditActivity extends AppCompatActivity implements ContactEdi
         Intent intent = new Intent();
         setResult(1, intent);
         finish();
+    }
+
+    @Override
+    public void loadCustomers(List<CustomerBean> list) {
+        final int[] cids = new int[list.size()];
+        String[] cnames = new String[list.size()];
+        int position = 0;
+        for (int i = 0; i < list.size(); i++) {
+            cids[i] = list.get(i).getCustomerId();
+            cnames[i] = list.get(i).getCustomerName();
+
+            if (mContactBean.getCustomerId() == cids[i]) {
+                position = i;
+            }
+        }
+        mSpCustomer.setItems(cnames);
+        mSpCustomer.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                mContactBean.setCustomerId(cids[position]);
+            }
+        });
+        mSpCustomer.setSelectedIndex(position);
     }
 
     @Override

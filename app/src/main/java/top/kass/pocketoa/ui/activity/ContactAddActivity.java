@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -169,5 +170,18 @@ public class ContactAddActivity extends AppCompatActivity implements ContactAddV
         View view = findViewById(R.id.contact_add_layout);
         UIUtil.showSnackBar(view, msg, Snackbar.LENGTH_SHORT);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
 
 }

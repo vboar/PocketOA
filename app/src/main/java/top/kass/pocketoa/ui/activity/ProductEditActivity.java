@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.bumptech.glide.Glide;
+import com.umeng.analytics.MobclickAgent;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import top.kass.pocketoa.R;
@@ -172,6 +173,18 @@ public class ProductEditActivity extends AppCompatActivity implements ProductEdi
             Uri uri = data.getData();
             mProductEditPresenter.uploadImage(ImageUriUtil.getImageAbsolutePath(this, uri));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

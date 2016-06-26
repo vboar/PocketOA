@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.umeng.analytics.MobclickAgent;
 
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.CustomerBean;
@@ -162,5 +163,18 @@ public class CustomerAddActivity extends AppCompatActivity implements CustomerAd
         View view = findViewById(R.id.customer_add_layout);
         UIUtil.showSnackBar(view, msg, Snackbar.LENGTH_SHORT);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
 
 }

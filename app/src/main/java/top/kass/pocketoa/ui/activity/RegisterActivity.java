@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.umeng.analytics.MobclickAgent;
+
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.StaffBean;
 import top.kass.pocketoa.presenter.RegisterPresenter;
@@ -87,6 +89,18 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     public void showFailMsg(String msg) {
         View view = findViewById(R.id.register_layout);
         UIUtil.showSnackBar(view, msg, Snackbar.LENGTH_SHORT);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

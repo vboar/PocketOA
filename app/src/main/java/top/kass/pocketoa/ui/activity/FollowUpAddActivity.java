@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.umeng.analytics.MobclickAgent;
+
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.FollowUpBean;
 import top.kass.pocketoa.presenter.FollowUpAddPresenter;
@@ -105,6 +107,18 @@ public class FollowUpAddActivity extends AppCompatActivity implements FollowUpAd
     public void showFailMsg(String msg) {
         View view = findViewById(R.id.product_add_layout);
         UIUtil.showSnackBar(view, msg, Snackbar.LENGTH_SHORT);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

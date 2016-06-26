@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.ContractBean;
 import top.kass.pocketoa.presenter.ContractDetailPresenter;
@@ -200,6 +202,18 @@ public class ContractDetailActivity extends AppCompatActivity implements Contrac
             isEdited = true;
             mContractDetailPresenter.loadContract(mContractBean.getContractId());
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

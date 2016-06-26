@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.FollowUpBean;
 import top.kass.pocketoa.presenter.FollowUpDetailPresenter;
@@ -144,6 +146,18 @@ public class FollowUpDetailActivity extends AppCompatActivity implements FollowU
             isEdited = true;
             mFollowUpDetailPresenter.loadFollowUp(mFollowUpBean.getFollowUpId());
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

@@ -20,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
+import com.umeng.analytics.MobclickAgent;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import top.kass.pocketoa.R;
@@ -176,6 +177,18 @@ public class UserEditActivity extends AppCompatActivity implements UserEditView 
             Uri uri = data.getData();
             mUserEditPresenter.uploadImage(ImageUriUtil.getImageAbsolutePath(this, uri));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

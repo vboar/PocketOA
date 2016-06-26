@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.umeng.analytics.MobclickAgent;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import top.kass.pocketoa.R;
@@ -167,6 +168,18 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
             isEdited = true;
             mProductDetailPresenter.loadProduct(mProductBean.getProductId());
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

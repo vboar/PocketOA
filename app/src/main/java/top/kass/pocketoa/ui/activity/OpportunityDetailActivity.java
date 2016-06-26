@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.OpportunityBean;
 import top.kass.pocketoa.presenter.OpportunityDetailPresenter;
@@ -208,6 +210,18 @@ public class OpportunityDetailActivity extends AppCompatActivity implements Oppo
             isEdited = true;
             mOpportunityDetailPresenter.loadOpportunity(mOpportunityBean.getOpportunityId());
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

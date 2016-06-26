@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.umeng.analytics.MobclickAgent;
+
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.ui.fragment.ContactListFragment;
 import top.kass.pocketoa.ui.fragment.ContractListFragment;
@@ -70,6 +72,18 @@ public class ContractActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == 1) {
             reloadFragment();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

@@ -1,5 +1,6 @@
 package top.kass.pocketoa.ui.activity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -43,6 +45,8 @@ public class OpportunityAddActivity extends AppCompatActivity implements Opportu
     private MaterialSpinner mSpType;
     private MaterialSpinner mSpStatus;
     private MaterialSpinner mSpCustomer;
+    private DatePickerDialog mADateDialog;
+    private DatePickerDialog mEDateDialog;
 
     private OpportunityBean mOpportunityBean;
     private int defaultCustomerId;
@@ -73,8 +77,41 @@ public class OpportunityAddActivity extends AppCompatActivity implements Opportu
         mEtEDate = (EditText) findViewById(R.id.etEDate);
         mEtRemark = (EditText) findViewById(R.id.etRemark);
 
-        mEtADate.setText(ToolsUtil.getCurrentDate());
-        mEtEDate.setText(ToolsUtil.getCurrentDate());
+        String currentDate = ToolsUtil.getCurrentDate();
+        mEtADate.setText(currentDate);
+        mEtEDate.setText(currentDate);
+        mADateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mEtADate.setText(ToolsUtil.getFomartedDate(year, monthOfYear, dayOfMonth));
+            }
+        },
+        Integer.parseInt(currentDate.substring(0, 4)),
+        Integer.parseInt(currentDate.substring(5, 7))-1,
+        Integer.parseInt(currentDate.substring(8, 10))
+        );
+        mEtADate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mADateDialog.show();
+            }
+        });
+        mEDateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mEtEDate.setText(ToolsUtil.getFomartedDate(year, monthOfYear, dayOfMonth));
+            }
+        },
+                Integer.parseInt(currentDate.substring(0, 4)),
+                Integer.parseInt(currentDate.substring(5, 7))-1,
+                Integer.parseInt(currentDate.substring(8, 10))
+        );
+        mEtEDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEDateDialog.show();
+            }
+        });
 
         mSpCustomer = (MaterialSpinner) findViewById(R.id.spCustomer);
         mOpportunityAddPresenter.loadCustomers();
@@ -170,6 +207,7 @@ public class OpportunityAddActivity extends AppCompatActivity implements Opportu
             }
         });
         mSpCustomer.setSelectedIndex(position);
+        mOpportunityBean.setCustomerId(cids[position]);
     }
 
     @Override

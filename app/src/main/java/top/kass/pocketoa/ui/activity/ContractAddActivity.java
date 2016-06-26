@@ -1,5 +1,6 @@
 package top.kass.pocketoa.ui.activity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -50,6 +52,9 @@ public class ContractAddActivity extends AppCompatActivity implements ContractAd
     private MaterialSpinner mSpStatus;
     private MaterialSpinner mSpCustomer;
     private MaterialSpinner mSpOpportunity;
+    private DatePickerDialog mStartDateDialog;
+    private DatePickerDialog mEndDateDialog;
+    private DatePickerDialog mSiningDateDialog;
 
     private int defaultCustomerId;
     private int defaultOppId;
@@ -89,6 +94,55 @@ public class ContractAddActivity extends AppCompatActivity implements ContractAd
         mEtStartDate.setText(ToolsUtil.getCurrentDate());
         mEtEndDate.setText(ToolsUtil.getCurrentDate());
         mEtSigningDate.setText(ToolsUtil.getCurrentDate());
+
+        mStartDateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mEtStartDate.setText(ToolsUtil.getFomartedDate(year, monthOfYear, dayOfMonth));
+            }
+        },
+                Integer.parseInt(mEtStartDate.getText().toString().substring(0, 4)),
+                Integer.parseInt(mEtStartDate.getText().toString().substring(5, 7))-1,
+                Integer.parseInt(mEtStartDate.getText().toString().substring(8, 10))
+        );
+        mEtStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mStartDateDialog.show();
+            }
+        });
+        mEndDateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mEtEndDate.setText(ToolsUtil.getFomartedDate(year, monthOfYear, dayOfMonth));
+            }
+        },
+                Integer.parseInt(mEtEndDate.getText().toString().substring(0, 4)),
+                Integer.parseInt(mEtEndDate.getText().toString().substring(5, 7))-1,
+                Integer.parseInt(mEtEndDate.getText().toString().substring(8, 10))
+        );
+        mEtEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEndDateDialog.show();
+            }
+        });
+        mSiningDateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mEtSigningDate.setText(ToolsUtil.getFomartedDate(year, monthOfYear, dayOfMonth));
+            }
+        },
+                Integer.parseInt(mEtSigningDate.getText().toString().substring(0, 4)),
+                Integer.parseInt(mEtSigningDate.getText().toString().substring(5, 7))-1,
+                Integer.parseInt(mEtSigningDate.getText().toString().substring(8, 10))
+        );
+        mEtSigningDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSiningDateDialog.show();
+            }
+        });
 
         mSpCustomer = (MaterialSpinner) findViewById(R.id.spCustomer);
         mSpOpportunity = (MaterialSpinner) findViewById(R.id.spOpportunity);
@@ -186,6 +240,7 @@ public class ContractAddActivity extends AppCompatActivity implements ContractAd
             }
         });
         mSpCustomer.setSelectedIndex(position);
+        mContractBean.setCustomerId(cids[position]);;
     }
 
     @Override
@@ -209,6 +264,7 @@ public class ContractAddActivity extends AppCompatActivity implements ContractAd
             }
         });
         mSpOpportunity.setSelectedIndex(position);
+        mContractBean.setOpportunityId(oids[position]);
     }
 
     @Override

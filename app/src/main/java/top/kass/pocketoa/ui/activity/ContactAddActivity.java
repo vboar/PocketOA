@@ -152,6 +152,7 @@ public class ContactAddActivity extends AppCompatActivity implements ContactAddV
             }
         });
         mSpCustomer.setSelectedIndex(position);
+        mContactBean.setCustomerId(cids[position]);
     }
 
     @Override

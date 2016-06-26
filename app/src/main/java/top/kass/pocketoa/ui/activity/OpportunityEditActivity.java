@@ -1,5 +1,6 @@
 package top.kass.pocketoa.ui.activity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -43,6 +45,8 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
     private MaterialSpinner mSpType;
     private MaterialSpinner mSpStatus;
     private MaterialSpinner mSpCustomer;
+    private DatePickerDialog mADateDialog;
+    private DatePickerDialog mEDateDialog;
 
 
     @Override
@@ -127,6 +131,39 @@ public class OpportunityEditActivity extends AppCompatActivity implements Opport
         } else {
             mOpportunityBean.setOpportunityStatus(1);
         }
+
+        mADateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mEtADate.setText(ToolsUtil.getFomartedDate(year, monthOfYear, dayOfMonth));
+            }
+        },
+                Integer.parseInt(mEtADate.getText().toString().substring(0, 4)),
+                Integer.parseInt(mEtADate.getText().toString().substring(5, 7))-1,
+                Integer.parseInt(mEtADate.getText().toString().substring(8, 10))
+        );
+        mEtADate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mADateDialog.show();
+            }
+        });
+        mEDateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                mEtEDate.setText(ToolsUtil.getFomartedDate(year, monthOfYear, dayOfMonth));
+            }
+        },
+                Integer.parseInt(mEtADate.getText().toString().substring(0, 4)),
+                Integer.parseInt(mEtADate.getText().toString().substring(5, 7))-1,
+                Integer.parseInt(mEtADate.getText().toString().substring(8, 10))
+        );
+        mEtEDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEDateDialog.show();
+            }
+        });
 
     }
 

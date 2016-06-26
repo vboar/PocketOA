@@ -28,4 +28,21 @@ public class ToolsUtil {
         return str;
     }
 
+    public static String getFomartedDate(int year, int monthOfYear, int dayOfMonth) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Integer.toString(year)+"-");
+        if (monthOfYear +1 < 10) {
+            sb.append("0" + Integer.toString(monthOfYear+1));
+        } else {
+            sb.append(Integer.toString(monthOfYear+1));
+        }
+        sb.append("-");
+        if (dayOfMonth < 10) {
+            sb.append("0" + Integer.toString(dayOfMonth));
+        } else {
+            sb.append(Integer.toString(dayOfMonth));
+        }
+        return sb.toString();
+    }
+
 }

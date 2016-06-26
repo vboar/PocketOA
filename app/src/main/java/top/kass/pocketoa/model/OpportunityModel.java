@@ -19,8 +19,8 @@ public interface OpportunityModel {
     void deleteOpportunity(int opportunityId, OnSingleOpportunityListener listener);
 
     interface OnLoadOpportunitiesListener {
-        void onSuccess(List<OpportunityBean> list);
-        void onFailure(String msg);
+        void onLoadSuccess(List<OpportunityBean> list);
+        void onLoadFailure(String msg);
     }
 
     interface OnSingleOpportunityListener {

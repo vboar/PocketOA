@@ -1,10 +1,7 @@
 package top.kass.pocketoa.model.impl;
 
-import android.util.Log;
-
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.utils.Exceptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +31,7 @@ public class OpportunityModelImpl implements OpportunityModel {
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            listener.onFailure("加载失败");
+                            listener.onLoadFailure("加载失败");
                         }
 
                         @Override
@@ -47,9 +44,9 @@ public class OpportunityModelImpl implements OpportunityModel {
                                     list.add(jsonToOpportunityBean(
                                             jsonObject.getJSONObject(Integer.toString(i))));
                                 }
-                                listener.onSuccess(list);
+                                listener.onLoadSuccess(list);
                             } catch (JSONException e) {
-                                listener.onFailure("加载失败");
+                                listener.onLoadFailure("加载失败");
                             }
                         }
                     });
@@ -62,7 +59,7 @@ public class OpportunityModelImpl implements OpportunityModel {
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            listener.onFailure("加载失败");
+                            listener.onLoadFailure("加载失败");
                         }
 
                         @Override
@@ -75,9 +72,9 @@ public class OpportunityModelImpl implements OpportunityModel {
                                     list.add(jsonToOpportunityBean(
                                             jsonObject.getJSONObject(Integer.toString(i))));
                                 }
-                                listener.onSuccess(list);
+                                listener.onLoadSuccess(list);
                             } catch (JSONException e) {
-                                listener.onFailure("加载失败");
+                                listener.onLoadFailure("加载失败");
                             }
                         }
                     });
@@ -96,7 +93,7 @@ public class OpportunityModelImpl implements OpportunityModel {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        listener.onFailure("加载失败");
+                        listener.onLoadFailure("加载失败");
                     }
 
                     @Override
@@ -109,9 +106,9 @@ public class OpportunityModelImpl implements OpportunityModel {
                                 list.add(jsonToOpportunityBean(
                                         jsonObject.getJSONObject(Integer.toString(i))));
                             }
-                            listener.onSuccess(list);
+                            listener.onLoadSuccess(list);
                         } catch (JSONException e) {
-                            listener.onFailure("加载失败");
+                            listener.onLoadFailure("加载失败");
                         }
                     }
                 });

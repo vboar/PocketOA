@@ -49,6 +49,11 @@ public class ContractActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_add) {
             Intent intent = new Intent(this, ContractAddActivity.class);
+            if (sourceType == 1) {
+                intent.putExtra("customerId", sourceId);
+            } else if (sourceType == 2) {
+                intent.putExtra("opportunityId", sourceId);
+            }
             startActivityForResult(intent, 1);
         }
         return super.onOptionsItemSelected(item);

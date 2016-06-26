@@ -6,4 +6,8 @@ public interface ContractEditPresenter {
 
     void editContract(ContractBean contractBean);
 
+    void loadCustomers();
+
+    void loadOpportunities();
+
 }

@@ -15,8 +15,12 @@ import android.widget.EditText;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import java.util.List;
+
 import top.kass.pocketoa.R;
 import top.kass.pocketoa.bean.ContractBean;
+import top.kass.pocketoa.bean.CustomerBean;
+import top.kass.pocketoa.bean.OpportunityBean;
 import top.kass.pocketoa.presenter.ContractAddPresenter;
 import top.kass.pocketoa.presenter.impl.ContractAddPresenterImpl;
 import top.kass.pocketoa.util.ToolsUtil;
@@ -31,8 +35,6 @@ public class ContractAddActivity extends AppCompatActivity implements ContractAd
     private ContractBean mContractBean;
 
     private EditText mEtTitle;
-    private EditText mEtCustomer;
-    private EditText mEtOpportunity;
     private EditText mEtAmount;
     private EditText mEtStartDate;
     private EditText mEtEndDate;
@@ -45,11 +47,19 @@ public class ContractAddActivity extends AppCompatActivity implements ContractAd
     private EditText mEtRemark;
     private MaterialSpinner mSpType;
     private MaterialSpinner mSpStatus;
+    private MaterialSpinner mSpCustomer;
+    private MaterialSpinner mSpOpportunity;
+
+    private int defaultCustomerId;
+    private int defaultOppId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contract_add);
+
+        defaultCustomerId = getIntent().getIntExtra("customerId", 0);
+        defaultOppId = getIntent().getIntExtra("opportunityId", 0);
 
         mContractAddPresenter = new ContractAddPresenterImpl(this);
         mContractBean = new ContractBean();
@@ -64,8 +74,6 @@ public class ContractAddActivity extends AppCompatActivity implements ContractAd
         });
 
         mEtTitle = (EditText) findViewById(R.id.etTitle);
-        mEtCustomer = (EditText) findViewById(R.id.etCustomer);
-        mEtOpportunity = (EditText) findViewById(R.id.etOpportunity);
         mEtAmount = (EditText) findViewById(R.id.etAmount);
         mEtStartDate = (EditText) findViewById(R.id.etStartDate);
         mEtEndDate = (EditText) findViewById(R.id.etEndDate);
@@ -80,6 +88,11 @@ public class ContractAddActivity extends AppCompatActivity implements ContractAd
         mEtStartDate.setText(ToolsUtil.getCurrentDate());
         mEtEndDate.setText(ToolsUtil.getCurrentDate());
         mEtSigningDate.setText(ToolsUtil.getCurrentDate());
+
+        mSpCustomer = (MaterialSpinner) findViewById(R.id.spCustomer);
+        mSpOpportunity = (MaterialSpinner) findViewById(R.id.spOpportunity);
+        mContractAddPresenter.loadCustomers();
+        mContractAddPresenter.loadOpportunities();
 
         mSpType = (MaterialSpinner) findViewById(R.id.spType);
         mSpType.setItems(
@@ -124,8 +137,6 @@ public class ContractAddActivity extends AppCompatActivity implements ContractAd
         switch (item.getItemId()) {
             case R.id.action_submit:
                 mContractBean.setContractTitle(mEtTitle.getText().toString());
-                mContractBean.setCustomerId(Integer.parseInt(mEtCustomer.getText().toString()));
-                mContractBean.setOpportunityId(Integer.parseInt(mEtOpportunity.getText().toString()));
                 if (mEtAmount.getText().toString().equals("")) {
                     mContractBean.setTotalAmount(0.0);
                 } else {
@@ -151,6 +162,52 @@ public class ContractAddActivity extends AppCompatActivity implements ContractAd
         Intent intent = new Intent();
         setResult(4, intent);
         finish();
+    }
+
+    @Override
+    public void loadCustomers(List<CustomerBean> list) {
+        final int[] cids = new int[list.size()];
+        String[] cnames = new String[list.size()];
+        int position = 0;
+        for (int i = 0; i < list.size(); i++) {
+            cids[i] = list.get(i).getCustomerId();
+            cnames[i] = list.get(i).getCustomerName();
+
+            if (defaultCustomerId == cids[i]) {
+                position = i;
+            }
+        }
+        mSpCustomer.setItems(cnames);
+        mSpCustomer.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                mContractBean.setCustomerId(cids[position]);
+            }
+        });
+        mSpCustomer.setSelectedIndex(position);
+    }
+
+    @Override
+    public void loadOpportunities(List<OpportunityBean> list) {
+        final int[] oids = new int[list.size()];
+        String[] otitles = new String[list.size()];
+        int position = 0;
+        for (int i = 0; i < list.size(); i++) {
+            oids[i] = list.get(i).getOpportunityId();
+            otitles[i] = list.get(i).getOpportunityTitle();
+
+            if (defaultOppId == oids[i]) {
+                position = i;
+            }
+        }
+        mSpOpportunity.setItems(otitles);
+        mSpOpportunity.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                mContractBean.setOpportunityId(oids[position]);
+            }
+        });
+        mSpOpportunity.setSelectedIndex(position);
     }
 
     @Override

@@ -37,13 +37,13 @@ public class OpportunityPresenterImpl implements OpportunityPresenter,
 
 
     @Override
-    public void onSuccess(List<OpportunityBean> list) {
+    public void onLoadSuccess(List<OpportunityBean> list) {
         mOpportunityView.hideProgress();
         mOpportunityView.addOpportunities(list);
     }
 
     @Override
-    public void onFailure(String msg) {
+    public void onLoadFailure(String msg) {
         mOpportunityView.hideProgress();
         mOpportunityView.showLoadFailMsg();
     }

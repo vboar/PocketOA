@@ -6,4 +6,8 @@ public interface ContractAddPresenter {
 
     void addContract(ContractBean contractBean);
 
+    void loadCustomers();
+
+    void loadOpportunities();
+
 }

@@ -83,6 +83,70 @@ public class ContractModelImpl implements ContractModel {
     }
 
     @Override
+    public void loadContractsBySource(int sourceId, int sourceType, int page, final OnLoadContractsListener listener) {
+        String url = UrlUtil.URL_PREFIX + "common_contract_json";
+        if (sourceType == 1) {
+            OkHttpUtils
+                    .post()
+                    .url(url)
+                    .addParams("currentpage", Integer.toString(page+1))
+                    .addParams("customerid", Integer.toString(sourceId))
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            listener.onFailure("加载失败");
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                List<ContractBean> list = new ArrayList<>();
+                                int count = jsonObject.getInt("currentcount");
+                                for (int i = 0; i < count; i++) {
+                                    list.add(jsonToContractBean(
+                                            jsonObject.getJSONObject(Integer.toString(i))));
+                                }
+                                listener.onSuccess(list);
+                            } catch (JSONException e) {
+                                listener.onFailure("加载失败");
+                            }
+                        }
+                    });
+        } else {
+            OkHttpUtils
+                    .post()
+                    .url(url)
+                    .addParams("currentpage", Integer.toString(page+1))
+                    .addParams("opportunityid", Integer.toString(sourceId))
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            listener.onFailure("加载失败");
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                List<ContractBean> list = new ArrayList<>();
+                                int count = jsonObject.getInt("currentcount");
+                                for (int i = 0; i < count; i++) {
+                                    list.add(jsonToContractBean(
+                                            jsonObject.getJSONObject(Integer.toString(i))));
+                                }
+                                listener.onSuccess(list);
+                            } catch (JSONException e) {
+                                listener.onFailure("加载失败");
+                            }
+                        }
+                    });
+        }
+    }
+
+    @Override
     public void loadContract(int contractId, final OnLoadContractListener listener) {
         String url = UrlUtil.URL_PREFIX + "contract_query_json";
         OkHttpUtils

@@ -39,11 +39,15 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
     private int mType = OpportunityFragment.OPPORTUNITY_MY;
     private int pageIndex = 0;
     private int staffId;
+    private int sourceId;
+    private int sourceType;
 
-    public static OpportunityListFragment newInstance(int type) {
+    public static OpportunityListFragment newInstance(int type, int sourceId, int sourceType) {
         Bundle args = new Bundle();
         OpportunityListFragment fragment = new OpportunityListFragment();
         args.putInt("type", type);
+        args.putInt("sourceId", sourceId);
+        args.putInt("sourceType", sourceType);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,6 +57,8 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
         super.onCreate(savedInstanceState);
         mOpportunityPresenter = new OpportunityPresenterImpl(this);
         mType = getArguments().getInt("type");
+        sourceId = getArguments().getInt("sourceId");
+        sourceType = getArguments().getInt("sourceType");
 
         SharedPreferences sharedPreferences = getActivity().
                 getSharedPreferences("oa", Context.MODE_PRIVATE);
@@ -102,7 +108,11 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
                     && mAdapter.isShowFooter()) {
-                mOpportunityPresenter.loadOpportunities(mType, staffId, pageIndex);
+                if (sourceId == -1) {
+                    mOpportunityPresenter.loadOpportunities(mType, staffId, pageIndex);
+                } else {
+                    mOpportunityPresenter.loadOpportunities(sourceId, pageIndex);
+                }
             }
         }
     };
@@ -123,7 +133,11 @@ public class OpportunityListFragment extends Fragment implements OpportunityView
         if(mData != null) {
             mData.clear();
         }
-        mOpportunityPresenter.loadOpportunities(mType, staffId, pageIndex);
+        if (sourceId == -1) {
+            mOpportunityPresenter.loadOpportunities(mType, staffId, pageIndex);
+        } else {
+            mOpportunityPresenter.loadOpportunities(sourceId, pageIndex);
+        }
     }
 
     @Override

@@ -8,6 +8,8 @@ public interface ContactModel {
 
     void loadContacts(int type, int staffId, int page, OnLoadContactsListener listener);
 
+    void loadContactsBySource(int sourceID, int sourceType, int page, OnLoadContactsListener listener);
+
     void loadContact(int contactId, OnLoadContactListener listener);
 
     void addContact(ContactBean contactBean, OnSingleContactListener listener);

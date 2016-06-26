@@ -39,11 +39,15 @@ public class ContactListFragment extends Fragment implements ContactView,
     private int mType = ContactFragment.CONTACT_MY;
     private int pageIndex = 0;
     private int staffId;
+    private int sourceId;
+    private int sourceType;
 
-    public static ContactListFragment newInstance(int type) {
+    public static ContactListFragment newInstance(int type, int sourceId, int sourceType) {
         Bundle args = new Bundle();
         ContactListFragment fragment = new ContactListFragment();
         args.putInt("type", type);
+        args.putInt("sourceId", sourceId);
+        args.putInt("sourceType", sourceType);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,6 +57,8 @@ public class ContactListFragment extends Fragment implements ContactView,
         super.onCreate(savedInstanceState);
         mContactPresenter = new ContactPresenterImpl(this);
         mType = getArguments().getInt("type");
+        sourceId = getArguments().getInt("sourceId");
+        sourceType = getArguments().getInt("sourceType");
 
         SharedPreferences sharedPreferences = getActivity().
                 getSharedPreferences("oa", Context.MODE_PRIVATE);
@@ -102,7 +108,11 @@ public class ContactListFragment extends Fragment implements ContactView,
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
                     && mAdapter.isShowFooter()) {
-                mContactPresenter.loadContacts(mType, staffId, pageIndex);
+                if (sourceId == -1) {
+                    mContactPresenter.loadContacts(mType, staffId, pageIndex);
+                } else {
+                    mContactPresenter.loadContacts(sourceId, pageIndex);
+                }
             }
         }
     };
@@ -123,7 +133,11 @@ public class ContactListFragment extends Fragment implements ContactView,
         if(mData != null) {
             mData.clear();
         }
-        mContactPresenter.loadContacts(mType, staffId, pageIndex);
+        if (sourceId == -1) {
+            mContactPresenter.loadContacts(mType, staffId, pageIndex);
+        } else {
+            mContactPresenter.loadContacts(sourceId, pageIndex);
+        }
     }
 
     @Override

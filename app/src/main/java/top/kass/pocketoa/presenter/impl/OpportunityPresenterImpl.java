@@ -27,6 +27,14 @@ public class OpportunityPresenterImpl implements OpportunityPresenter,
         mOpportunityModel.loadOpportunities(type, staffId, pageIndex, this);
     }
 
+    @Override
+    public void loadOpportunities(int customerId, int page) {
+        if(page == 0) {
+            mOpportunityView.showProgress();
+        }
+        mOpportunityModel.loadOpportunitiesBySource(customerId, 1, page, this);
+    }
+
 
     @Override
     public void onSuccess(List<OpportunityBean> list) {

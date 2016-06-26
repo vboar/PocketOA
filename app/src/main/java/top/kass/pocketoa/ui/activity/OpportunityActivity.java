@@ -9,13 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import top.kass.pocketoa.R;
-import top.kass.pocketoa.ui.fragment.FollowUpListFragment;
+import top.kass.pocketoa.ui.fragment.OpportunityListFragment;
 
-public class FollowUpActivity extends AppCompatActivity {
+public class OpportunityActivity extends AppCompatActivity {
 
     private Toolbar mToolBar;
-    private int sourceId;
-    private int sourceType;
+    private int customerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +30,7 @@ public class FollowUpActivity extends AppCompatActivity {
             }
         });
 
-        sourceId = getIntent().getIntExtra("sourceId", 0);
-        sourceType = getIntent().getIntExtra("sourceType", 0);
+        customerId = getIntent().getIntExtra("customerId", 0);
 
         reloadFragment();
     }
@@ -47,9 +45,7 @@ public class FollowUpActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            Intent intent = new Intent(this, FollowUpAddActivity.class);
-            intent.putExtra("sourceId", sourceId);
-            intent.putExtra("sourceType", sourceType);
+            Intent intent = new Intent(this, OpportunityAddActivity.class);
             startActivityForResult(intent, 1);
         }
         return super.onOptionsItemSelected(item);
@@ -57,7 +53,7 @@ public class FollowUpActivity extends AppCompatActivity {
 
     private void reloadFragment() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
-                FollowUpListFragment.newInstance(sourceId, sourceType)).commitAllowingStateLoss();
+                OpportunityListFragment.newInstance(0, customerId, 1)).commitAllowingStateLoss();
     }
 
     @Override
@@ -67,4 +63,5 @@ public class FollowUpActivity extends AppCompatActivity {
             reloadFragment();
         }
     }
+
 }

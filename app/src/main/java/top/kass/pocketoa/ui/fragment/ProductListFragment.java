@@ -36,9 +36,15 @@ public class ProductListFragment extends Fragment implements ProductView,
     private ProductPresenter mProductPresenter;
 
     private int pageIndex = 0;
+    private int sourceId;
+    private int sourceType;
 
-    public static ProductListFragment newInstance() {
+    public static ProductListFragment newInstance(int sourceId, int sourceType) {
         ProductListFragment fragment = new ProductListFragment();
+        Bundle args = new Bundle();
+        args.putInt("sourceId", sourceId);
+        args.putInt("sourceType", sourceType);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -46,6 +52,8 @@ public class ProductListFragment extends Fragment implements ProductView,
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mProductPresenter = new ProductPresenterImpl(this);
+        sourceId = getArguments().getInt("sourceId");
+        sourceType = getArguments().getInt("sourceType");
     }
 
     @Nullable
@@ -92,7 +100,11 @@ public class ProductListFragment extends Fragment implements ProductView,
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mAdapter.getItemCount()
                     && mAdapter.isShowFooter()) {
-                mProductPresenter.loadProducts(pageIndex);
+                if (sourceId == -1) {
+                    mProductPresenter.loadProducts(pageIndex);
+                } else {
+                    mProductPresenter.loadProducts(sourceId, pageIndex);
+                }
             }
         }
     };
@@ -113,7 +125,11 @@ public class ProductListFragment extends Fragment implements ProductView,
         if(mData != null) {
             mData.clear();
         }
-        mProductPresenter.loadProducts(pageIndex);
+        if (sourceId == -1) {
+            mProductPresenter.loadProducts(pageIndex);
+        } else {
+            mProductPresenter.loadProducts(sourceId, pageIndex);
+        }
     }
 
     @Override

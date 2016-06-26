@@ -95,7 +95,7 @@ public class ContactDetailActivity extends AppCompatActivity implements ContactD
         TextView tvName = (TextView) findViewById(R.id.tvName);
         tvName.setText(mContactBean.getContactsName());
         TextView tvCustomer= (TextView) findViewById(R.id.tvCustomer);
-        tvCustomer.setText(Html.fromHtml("來自客戶：<u>" + customerName + "</u>"));
+        tvCustomer.setText("來自客戶：" + customerName);
         TextView tvAge= (TextView) findViewById(R.id.tvAge);
         if (mContactBean.getContactsAge() == null) {
             tvAge.setText("");

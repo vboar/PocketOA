@@ -49,8 +49,8 @@ public class ContractFragment extends Fragment {
 
     private void setupViewPager(ViewPager mViewPager) {
         MyPagerAdapter adapter = new MyPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(ContractListFragment.newInstance(CONTRACT_MY), getString(R.string.tab_my_contracts));
-        adapter.addFragment(ContractListFragment.newInstance(CONTRACT_ALL), getString(R.string.tab_all_contracts));
+        adapter.addFragment(ContractListFragment.newInstance(CONTRACT_MY, -1, 0), getString(R.string.tab_my_contracts));
+        adapter.addFragment(ContractListFragment.newInstance(CONTRACT_ALL, -1, 0), getString(R.string.tab_all_contracts));
         mViewPager.setAdapter(adapter);
     }
 

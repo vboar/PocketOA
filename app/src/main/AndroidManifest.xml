@@ -64,6 +64,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".ui.activity.ContactActivity"
+            android:label="@string/title_contact"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ui.activity.ContactAddActivity"
             android:label="@string/title_contact_add"
             android:screenOrientation="portrait"
@@ -79,6 +84,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".ui.activity.ProductActivity"
+            android:label="@string/title_product"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.activity.ProductAddActivity"
             android:label="@string/title_product_add"
             android:screenOrientation="portrait"
@@ -95,6 +105,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".ui.activity.OpportunityActivity"
+            android:label="@string/title_opportunity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ui.activity.OpportunityAddActivity"
             android:label="@string/title_opportunity_add"
             android:screenOrientation="portrait"
@@ -110,6 +125,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".ui.activity.ContractActivity"
+            android:label="@string/title_contract"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.ContractAddActivity"
             android:label="@string/title_contract_add"

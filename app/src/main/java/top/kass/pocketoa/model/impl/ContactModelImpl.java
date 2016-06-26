@@ -82,6 +82,39 @@ public class ContactModelImpl implements ContactModel {
     }
 
     @Override
+    public void loadContactsBySource(int sourceId, int sourceType, int page, final OnLoadContactsListener listener) {
+        String url = UrlUtil.URL_PREFIX + "common_contacts_json";
+        OkHttpUtils
+                .post()
+                .url(url)
+                .addParams("customerid", Integer.toString(sourceId))
+                .addParams("currentpage", Integer.toString(page+1))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onFailure("加载失败");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            List<ContactBean> list = new ArrayList<>();
+                            int count = jsonObject.getInt("currentcount");
+                            for (int i = 0; i < count; i++) {
+                                list.add(jsonToContactBean(
+                                        jsonObject.getJSONObject(Integer.toString(i))));
+                            }
+                            listener.onSuccess(list);
+                        } catch (JSONException e) {
+                            listener.onFailure("加载失败");
+                        }
+                    }
+                });
+    }
+
+    @Override
     public void loadContact(int contactId, final OnLoadContactListener listener) {
         String url = UrlUtil.URL_PREFIX + "contact_query_json";
         OkHttpUtils

@@ -8,6 +8,8 @@ public interface OpportunityModel {
 
     void loadOpportunities(int type, int staffId, int page, OnLoadOpportunitiesListener listener);
 
+    void loadOpportunitiesBySource(int sourceId, int sourceType, int page, OnLoadOpportunitiesListener listener);
+
     void loadOpportunity(int opportunityId, OnLoadOpportunityListener listener);
 
     void addOpportunity(OpportunityBean opportunityBean, OnSingleOpportunityListener listener);

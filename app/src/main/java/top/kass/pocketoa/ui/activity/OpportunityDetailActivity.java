@@ -67,7 +67,10 @@ public class OpportunityDetailActivity extends AppCompatActivity implements Oppo
         btnProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                Intent intent = new Intent(OpportunityDetailActivity.this, ProductActivity.class);
+                intent.putExtra("sourceId", opportunityBean.getOpportunityId());
+                intent.putExtra("sourceType", 2);
+                startActivity(intent);
             }
         });
         Button btnContract = (Button) findViewById(R.id.btnContract);
@@ -75,7 +78,10 @@ public class OpportunityDetailActivity extends AppCompatActivity implements Oppo
         btnContract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                Intent intent = new Intent(OpportunityDetailActivity.this, ContractActivity.class);
+                intent.putExtra("sourceId", opportunityBean.getOpportunityId());
+                intent.putExtra("sourceType", 2);
+                startActivity(intent);
             }
         });
 

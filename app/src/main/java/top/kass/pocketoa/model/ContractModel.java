@@ -8,6 +8,8 @@ public interface ContractModel {
 
     void loadContracts(int type, int staffId, int page, OnLoadContractsListener listener);
 
+    void loadContractsBySource(int sourceId, int sourceType, int page, OnLoadContractsListener listener);
+
     void loadContract(int contractId, OnLoadContractListener listner);
 
     void addContract(ContractBean contractBean, OnSingleContractListener listener);

@@ -27,6 +27,14 @@ public class ProductPresenterImpl implements ProductPresenter, ProductModel.OnLo
     }
 
     @Override
+    public void loadProducts(int opportunityId, int page) {
+        if(page == 0) {
+            mProductView.showProgress();
+        }
+        mProductModel.loadProductsBySource(opportunityId, 2, page, this);
+    }
+
+    @Override
     public void onSuccess(List<ProductBean> list) {
         mProductView.hideProgress();
         mProductView.addProducts(list);

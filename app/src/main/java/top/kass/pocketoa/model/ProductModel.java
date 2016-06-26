@@ -8,6 +8,8 @@ public interface ProductModel {
 
     void loadProducts(int page, OnLoadProductsListener listener);
 
+    void loadProductsBySource(int sourceId, int sourceType, int page, OnLoadProductsListener listener);
+
     void loadProduct(int productId, OnLoadProductListner listener);
 
     void addProduct(ProductBean productBean, OnSingleProductListener listener);

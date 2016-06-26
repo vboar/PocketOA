@@ -1,15 +1,11 @@
 package top.kass.pocketoa.model.impl;
 
-import android.util.Log;
 
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +41,39 @@ public class ProductModelImpl implements ProductModel {
                                 list.add(jsonToProductBean(
                                         jsonObject.getJSONObject(Integer.toString(i))));
                             }
+                            listener.onSuccess(list);
+                        } catch (JSONException e) {
+                            listener.onFailure("加载失败", e);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void loadProductsBySource(int sourceId, int sourceType, int page, final OnLoadProductsListener listener) {
+        String url = UrlUtil.URL_PREFIX + "common_product_json";
+        OkHttpUtils
+                .post()
+                .url(url)
+                .addParams("currentpage", Integer.toString(page+1))
+                .addParams("opportunityid", Integer.toString(sourceId))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onFailure("加载失败", e);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            List<ProductBean> list = new ArrayList<>();
+//                            int count = jsonObject.getInt("currentcount");
+//                            for (int i = 0; i < count; i++) {
+//                                list.add(jsonToProductBean(
+//                                        jsonObject.getJSONObject(Integer.toString(i))));
+//                            }
                             listener.onSuccess(list);
                         } catch (JSONException e) {
                             listener.onFailure("加载失败", e);

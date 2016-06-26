@@ -41,8 +41,8 @@ public class OpportunityFragment extends Fragment {
 
     private void setupViewPager(ViewPager mViewPager) {
         MyPagerAdapter adapter = new MyPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(OpportunityListFragment.newInstance(OPPORTUNITY_MY), getString(R.string.tab_my_opportunities));
-        adapter.addFragment(OpportunityListFragment.newInstance(OPPORTUNITY_ALL), getString(R.string.tab_all_opportunities));
+        adapter.addFragment(OpportunityListFragment.newInstance(OPPORTUNITY_MY, -1, 0), getString(R.string.tab_my_opportunities));
+        adapter.addFragment(OpportunityListFragment.newInstance(OPPORTUNITY_ALL, -1, 0), getString(R.string.tab_all_opportunities));
         mViewPager.setAdapter(adapter);
     }
 

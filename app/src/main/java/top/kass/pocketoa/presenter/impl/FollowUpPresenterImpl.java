@@ -20,7 +20,9 @@ public class FollowUpPresenterImpl implements FollowUpPresenter, FollowUpModel.O
 
     @Override
     public void loadFollowUps(int sourceId, int sourceType, int page) {
-        mFollowUpView.showProgress();
+        if (page == 0) {
+            mFollowUpView.showProgress();
+        }
         mFollowUpModel.loadFollowUps(sourceType, sourceId, page, this);
     }
 

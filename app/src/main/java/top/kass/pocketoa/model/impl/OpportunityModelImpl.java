@@ -85,6 +85,39 @@ public class OpportunityModelImpl implements OpportunityModel {
     }
 
     @Override
+    public void loadOpportunitiesBySource(int sourceId, int sourceType, int page, final OnLoadOpportunitiesListener listener) {
+        String url = UrlUtil.URL_PREFIX + "common_opportunity_json";
+        OkHttpUtils
+                .post()
+                .url(url)
+                .addParams("currentpage", Integer.toString(page+1))
+                .addParams("customerid", Integer.toString(sourceId))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        listener.onFailure("加载失败");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            List<OpportunityBean> list = new ArrayList<>();
+                            int count = jsonObject.getInt("currentcount");
+                            for (int i = 0; i < count; i++) {
+                                list.add(jsonToOpportunityBean(
+                                        jsonObject.getJSONObject(Integer.toString(i))));
+                            }
+                            listener.onSuccess(list);
+                        } catch (JSONException e) {
+                            listener.onFailure("加载失败");
+                        }
+                    }
+                });
+    }
+
+    @Override
     public void loadOpportunity(int opportunityId, final OnLoadOpportunityListener listener) {
         String url = UrlUtil.URL_PREFIX + "opportunity_query_json";
         OkHttpUtils

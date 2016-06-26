@@ -68,7 +68,9 @@ public class CustomerDetailActivity extends AppCompatActivity implements Custome
         btnContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                Intent intent = new Intent(CustomerDetailActivity.this, ContactActivity.class);
+                intent.putExtra("customerId", customerBean.getCustomerId());
+                startActivity(intent);
             }
         });
         Button btnOpportunity = (Button) findViewById(R.id.btnOpportunity);
@@ -76,7 +78,9 @@ public class CustomerDetailActivity extends AppCompatActivity implements Custome
         btnOpportunity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                Intent intent = new Intent(CustomerDetailActivity.this, OpportunityActivity.class);
+                intent.putExtra("customerId", customerBean.getCustomerId());
+                startActivity(intent);
             }
         });
         Button btnContract = (Button) findViewById(R.id.btnContract);
@@ -84,7 +88,10 @@ public class CustomerDetailActivity extends AppCompatActivity implements Custome
         btnContract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                Intent intent = new Intent(CustomerDetailActivity.this, ContractActivity.class);
+                intent.putExtra("sourceId", customerBean.getCustomerId());
+                intent.putExtra("sourceType", 1);
+                startActivity(intent);
             }
         });
 

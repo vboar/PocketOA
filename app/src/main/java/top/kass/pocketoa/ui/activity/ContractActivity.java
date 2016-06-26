@@ -9,9 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import top.kass.pocketoa.R;
-import top.kass.pocketoa.ui.fragment.FollowUpListFragment;
+import top.kass.pocketoa.ui.fragment.ContactListFragment;
+import top.kass.pocketoa.ui.fragment.ContractListFragment;
 
-public class FollowUpActivity extends AppCompatActivity {
+public class ContractActivity extends AppCompatActivity {
 
     private Toolbar mToolBar;
     private int sourceId;
@@ -47,9 +48,7 @@ public class FollowUpActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            Intent intent = new Intent(this, FollowUpAddActivity.class);
-            intent.putExtra("sourceId", sourceId);
-            intent.putExtra("sourceType", sourceType);
+            Intent intent = new Intent(this, ContractAddActivity.class);
             startActivityForResult(intent, 1);
         }
         return super.onOptionsItemSelected(item);
@@ -57,7 +56,7 @@ public class FollowUpActivity extends AppCompatActivity {
 
     private void reloadFragment() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
-                FollowUpListFragment.newInstance(sourceId, sourceType)).commitAllowingStateLoss();
+                ContractListFragment.newInstance(0, sourceId, sourceType)).commitAllowingStateLoss();
     }
 
     @Override
@@ -67,4 +66,5 @@ public class FollowUpActivity extends AppCompatActivity {
             reloadFragment();
         }
     }
+
 }

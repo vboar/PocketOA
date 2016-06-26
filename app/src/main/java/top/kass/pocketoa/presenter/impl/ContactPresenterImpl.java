@@ -26,6 +26,14 @@ public class ContactPresenterImpl implements ContactPresenter, ContactModel.OnLo
         mContactModel.loadContacts(type, staffId, pageIndex, this);
     }
 
+    @Override
+    public void loadContacts(int customerId, int page) {
+        if(page == 0) {
+            mContactView.showProgress();
+        }
+        mContactModel.loadContactsBySource(customerId, 1, page, this);
+    }
+
 
     @Override
     public void onSuccess(List<ContactBean> list) {

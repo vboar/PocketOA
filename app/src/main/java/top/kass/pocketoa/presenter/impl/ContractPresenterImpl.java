@@ -20,8 +20,18 @@ public class ContractPresenterImpl implements ContractPresenter, ContractModel.O
 
     @Override
     public void loadContracts(int type, int staffId, int page) {
-        mContractView.showProgress();
+        if (page == 0) {
+            mContractView.showProgress();
+        }
         mContractModel.loadContracts(type, staffId, page, this);
+    }
+
+    @Override
+    public void loadContractsBySource(int sourceId, int sourceType, int page) {
+        if (page == 0) {
+            mContractView.showProgress();
+        }
+        mContractModel.loadContractsBySource(sourceId, sourceType, page, this);
     }
 
     @Override
